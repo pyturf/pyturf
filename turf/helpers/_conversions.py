@@ -1,6 +1,11 @@
 import numpy as np
 
-from ..helpers import factors, area_factors
+from turf.helpers._units import factors, area_factors
+
+
+def c_like_modulo(number, base):
+
+    return number - int(number / base) * base
 
 
 def degrees_to_radians(degrees):
@@ -9,7 +14,7 @@ def degrees_to_radians(degrees):
     :return: angle in radians
     """
 
-    radians = degrees % 360
+    radians = c_like_modulo(degrees, 360)
     return radians * np.pi / 180
 
 
@@ -19,7 +24,7 @@ def radians_to_degrees(radians):
     :return: degrees between 0 and 360
     """
 
-    degrees = radians % (2 * np.pi)
+    degrees = c_like_modulo(radians, 2 * np.pi)
     return degrees * 180 / np.pi
 
 
