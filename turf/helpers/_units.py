@@ -50,4 +50,13 @@ area_factors = {
     "millimeters": 1000000,
     "millimetres": 1000000,
     "yards": 1.195990046,
-};
+}
+
+geometry_types = {
+    "Point": "Point",
+    "LineString": "LineString",
+    "Polygon": "Polygon",
+    "MultiPoint": "MultiPoint",
+    "MultiLineString": "MultiLineString",
+    "MultiPolygon": "MultiPolygon",
+}
