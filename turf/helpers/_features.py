@@ -2,33 +2,67 @@ from turf.helpers._units import geometry_types
 from abc import ABC, abstractmethod
 
 
-class Feature:
+class FeatureType:
+    """
+    Parent class for Feature and FeatureCollection.
+    """
+
+    def __init__(self, feature_type):
+        self.type = feature_type
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}"
+
+    def get(self, attribute, default=None):
+        try:
+            return getattr(self, attribute)
+        except AttributeError:
+            return default
+
+
+class Feature(FeatureType):
     """
     Class that encapsulates a certain geometry, along with its properties.
     Equivalent to a GeoJSON feature
     """
 
     def __init__(self, geom=None, properties=None):
-        self.type = "Feature"
+
+        FeatureType.__init__(self, feature_type="Feature")
+
         self.geometry = geom or []
         self.properties = properties or {}
 
-    def __repr__(self):
-        return f"Feature({self.geometry})"
+    def to_geojson(self):
+        geojson = {
+            "type": "Feature",
+            "properties": self.properties,
+            "geometry": self.geometry.to_geojson()
+        }
 
 
-class FeatureCollection:
+class FeatureCollection(FeatureType):
     """
     Class that encapsulates a group of features in a FeatureCollection.
     Equivalent to a GeoJSON FeatureCollection
     """
 
     def __init__(self, features=None):
-        self.type = "FeatureCollection"
+
+        FeatureType.__init__(self, feature_type="FeatureCollection")
+
         self.features = features or []
 
-    def __repr__(self):
-        return f"FeatureCollection({self.features})"
+    def to_geojson(self):
+        geojson = {
+            "type": "FeatureCollection",
+            "features": []
+        }
+
+        for f in self.features:
+            geojson["features"].append(f.to_geojson())
+
+        return geojson
 
 
 class _FeatureBaseClass(ABC):
@@ -39,8 +73,6 @@ class _FeatureBaseClass(ABC):
     def __init__(self, coordinates: list):
 
         self._check_input(coordinates)
-
-        self.type = "Point"
         self.coordinates = coordinates
 
     def __repr__(self):
@@ -50,6 +82,12 @@ class _FeatureBaseClass(ABC):
     @abstractmethod
     def _check_input(coordinates):
         pass
+
+    def get(self, attribute, default=None):
+        try:
+            return getattr(self, attribute)
+        except AttributeError:
+            return default
 
 
 class Point(_FeatureBaseClass):
