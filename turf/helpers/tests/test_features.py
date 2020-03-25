@@ -11,6 +11,8 @@ from turf.helpers._features import (
     multi_line_string,
     multi_polygon,
 )
+from turf.utils.error_codes import error_code_messages
+from turf.utils.exceptions import InvalidInput
 
 
 class TestPoint:
@@ -29,18 +31,28 @@ class TestPoint:
 
         assert p.properties == {}
 
-    def test_exceptions(self):
-
-        with pytest.raises(Exception):
-            point()
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                [1],
+                error_code_messages["InvalidPointInput"],
+                id="InvalidPointInput",
+            ),
+            pytest.param(
+                [1, "xyz"],
+                error_code_messages["InvalidPointInput"],
+                id="InvalidPointInput",
+            ),
+        ],
+    )
+    def test_exceptions(self, input_value, exception_value):
 
         with pytest.raises(Exception) as excinfo:
-            point([1])
-        assert "[lng, lat]" in str(excinfo.value)
+            point(input_value)
 
-        with pytest.raises(Exception) as excinfo:
-            point([1, "xyz"])
-        assert "invalid" in str(excinfo.value)
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value
 
     def test_points(self):
 
@@ -59,17 +71,39 @@ class TestPoint:
         assert mp.geometry.type == "MultiPoint"
         assert mp.geometry.coordinates == [[0, 0], [10, 10]]
 
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                ([[[0, 0], [1, 1]], [[2, 2]]], {"test": 23}),
+                error_code_messages["InvalidMultiInput"] + "of Points",
+                id="InvalidMultiInput",
+                ),
+            pytest.param(
+                ([[0, 0], [5, 'xyz'], [15, 8]], {"test": 23}),
+                error_code_messages["InvalidPointInput"],
+                id="InvalidPointInput",
+            ),
+        ],
+    )
+    def test_multi_point_exceptions(self, input_value, exception_value):
+
+        with pytest.raises(Exception) as excinfo:
+            multi_point(*input_value)
+
+        assert excinfo.type == InvalidInput
+        assert (
+            str(excinfo.value) == exception_value
+        )
+
     def test_to_geojson(self):
 
         p = point([0, 0])
 
-        assert p.to_geojson() ==  {
-            'geometry': {
-                'coordinates': [0, 0],
-                'type': 'Point'
-            },
-            'properties': {},
-            'type': 'Feature'
+        assert p.to_geojson() == {
+            "geometry": {"coordinates": [0, 0], "type": "Point"},
+            "properties": {},
+            "type": "Feature",
         }
 
 
@@ -89,18 +123,33 @@ class TestLineString:
 
         assert line.properties == {}
 
-    def test_exceptions(self):
-
-        with pytest.raises(Exception):
-            line_string()
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                [[[2, 10], [1, 4]]],
+                error_code_messages["InvalidLineStringInput"],
+                id="InvalidLineStringInput",
+            ),
+            pytest.param(
+                [[5, 10]],
+                error_code_messages["InvalidLinePoints"],
+                id="InvalidLinePoints",
+            ),
+            pytest.param(
+                [["xyz", 10], [1, 4]],
+                error_code_messages["InvalidLinePoints"],
+                id="InvalidLinePoints",
+            ),
+        ],
+    )
+    def test_exceptions(self, input_value, exception_value):
 
         with pytest.raises(Exception) as excinfo:
-            line_string([[5, 10]])
-        assert "two or more" in str(excinfo.value)
+            line_string(input_value)
 
-        with pytest.raises(Exception) as excinfo:
-            line_string([["xyz", 10], [1, 4]])
-        assert "invalid" in str(excinfo.value)
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value
 
     def test_line_strings(self):
 
@@ -126,23 +175,37 @@ class TestLineString:
         assert mls.geometry.type == "MultiLineString"
         assert mls.geometry.coordinates == [[[0, 0], [1, 2]], [[5, 0], [15, 8]]]
 
-    def test_multi_line_string_exception(self):
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                ([[0, 0], [5, 0], [15, 8]], {"test": 23}),
+                error_code_messages["InvalidMultiInput"] + "of LineStrings",
+                id="InvalidMultiInput",
+            ),
+            pytest.param(
+                ([[[0, 0]], [[5, 0], [15, 8]]], {"test": 23}),
+                error_code_messages["InvalidLinePoints"],
+                id="InvalidLinePoints",
+            ),
+        ],
+    )
+    def test_multi_line_string_exception(self, input_value, exception_value):
 
         with pytest.raises(Exception) as excinfo:
-            multi_line_string([[[0, 0]], [[5, 0], [15, 8]]], {"test": 23})
-        assert "two or more" in str(excinfo.value)
+            multi_line_string(*input_value)
+
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value
 
     def test_to_geojson(self):
 
         line = line_string([[5, 10], [20, 40]])
 
-        assert line.to_geojson() ==  {
-            'geometry': {
-                'coordinates': [[5, 10], [20, 40]],
-                'type': 'LineString'
-            },
-            'properties': {},
-            'type': 'Feature'
+        assert line.to_geojson() == {
+            "geometry": {"coordinates": [[5, 10], [20, 40]], "type": "LineString"},
+            "properties": {},
+            "type": "Feature",
         }
 
 
@@ -165,26 +228,38 @@ class TestPolygon:
 
         assert poly.properties == {}
 
-    def test_exceptions(self):
-
-        with pytest.raises(Exception):
-            polygon()
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                "xyz",
+                error_code_messages["InvalidPolygonInput"],
+                id="InvalidPolygonInput",
+            ),
+            pytest.param(
+                ["xyz"],
+                error_code_messages["InvalidPolygonInput"],
+                id="InvalidPolygonInput",
+            ),
+            pytest.param(
+                [[[5, 10], [20, 40], [40, 0]]],
+                error_code_messages["InvalidLinearRing"],
+                id="InvalidLinearRing",
+            ),
+            pytest.param(
+                [[[5, 10], [20, 40], [40, 0], [2, 3]]],
+                error_code_messages["InvalidFirstLastPoints"],
+                id="InvalidFirstLastPoints",
+            ),
+        ],
+    )
+    def test_exceptions(self, input_value, exception_value):
 
         with pytest.raises(Exception) as excinfo:
-            polygon("xyz")
-        assert "list of LinearRing" in str(excinfo.value)
+            polygon(input_value)
 
-        with pytest.raises(Exception) as excinfo:
-            polygon(["xyz"])
-        assert "list of Positions" in str(excinfo.value)
-
-        with pytest.raises(Exception) as excinfo:
-            polygon([[[5, 10], [20, 40], [40, 0]]])
-        assert "4 or more Positions" in str(excinfo.value)
-
-        with pytest.raises(Exception) as excinfo:
-            polygon([[[5, 10], [20, 40], [40, 0], [2, 3]]])
-        assert "not equivalent" in str(excinfo.value)
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value
 
     def test_polygons(self):
 
@@ -219,27 +294,45 @@ class TestPolygon:
             [[[93, 19], [63, 7], [79, 0], [93, 19]]],
         ]
 
-    def test_multi_polygon_exception(self):
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                (
+                    [
+                        [[[0, 1], [78, 49], [94, 43], [94, 57]]],
+                        [[[93, 19], [63, 7], [79, 0], [93, 19]]],
+                    ],
+                    {"test": 23},
+                ),
+                error_code_messages["InvalidFirstLastPoints"],
+                id="InvalidFirstLastPoints",
+            ),
+            pytest.param(
+                (
+                    [
+                        [[[78, 49], [94, 43], [94, 57]]],
+                        [[[93, 19], [63, 7], [79, 0], [93, 19]]],
+                    ],
+                    {"test": 23},
+                ),
+                error_code_messages["InvalidLinearRing"],
+                id="InvalidLinearRing",
+            ),
+            pytest.param(
+                ([[[93, 19], [63, 7], [79, 0], [93, 19]]], {"test": 23}),
+                error_code_messages["InvalidMultiInput"] + "of Polygons",
+                id="InvalidMultiInput",
+            ),
+        ],
+    )
+    def test_multi_polygon_exception(self, input_value, exception_value):
 
         with pytest.raises(Exception) as excinfo:
-            multi_polygon(
-                [
-                    [[[0, 1], [78, 49], [94, 43], [94, 57]]],
-                    [[[93, 19], [63, 7], [79, 0], [93, 19]]],
-                ],
-                {"test": 23},
-            )
-        assert "not equivalent" in str(excinfo.value)
+            multi_polygon(*input_value)
 
-        with pytest.raises(Exception) as excinfo:
-            multi_polygon(
-                [
-                    [[[78, 49], [94, 43], [94, 57]]],
-                    [[[93, 19], [63, 7], [79, 0], [93, 19]]],
-                ],
-                {"test": 23},
-            )
-        assert "4 or more Positions" in str(excinfo.value)
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value
 
     def test_to_geojson(self):
 
@@ -248,10 +341,10 @@ class TestPolygon:
         )
 
         assert poly.to_geojson() == {
-            'geometry': {
-                'coordinates': [[[5, 10], [20, 40], [40, 0], [5, 10]]],
-                'type': 'Polygon'
+            "geometry": {
+                "coordinates": [[[5, 10], [20, 40], [40, 0], [5, 10]]],
+                "type": "Polygon",
             },
-            'properties': {'name': 'test polygon'},
-            'type': 'Feature'
+            "properties": {"name": "test polygon"},
+            "type": "Feature",
         }

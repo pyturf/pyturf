@@ -1,5 +1,9 @@
-from turf.helpers._units import geometry_types
 from abc import ABC, abstractmethod
+
+from turf.helpers._units import geometry_types
+from turf.utils.error_codes import error_code_messages
+from turf.utils.exceptions import InvalidInput
+from turf.utils.helpers import get_input_dimensions
 
 
 class FeatureType:
@@ -11,7 +15,7 @@ class FeatureType:
         self.type = feature_type
 
     def __repr__(self):
-        return f"{self.__class__.__name__}"
+        return f"{self.__class__.__name__}({self.geometry if self.geometry else ''})"
 
     def get(self, attribute, default=None):
         try:
@@ -37,7 +41,7 @@ class Feature(FeatureType):
         return {
             "type": "Feature",
             "properties": self.properties,
-            "geometry": self.geometry.to_geojson()
+            "geometry": self.geometry.to_geojson(),
         }
 
 
@@ -54,10 +58,7 @@ class FeatureCollection(FeatureType):
         self.features = features or []
 
     def to_geojson(self):
-        geojson = {
-            "type": "FeatureCollection",
-            "features": []
-        }
+        geojson = {"type": "FeatureCollection", "features": []}
 
         for f in self.features:
             geojson["features"].append(f.to_geojson())
@@ -91,10 +92,7 @@ class Geometry(ABC):
             return default
 
     def to_geojson(self):
-        return {
-            "type": self.type,
-            "coordinates": self.coordinates
-        }
+        return {"type": self.type, "coordinates": self.coordinates}
 
 
 class Point(Geometry):
@@ -108,11 +106,14 @@ class Point(Geometry):
 
     @staticmethod
     def _check_input(coordinates):
-        if not isinstance(coordinates, list) or len(coordinates) != 2:
-            raise Exception("Coordinates must be an array of [lng, lat]")
+        if (
+            get_input_dimensions(coordinates) == 1
+            and len(coordinates) == 2
+            and all(isinstance(x, (int, float)) for x in coordinates)
+        ):
+            return
 
-        if any(not isinstance(x, (int, float)) for x in coordinates):
-            raise Exception("Coordinates contains invalid numbers")
+        raise InvalidInput(error_code_messages["InvalidPointInput"])
 
 
 class MultiPoint(Point):
@@ -121,8 +122,8 @@ class MultiPoint(Point):
         self.type = "MultiPoint"
 
     def _check_input(self, coordinates):
-        if not isinstance(coordinates, list):
-            raise Exception("Coordinates must be an array of Positions")
+        if get_input_dimensions(coordinates) != 2:
+            raise InvalidInput(error_code_messages["InvalidMultiInput"] + "of Points")
 
         for coord in coordinates:
             super(MultiPoint, self)._check_input(coord)
@@ -137,13 +138,16 @@ class LineString(Geometry):
     def __init__(self, coordinates: list):
         Geometry.__init__(self, coordinates, geometry_type="LineString")
 
-    @staticmethod
-    def _check_input(coordinates):
-        if not isinstance(coordinates, list) or len(coordinates) < 2:
-            raise Exception("Coordinates must be an array of two or more positions")
+    def _check_input(self, coordinates):
+        if get_input_dimensions(coordinates) != 2:
+            raise InvalidInput(error_code_messages["InvalidLineStringInput"])
 
-        if any(any(not isinstance(x, (int, float)) for x in y) for y in coordinates):
-            raise Exception("Coordinates contains invalid numbers")
+        if len(coordinates) >= 2 and all(
+            all(isinstance(x, (int, float)) for x in y) for y in coordinates
+        ):
+            return
+
+        raise InvalidInput(error_code_messages["InvalidLinePoints"])
 
 
 class MultiLineString(LineString):
@@ -152,8 +156,10 @@ class MultiLineString(LineString):
         self.type = "MultiLineString"
 
     def _check_input(self, coordinates):
-        if not isinstance(coordinates, list):
-            raise Exception("Coordinates must be an array of Position arrays")
+        if get_input_dimensions(coordinates) != 3:
+            raise InvalidInput(
+                error_code_messages["InvalidMultiInput"] + "of LineStrings"
+            )
 
         for coord in coordinates:
             super(MultiLineString, self)._check_input(coord)
@@ -168,22 +174,19 @@ class Polygon(Geometry):
     def __init__(self, coordinates: list):
         Geometry.__init__(self, coordinates, geometry_type="Polygon")
 
-    @staticmethod
-    def _check_input(coordinates):
-        if not isinstance(coordinates, list):
-            raise Exception("Coordinates must be a list of LinearRings")
+    def _check_input(self, coordinates):
+        if get_input_dimensions(coordinates) != 3:
+            raise InvalidInput(error_code_messages["InvalidPolygonInput"])
 
         for ring in coordinates:
             if not isinstance(ring, list):
-                raise Exception("LinearRing coordinates must be a list of Positions")
+                raise InvalidInput(error_code_messages["InvalidLinearRing"])
 
             if len(ring) < 4:
-                raise Exception(
-                    "Each LinearRing of a Polygon must have 4 or more Positions."
-                )
+                raise InvalidInput(error_code_messages["InvalidLinearRing"])
 
             if ring[-1] != ring[0]:
-                raise Exception("First and last Position are not equivalent.")
+                raise InvalidInput(error_code_messages["InvalidFirstLastPoints"])
 
 
 class MultiPolygon(Polygon):
@@ -192,8 +195,8 @@ class MultiPolygon(Polygon):
         self.type = "MultiPolygon"
 
     def _check_input(self, coordinates):
-        if not isinstance(coordinates, list):
-            raise Exception("Coordinates must be an array of Polygons")
+        if get_input_dimensions(coordinates) != 4:
+            raise InvalidInput(error_code_messages["InvalidMultiInput"] + "of Polygons")
 
         for coord in coordinates:
             super(MultiPolygon, self)._check_input(coord)

@@ -1,6 +1,8 @@
 import pytest
 
 from turf import point
+from turf.utils.exceptions import InvalidInput
+from turf.utils.error_codes import error_code_messages
 from turf.distance.tests.fixture import fixture, expected_results
 from turf.distance import distance
 
@@ -25,11 +27,16 @@ class TestDistance:
 
         assert distance(pt1, pt2, options) == expected_results[units]
 
-    def test_distance_particular(self):
+    def test_distance_particular_case(self):
 
         assert distance(point([-180, -90]), point([180, -90])) == 0
 
     def test_exception(self):
 
-        with pytest.raises(Exception):
-            distance(point([0, 0]), point([10, 10]), {"units": "foo"})
+        wrong_units = "foo"
+
+        with pytest.raises(Exception) as excinfo:
+            distance(point([0, 0]), point([10, 10]), {"units": wrong_units})
+
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == error_code_messages["InvalidUnits"](wrong_units)

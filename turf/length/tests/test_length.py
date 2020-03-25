@@ -4,6 +4,8 @@ import json
 from collections import defaultdict
 
 from turf.helpers import point, multi_line_string
+from turf.utils.exceptions import InvalidInput
+from turf.utils.error_codes import error_code_messages
 from turf.length import length
 
 current_path = os.path.dirname(os.path.realpath(__file__))
@@ -34,28 +36,38 @@ class TestLength:
 
     def test_length_with_feature_classes(self):
 
-        feature = multi_line_string([[
-            [-77.031669, 38.878605],
-            [-77.029609, 38.881946],
-            [-77.020339, 38.884084],
-            [-77.025661, 38.885821],
-            [-77.021884, 38.889563],
-            [-77.019824, 38.892368]
-        ], [
-            [-77.041669, 38.885821],
-            [-77.039609, 38.881946],
-            [-77.030339, 38.884084],
-            [-77.035661, 38.878605]]
-        ])
+        feature = multi_line_string(
+            [
+                [
+                    [-77.031669, 38.878605],
+                    [-77.029609, 38.881946],
+                    [-77.020339, 38.884084],
+                    [-77.025661, 38.885821],
+                    [-77.021884, 38.889563],
+                    [-77.019824, 38.892368],
+                ],
+                [
+                    [-77.041669, 38.885821],
+                    [-77.039609, 38.881946],
+                    [-77.030339, 38.884084],
+                    [-77.035661, 38.878605],
+                ],
+            ]
+        )
 
         assert round(length(feature, {"units": "feet"})) == 15433
 
-    def test_exception(self):
+    @pytest.mark.parametrize(
+        "input_value, exception_value",
+        [
+            pytest.param([0, 0], error_code_messages["InvalidLineOrPolygon"], id="InvalidLineOrPolygon"),
+            pytest.param(point([0, 0]), error_code_messages["InvalidLineOrPolygon"], id="InvalidLineOrPolygon"),
+        ]
+    )
+    def test_exception(self, input_value, exception_value):
 
         with pytest.raises(Exception) as excinfo:
-            length([0, 0])
-        assert "Input must be" in str(excinfo.value)
+            length(input_value)
 
-        with pytest.raises(Exception) as excinfo:
-            length(point([0, 0]))
-        assert "Input must be" in str(excinfo.value)
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value

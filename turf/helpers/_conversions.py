@@ -1,6 +1,8 @@
 import numpy as np
 
 from turf.helpers._units import factors, area_factors
+from turf.utils.exceptions import InvalidInput
+from turf.utils.error_codes import error_code_messages
 
 
 def c_like_modulo(number, base):
@@ -14,6 +16,9 @@ def degrees_to_radians(degrees):
     :return: angle in radians
     """
 
+    if not isinstance(degrees, (float, int)):
+        raise InvalidInput(error_code_messages["InvalidDegrees"])
+
     radians = c_like_modulo(degrees, 360)
     return radians * np.pi / 180
 
@@ -23,6 +28,9 @@ def radians_to_degrees(radians):
     :param radians: radians angle in radians
     :return: degrees between 0 and 360
     """
+
+    if not isinstance(radians, (float, int)):
+        raise InvalidInput(error_code_messages["InvalidRadians"])
 
     degrees = c_like_modulo(radians, 2 * np.pi)
     return degrees * 180 / np.pi
@@ -36,10 +44,13 @@ def length_to_radians(distance, units="kilometers"):
     :return: radians
     """
 
+    if distance < 0:
+        raise(InvalidInput(error_code_messages["InvalidDistance"]))
+
     try:
         factor = factors[units]
     except KeyError:
-        raise Exception(f"{units} is not a valid unit")
+        raise InvalidInput(error_code_messages["InvalidUnits"](units))
 
     return distance / factor
 
@@ -55,7 +66,7 @@ def radians_to_length(radians, units="kilometers"):
     try:
         factor = factors[units]
     except KeyError:
-        raise Exception(f"{units} is not a valid unit")
+        raise InvalidInput(error_code_messages["InvalidUnits"](units))
 
     return radians * factor
 
@@ -79,8 +90,8 @@ def convert_length(length, original_unit="kilometers", final_unit="kilometers"):
     :return: the converted length
     """
 
-    if not length >= 0:
-        raise Exception("length must be a positive number")
+    if not isinstance(length, (float, int)) or length < 0:
+        raise InvalidInput(error_code_messages["InvalidLength"])
 
     return radians_to_length(length_to_radians(length, original_unit), final_unit)
 
@@ -93,17 +104,17 @@ def convert_area(area, original_unit="meters", final_unit="kilometers"):
     :return: the converted area
     """
 
-    if not area >= 0:
-        raise Exception("area must be a positive number")
+    if not isinstance(area, (float, int)) or area < 0:
+        raise InvalidInput(error_code_messages["InvalidArea"])
 
     try:
         start_factor = area_factors[original_unit]
     except KeyError:
-        raise Exception(f"{original_unit} is not a valid unit")
+        raise InvalidInput(InvalidInput(error_code_messages["InvalidUnits"](original_unit)))
 
     try:
         final_factor = area_factors[final_unit]
     except KeyError:
-        raise Exception(f"{final_unit} is not a valid unit")
+        raise InvalidInput(InvalidInput(error_code_messages["InvalidUnits"](final_unit)))
 
     return (area / start_factor) * final_factor
