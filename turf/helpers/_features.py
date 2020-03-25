@@ -34,7 +34,7 @@ class Feature(FeatureType):
         self.properties = properties or {}
 
     def to_geojson(self):
-        geojson = {
+        return {
             "type": "Feature",
             "properties": self.properties,
             "geometry": self.geometry.to_geojson()
@@ -65,15 +65,16 @@ class FeatureCollection(FeatureType):
         return geojson
 
 
-class _FeatureBaseClass(ABC):
+class Geometry(ABC):
     """
     Base class for Point, LineString and Polygon sub-classes.
     """
 
-    def __init__(self, coordinates: list):
+    def __init__(self, coordinates: list, geometry_type):
 
         self._check_input(coordinates)
         self.coordinates = coordinates
+        self.type = geometry_type
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.coordinates})"
@@ -89,16 +90,21 @@ class _FeatureBaseClass(ABC):
         except AttributeError:
             return default
 
+    def to_geojson(self):
+        return {
+            "type": self.type,
+            "coordinates": self.coordinates
+        }
 
-class Point(_FeatureBaseClass):
+
+class Point(Geometry):
     """
     Class for creating Point objects with certain coordinates.
     Equivalent to a GeoJSON Point.
     """
 
     def __init__(self, coordinates: list):
-        _FeatureBaseClass.__init__(self, coordinates)
-        self.type = "Point"
+        Geometry.__init__(self, coordinates, "Point")
 
     @staticmethod
     def _check_input(coordinates):
@@ -122,15 +128,14 @@ class MultiPoint(Point):
             super(MultiPoint, self)._check_input(coord)
 
 
-class LineString(_FeatureBaseClass):
+class LineString(Geometry):
     """
     Class for creating LineString objects with certain coordinates.
     Equivalent to a GeoJSON LineString.
     """
 
     def __init__(self, coordinates: list):
-        _FeatureBaseClass.__init__(self, coordinates)
-        self.type = "LineString"
+        Geometry.__init__(self, coordinates, geometry_type="LineString")
 
     @staticmethod
     def _check_input(coordinates):
@@ -154,15 +159,14 @@ class MultiLineString(LineString):
             super(MultiLineString, self)._check_input(coord)
 
 
-class Polygon(_FeatureBaseClass):
+class Polygon(Geometry):
     """
     Class for creating Polygon objects with certain coordinates.
     Equivalent to a GeoJSON Polygon.
     """
 
     def __init__(self, coordinates: list):
-        _FeatureBaseClass.__init__(self, coordinates)
-        self.type = "Polygon"
+        Geometry.__init__(self, coordinates, geometry_type="Polygon")
 
     @staticmethod
     def _check_input(coordinates):

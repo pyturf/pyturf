@@ -59,6 +59,19 @@ class TestPoint:
         assert mp.geometry.type == "MultiPoint"
         assert mp.geometry.coordinates == [[0, 0], [10, 10]]
 
+    def test_to_geojson(self):
+
+        p = point([0, 0])
+
+        assert p.to_geojson() ==  {
+            'geometry': {
+                'coordinates': [0, 0],
+                'type': 'Point'
+            },
+            'properties': {},
+            'type': 'Feature'
+        }
+
 
 class TestLineString:
     def test_coordinates_props(self):
@@ -118,6 +131,19 @@ class TestLineString:
         with pytest.raises(Exception) as excinfo:
             multi_line_string([[[0, 0]], [[5, 0], [15, 8]]], {"test": 23})
         assert "two or more" in str(excinfo.value)
+
+    def test_to_geojson(self):
+
+        line = line_string([[5, 10], [20, 40]])
+
+        assert line.to_geojson() ==  {
+            'geometry': {
+                'coordinates': [[5, 10], [20, 40]],
+                'type': 'LineString'
+            },
+            'properties': {},
+            'type': 'Feature'
+        }
 
 
 class TestPolygon:
@@ -214,3 +240,18 @@ class TestPolygon:
                 {"test": 23},
             )
         assert "4 or more Positions" in str(excinfo.value)
+
+    def test_to_geojson(self):
+
+        poly = polygon(
+            [[[5, 10], [20, 40], [40, 0], [5, 10]]], {"name": "test polygon"}
+        )
+
+        assert poly.to_geojson() == {
+            'geometry': {
+                'coordinates': [[[5, 10], [20, 40], [40, 0], [5, 10]]],
+                'type': 'Polygon'
+            },
+            'properties': {'name': 'test polygon'},
+            'type': 'Feature'
+        }
