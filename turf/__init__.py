@@ -1,3 +1,4 @@
+from turf.along import along
 from turf.bearing import bearing
 from turf.destination import destination
 from turf.distance import distance

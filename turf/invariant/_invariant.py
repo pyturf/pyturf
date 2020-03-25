@@ -11,6 +11,7 @@ from turf.helpers import (
 )
 from turf.utils.exceptions import InvalidInput
 from turf.utils.error_codes import error_code_messages
+from turf.utils.helpers import dimensions
 
 allowed_types_points = ["Point", "MultiPoint"]
 allowed_types_line_string_polygons = [
@@ -25,9 +26,17 @@ def get_coords_from_geometry(geometry, allowed_types=None):
     if not allowed_types:
         allowed_types = allowed_types_line_string_polygons
 
+    if isinstance(geometry, list):
+        allowed_input_dimensions = [dimensions[allowed_type] for allowed_type in allowed_types]
+
+        if get_input_dimensions(geometry) in allowed_input_dimensions:
+            return geometry
+        else:
+            raise InvalidInput(error_code_messages["InvalidGeometry"](allowed_types))
+
     if isinstance(geometry, (Feature, dict)):
         if geometry.get("type") == "Feature":
-            return get_coords_from_geometry(geometry.get("geometry", {}))
+            return get_coords_from_geometry(geometry.get("geometry", {}), allowed_types)
 
     allowed_types_classes = [
         *[eval(allowed_type) for allowed_type in allowed_types],

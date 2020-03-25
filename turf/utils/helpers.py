@@ -8,3 +8,13 @@ def get_input_dimensions(lst, n_dim=0):
 def truncate(n, decimals=0):
     multiplier = 10 ** decimals
     return int(n * multiplier) / multiplier
+
+
+dimensions = {
+    "Point": 1,
+    "MultiPoint": 2,
+    "LineString": 2,
+    "MultiLineString": 3,
+    "Polygon": 3,
+    "MultiPolygon": 4,
+}
