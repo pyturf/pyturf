@@ -35,9 +35,7 @@ class TestPoint:
         "input_value,exception_value",
         [
             pytest.param(
-                [1],
-                error_code_messages["InvalidPointInput"],
-                id="InvalidPointInput",
+                [1], error_code_messages["InvalidPointInput"], id="InvalidPointInput",
             ),
             pytest.param(
                 [1, "xyz"],
@@ -78,9 +76,9 @@ class TestPoint:
                 ([[[0, 0], [1, 1]], [[2, 2]]], {"test": 23}),
                 error_code_messages["InvalidMultiInput"] + "of Points",
                 id="InvalidMultiInput",
-                ),
+            ),
             pytest.param(
-                ([[0, 0], [5, 'xyz'], [15, 8]], {"test": 23}),
+                ([[0, 0], [5, "xyz"], [15, 8]], {"test": 23}),
                 error_code_messages["InvalidPointInput"],
                 id="InvalidPointInput",
             ),
@@ -92,9 +90,7 @@ class TestPoint:
             multi_point(*input_value)
 
         assert excinfo.type == InvalidInput
-        assert (
-            str(excinfo.value) == exception_value
-        )
+        assert str(excinfo.value) == exception_value
 
     def test_to_geojson(self):
 

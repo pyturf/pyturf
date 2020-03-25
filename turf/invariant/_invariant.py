@@ -7,7 +7,8 @@ from turf.helpers import (
     Polygon,
     MultiPolygon,
     FeatureCollection,
-    get_input_dimensions)
+    get_input_dimensions,
+)
 from turf.utils.exceptions import InvalidInput
 from turf.utils.error_codes import error_code_messages
 
@@ -20,11 +21,26 @@ allowed_types_line_string_polygons = [
 ]
 
 
-def get_coords_from_geometry(geometry):
-    if geometry.get("type", None) in allowed_types_line_string_polygons:
+def get_coords_from_geometry(geometry, allowed_types=None):
+    if not allowed_types:
+        allowed_types = allowed_types_line_string_polygons
+
+    if isinstance(geometry, (Feature, dict)):
+        if geometry.get("type") == "Feature":
+            return get_coords_from_geometry(geometry.get("geometry", {}))
+
+    allowed_types_classes = [
+        *[eval(allowed_type) for allowed_type in allowed_types],
+        dict,
+    ]
+
+    if any(
+        isinstance(geometry, allowed_type_class)
+        for allowed_type_class in allowed_types_classes
+    ):
         return geometry.get("coordinates", [])
-    else:
-        raise InvalidInput(error_code_messages["InvalidLineOrPolygon"])
+
+    raise InvalidInput(error_code_messages["InvalidGeometry"](allowed_types))
 
 
 def get_coords_from_features(features):
@@ -39,19 +55,12 @@ def get_coords_from_features(features):
                 )
             )
 
-    if isinstance(features, (Feature, dict)):
-        if features.get("type") == "Feature":
-            return get_coords_from_geometry(features.get("geometry", {}))
-
-    if isinstance(features, (LineString, Polygon, MultiLineString, MultiPolygon, dict)):
-        return get_coords_from_geometry(features)
-
     if isinstance(features, list) and all(
         isinstance(sub_list, list) for sub_list in features
     ):
         return features
 
-    raise InvalidInput(error_code_messages["InvalidLineOrPolygon"])
+    return get_coords_from_geometry(features)
 
 
 def get_coord(coord):

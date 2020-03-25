@@ -44,8 +44,8 @@ def length_to_radians(distance, units="kilometers"):
     :return: radians
     """
 
-    if distance < 0:
-        raise(InvalidInput(error_code_messages["InvalidDistance"]))
+    if not isinstance(distance, (float, int)):
+        raise (InvalidInput(error_code_messages["InvalidDistance"]))
 
     try:
         factor = factors[units]
@@ -110,11 +110,15 @@ def convert_area(area, original_unit="meters", final_unit="kilometers"):
     try:
         start_factor = area_factors[original_unit]
     except KeyError:
-        raise InvalidInput(InvalidInput(error_code_messages["InvalidUnits"](original_unit)))
+        raise InvalidInput(
+            InvalidInput(error_code_messages["InvalidUnits"](original_unit))
+        )
 
     try:
         final_factor = area_factors[final_unit]
     except KeyError:
-        raise InvalidInput(InvalidInput(error_code_messages["InvalidUnits"](final_unit)))
+        raise InvalidInput(
+            InvalidInput(error_code_messages["InvalidUnits"](final_unit))
+        )
 
     return (area / start_factor) * final_factor

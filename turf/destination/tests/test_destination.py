@@ -42,9 +42,12 @@ class TestDestination:
     @pytest.mark.parametrize(
         "input_value, exception_value",
         [
-            pytest.param(([[0, 1], [2, 4]], 100, 15), error_code_messages["InvalidPoint"], id="InvalidPoint"),
-            pytest.param((point([0, 0]), -100, 0), error_code_messages["InvalidDistance"], id="InvalidDistance"),
-        ]
+            pytest.param(
+                ([[0, 1], [2, 4]], 100, 15),
+                error_code_messages["InvalidPoint"],
+                id="InvalidPoint",
+            ),
+        ],
     )
     def test_exception(self, input_value, exception_value):
 

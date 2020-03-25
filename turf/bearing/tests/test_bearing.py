@@ -26,9 +26,17 @@ class TestBearing:
     @pytest.mark.parametrize(
         "input_value, exception_value",
         [
-            pytest.param(([[0, 1]], [2, 3]), error_code_messages["InvalidPoint"], id="InvalidStartPoint"),
-            pytest.param((point([0, 0]), [2, 'xyz']), error_code_messages["InvalidDegrees"], id="InvalidEndPoint"),
-        ]
+            pytest.param(
+                ([[0, 1]], [2, 3]),
+                error_code_messages["InvalidPoint"],
+                id="InvalidStartPoint",
+            ),
+            pytest.param(
+                (point([0, 0]), [2, "xyz"]),
+                error_code_messages["InvalidDegrees"],
+                id="InvalidEndPoint",
+            ),
+        ],
     )
     def test_exception(self, input_value, exception_value):
 

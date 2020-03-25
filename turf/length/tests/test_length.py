@@ -23,6 +23,14 @@ for key in ["in", "out"]:
 
 
 class TestLength:
+
+    allowed_inpuy_types = [
+        "LineString",
+        "MultiLineString",
+        "Polygon",
+        "MultiPolygon",
+    ]
+
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -60,9 +68,17 @@ class TestLength:
     @pytest.mark.parametrize(
         "input_value, exception_value",
         [
-            pytest.param([0, 0], error_code_messages["InvalidLineOrPolygon"], id="InvalidLineOrPolygon"),
-            pytest.param(point([0, 0]), error_code_messages["InvalidLineOrPolygon"], id="InvalidLineOrPolygon"),
-        ]
+            pytest.param(
+                [0, 0],
+                error_code_messages["InvalidGeometry"](allowed_inpuy_types),
+                id="InvalidGeometry",
+            ),
+            pytest.param(
+                point([0, 0]),
+                error_code_messages["InvalidGeometry"](allowed_inpuy_types),
+                id="InvalidGeometry",
+            ),
+        ],
     )
     def test_exception(self, input_value, exception_value):
 

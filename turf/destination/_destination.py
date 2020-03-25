@@ -7,6 +7,7 @@ from turf.helpers import (
     point,
 )
 from turf.invariant import get_coord
+from turf.utils.helpers import truncate
 
 
 def destination(origin, distance, bearing, options=None):
@@ -49,7 +50,7 @@ def destination(origin, distance, bearing, options=None):
         np.cos(radians) - np.sin(latitude1) * np.sin(latitude2),
     )
 
-    lng = round(radians_to_degrees(longitude2), 6)
-    lat = round(radians_to_degrees(latitude2), 6)
+    lng = truncate(radians_to_degrees(longitude2), 6)
+    lat = truncate(radians_to_degrees(latitude2), 6)
 
     return point([lng, lat], options.get("properties", None)).to_geojson()
