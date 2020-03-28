@@ -1,27 +1,15 @@
 import pytest
-import json
 import os
-from collections import defaultdict
 
-from turf.helpers import point
 from turf.destination import destination
 
-# TODO: make this test set up a function
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
+from turf.utils.test_setup import get_fixtures
 
 current_path = os.path.dirname(os.path.realpath(__file__))
 
-fixtures = defaultdict(lambda: {"in": None, "out": None})
-
-for key in ["in", "out"]:
-
-    files_path = os.path.join(current_path, key)
-
-    for filename in os.listdir(files_path):
-        with open(os.path.join(files_path, filename), "r") as f:
-            name = filename.split(".")[0]
-            fixtures[name][key] = json.load(f)
+fixtures = get_fixtures(current_path)
 
 
 class TestDestination:
