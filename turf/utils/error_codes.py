@@ -12,8 +12,7 @@ error_code_corpus = {
     "InvalidDegrees": "<degrees> must be a number",
     "InvalidRadians": "<radians> must be a number",
     "InvalidGeometry": lambda geometries: f"Input must be of type {', '.join(geometries)}",
-    "InvalidLineOrPolygon": "Input must be a FeatureCollection / Feature of type LineString, "
-    "MultiLineString, Polygon, MultiPolygon.",
+    "InvalidFeature": "Input must be a FeatureCollection or Feature",
     "InvalidPoint": "Input must be a Point geoJSON feature or an array of numbers.",
     "InvalidMultiInput": "Input coordinates must be an array ",
     "InvalidPointInput": "Input coordinates must be an array of 2 valid numbers.",
@@ -32,7 +31,7 @@ error_code_messages = {
     "InvalidDegrees": error_code_corpus["InvalidDegrees"],
     "InvalidRadians": error_code_corpus["InvalidRadians"],
     "InvalidGeometry": error_code_corpus["InvalidGeometry"],
-    "InvalidLineOrPolygon": error_code_corpus["InvalidLineOrPolygon"],
+    "InvalidFeature": error_code_corpus["InvalidFeature"],
     "InvalidPoint": error_code_corpus["InvalidPoint"],
     "InvalidPointInput": error_code_corpus["InvalidPointInput"],
     "InvalidMultiInput": error_code_corpus["InvalidMultiInput"],

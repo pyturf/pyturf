@@ -14,7 +14,9 @@ def length(features, options=None):
     :return: the measured distance
     """
 
-    coords = get_coords_from_features(features)
+    coords = get_coords_from_features(
+        features, ["LineString", "MultiLineString", "Polygon", "MultiPolygon",]
+    )
 
     if any(isinstance(inner_item, list) for item in coords for inner_item in item):
         distances = list(map(lambda sub_item: length(sub_item, options), coords))

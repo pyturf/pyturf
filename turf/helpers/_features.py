@@ -38,11 +38,16 @@ class Feature(FeatureType):
         self.properties = properties or {}
 
     def to_geojson(self):
-        return {
+        geojson = {
             "type": "Feature",
             "properties": self.properties,
             "geometry": self.geometry.to_geojson(),
         }
+
+        if self.get("bbox"):
+            geojson["bbox"] = self.get("bbox")
+
+        return geojson
 
 
 class FeatureCollection(FeatureType):
