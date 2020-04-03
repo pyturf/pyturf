@@ -1,6 +1,7 @@
 from turf.along import along
 from turf.area import area
 from turf.bbox import bbox
+from turf.bbox_polygon import bbox_polygon
 from turf.bearing import bearing
 from turf.center import center
 from turf.destination import destination

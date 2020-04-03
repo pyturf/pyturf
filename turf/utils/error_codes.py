@@ -21,6 +21,7 @@ error_code_corpus = {
     "InvalidPolygonInput": "Input coordinates must be an array of valid rings.",
     "InvalidLinearRing": "Each Polygon ring coordinates must be a list of 4 or more Points.",
     "InvalidFirstLastPoints": "First and last Points of Polygon ring are not equivalent.",
+    "InvalidBoundingBox": "The input bounding box must be an array of size 4",
 }
 
 error_code_messages = {
@@ -40,4 +41,5 @@ error_code_messages = {
     "InvalidPolygonInput": error_code_corpus["InvalidPolygonInput"],
     "InvalidLinearRing": error_code_corpus["InvalidLinearRing"],
     "InvalidFirstLastPoints": error_code_corpus["InvalidFirstLastPoints"],
+    "InvalidBoundingBox": error_code_corpus["InvalidBoundingBox"],
 }
