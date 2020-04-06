@@ -4,6 +4,7 @@ from turf.bbox import bbox
 from turf.bbox_polygon import bbox_polygon
 from turf.bearing import bearing
 from turf.center import center
+from turf.centroid import centroid
 from turf.destination import destination
 from turf.distance import distance
 from turf.helpers import *
