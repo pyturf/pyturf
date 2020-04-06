@@ -30,7 +30,7 @@ def centroid(features, options=None):
 
     x_sum, y_sum, length = reduce(reduce_coords, coords, [x_sum, y_sum, length])
 
-    return point([x_sum / length, y_sum / length], options.get("properties", None))
+    return point([x_sum / length, y_sum / length], options.get('properties', None)).to_geojson()
 
 
 def reduce_coords(sum_array, coords):

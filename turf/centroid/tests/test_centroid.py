@@ -32,7 +32,11 @@ class TestCentroid:
     )
     def test_centroid(self, fixture):
 
-        options = {"properties": {"marker-symbol": "circle"}}
+        options = {
+            "properties": {
+                "marker-symbol": "circle"
+            }
+        }
 
         assert centroid(fixture["in"], options) == fixture["out"]
 
@@ -45,7 +49,13 @@ class TestCentroid:
                 id="InvalidGeometry",
             ),
             pytest.param(
+<<<<<<< HEAD
                 [1], error_code_messages["InvalidPointInput"], id="InvalidPointInput",
+=======
+                [1],
+                error_code_messages["InvalidPointInput"],
+                id="InvalidPointInput",
+>>>>>>> Add centroid module
             ),
         ],
     )
