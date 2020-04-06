@@ -29,11 +29,15 @@ def get_coords_from_geometry(geometry, allowed_types=None, raise_exception=True)
         allowed_types = allowed_types_default
 
     if isinstance(geometry, list):
-        allowed_input_dimensions = [
+        allowed_input_dimensions = {
             dimensions[allowed_type] for allowed_type in allowed_types
-        ]
+        }
 
-        if get_input_dimensions(geometry) in allowed_input_dimensions:
+        dim = get_input_dimensions(geometry)
+
+        if dim in allowed_input_dimensions:
+            if dim == 1 and len(geometry) < 2:
+                raise InvalidInput(error_code_messages["InvalidPointInput"])
             return geometry
         else:
             if raise_exception:
@@ -69,13 +73,17 @@ def get_geometry_from_features(features, allowed_types=None):
         allowed_types = allowed_types_default
 
     if isinstance(features, list):
-        allowed_input_dimensions = [
+        allowed_input_dimensions = {
             sub
             for allowed_type in allowed_types
             for sub in (dimensions[allowed_type], 1)
-        ]
+        }
 
-        if get_input_dimensions(features) in allowed_input_dimensions:
+        dim = get_input_dimensions(features)
+
+        if dim in allowed_input_dimensions:
+            if dim == 1 and len(features) < 2:
+                raise InvalidInput(error_code_messages["InvalidPointInput"])
             return [features]
         else:
             raise InvalidInput(error_code_messages["InvalidGeometry"](allowed_types))
