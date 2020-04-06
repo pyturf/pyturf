@@ -1,0 +1,13 @@
+{
+    "type": "Feature",
+    "properties": {
+        "marker-symbol": "circle"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            4.851914405822754,
+            45.78098812633097
+        ]
+    }
+}
