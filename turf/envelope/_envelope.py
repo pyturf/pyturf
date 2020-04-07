@@ -9,5 +9,4 @@ def envelope(features, *args):
     :param features: any GeoJSON feature or feature collection
     :return: bounding box extent in [minX, minY, maxX, maxY] order
     """
-
-    return bbox_polygon(bbox(features, *args))
+    return bbox_polygon(bbox(geojson, *args))
