@@ -9,3 +9,4 @@ from turf.destination import destination
 from turf.distance import distance
 from turf.helpers import *
 from turf.length import length
+from turf.midpoint import midpoint
