@@ -11,7 +11,6 @@ current_path = os.path.dirname(os.path.realpath(__file__))
 
 fixtures = get_fixtures(current_path)
 
-
 class TestEnvelope:
     @pytest.mark.parametrize(
         "fixture",
