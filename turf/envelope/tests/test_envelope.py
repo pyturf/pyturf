@@ -9,8 +9,7 @@ from turf.utils.test_setup import get_fixtures
 
 current_path = os.path.dirname(os.path.realpath(__file__))
 
-fixtures = get_fixtures(current_path, keys=["in"])
-
+fixtures = get_fixtures(current_path)
 
 class TestEnvelope:
 
@@ -23,9 +22,4 @@ class TestEnvelope:
     )
     def test_envelope(self, fixture):
 
-        import ipdb; ipdb.set_trace()
-
-        enveloped = envelope(fixture["in"])
-
-        assert True == True
-
+        assert envelope(fixture["in"]) == fixture["out"]
