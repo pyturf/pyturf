@@ -1,17 +1,10 @@
 {
   "type": "Feature",
   "bbox": [
-<<<<<<< HEAD
     20,
     -10,
     130,
     4
-=======
-    0,
-    0,
-    10,
-    10
->>>>>>> added tests
   ],
   "properties": {},
   "geometry": {
