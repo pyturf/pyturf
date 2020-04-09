@@ -31,4 +31,13 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        python -m pytest --verbose --cov=turf
+        pip install pytest-cov
+        python -m pytest --verbose --cov=./ --cov-report=xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
