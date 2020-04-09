@@ -24,7 +24,11 @@ def centroid(features, options=None):
     if get_input_dimensions(coords) == 1:
         coords = [coords]
 
-    x_sum, y_sum, length = reduce(reduce_coords, coords, [0, 0, 0])
+    x_sum = 0
+    y_sum = 0
+    length = 0
+
+    x_sum, y_sum, length = reduce(reduce_coords, coords, [x_sum, y_sum, length])
 
     return point([x_sum / length, y_sum / length], options.get('properties', None)).to_geojson()
 
