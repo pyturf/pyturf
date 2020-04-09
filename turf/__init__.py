@@ -7,6 +7,7 @@ from turf.center import center
 from turf.centroid import centroid
 from turf.destination import destination
 from turf.distance import distance
+from turf.envelope import envelope
 from turf.helpers import *
 from turf.length import length
 from turf.midpoint import midpoint

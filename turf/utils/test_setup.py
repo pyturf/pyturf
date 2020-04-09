@@ -17,7 +17,7 @@ def get_fixtures(current_path, fixtures=None, keys=None):
 
         for filename in os.listdir(files_path):
             with open(os.path.join(files_path, filename), "r") as f:
-                name = '.'.join(filename.split(".")[:-1])
+                name = ".".join(filename.split(".")[:-1])
                 fixtures[name][key] = json.load(f)
 
     return fixtures
