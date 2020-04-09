@@ -60,13 +60,5 @@ dist = distance(point1, point2, {"units": "miles"})
 
 This library is a work in progress, so pull requests from the community are welcome!
 
-As the library follows a modular structure, it is fairly easy to contribute by working on a subpackage 
-(creating the module and the respective tests) and then opening a pull request with the changes. 
-
-For this, first you should check this repo's issues and check which modules are being worked on. Then, you can 
-check [turf.js](https://github.com/Turfjs/turf)'s github repo, choose a module not yet implemented 
-and then open an issue on this repo outlining the module you'll be working on, so that subsequent contributors can 
-follow the same logic outlined here.
-
-Make sure to pull and rebase from the upstream (this main repo) before you open the pull request.
+Check out [CONTRIBUTING.md](CONTRIBUTING.md) for a detailed explanation on how to contribute.
  
