@@ -1,4 +1,4 @@
-# pyturf
+# pyturf [![codecov](https://codecov.io/gh/diogomatoschaves/pyturf/branch/master/graph/badge.svg)](https://codecov.io/gh/diogomatoschaves/pyturf)
 
 `pyturf` is loosely based on [turf.js](https://github.com/Turfjs/turf), a popular geospatial engine 
 written in javascript. It follows the same modular structure and maintains the same functionality as the original
