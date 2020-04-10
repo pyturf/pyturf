@@ -7,14 +7,69 @@ from turf.utils.exceptions import InvalidInput
 from turf.utils.helpers import get_input_dimensions
 
 
-all_geometry_types = [
-    "Point",
-    "LineString",
-    "Polygon",
-    "MultiPoint",
-    "MultiLineString",
-    "MultiPolygon",
-]
+class FeatureType:
+    """
+    Parent class for Feature and FeatureCollection.
+    """
+
+    def __init__(self, feature_type):
+        self.type = feature_type
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.geometry if self.get('geometry') else ''})"
+
+    def get(self, attribute, default=None):
+        try:
+            return getattr(self, attribute)
+        except AttributeError:
+            return default
+
+
+class Feature(FeatureType):
+    """
+    Class that encapsulates a certain geometry, along with its properties.
+    Equivalent to a GeoJSON feature
+    """
+
+    def __init__(self, geom=None, properties=None):
+
+        FeatureType.__init__(self, feature_type="Feature")
+
+        self.geometry = geom or []
+        self.properties = properties or {}
+
+    def to_geojson(self):
+        geojson = {
+            "type": "Feature",
+            "properties": self.properties,
+            "geometry": self.geometry.to_geojson(),
+        }
+
+        if self.get("bbox"):
+            geojson["bbox"] = self.get("bbox")
+
+        return geojson
+
+
+class FeatureCollection(FeatureType):
+    """
+    Class that encapsulates a group of features in a FeatureCollection.
+    Equivalent to a GeoJSON FeatureCollection
+    """
+
+    def __init__(self, features=None):
+
+        FeatureType.__init__(self, feature_type="FeatureCollection")
+
+        self.features = features or []
+
+    def to_geojson(self):
+        geojson = {"type": "FeatureCollection", "features": []}
+
+        for f in self.features:
+            geojson["features"].append(f.to_geojson() if not isinstance(f, dict) else f)
+
+        return geojson
 
 
 class Geometry(ABC):
@@ -427,7 +482,7 @@ def feature_collection(
     if not options:
         options = {}
 
-    feat_collection = FeatureCollection(features)
+    feat_collection = FeatureCollection(features).to_geojson()
 
     if "id" in options:
         feat_collection.id = options["id"]
