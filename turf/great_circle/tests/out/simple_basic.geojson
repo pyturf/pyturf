@@ -1,0 +1,17 @@
+{
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[
+						-122,
+						48
+					],
+					[
+						48,
+						-122
+					]
+				]
+			},
+			"type": "Feature",
+			"properties": {"npoints": 2}
+		}
