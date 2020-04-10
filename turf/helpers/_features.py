@@ -15,7 +15,7 @@ class FeatureType:
         self.type = feature_type
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.geometry if self.geometry else ''})"
+        return f"{self.__class__.__name__}({self.geometry if self.get('geometry') else ''})"
 
     def get(self, attribute, default=None):
         try:
@@ -66,7 +66,7 @@ class FeatureCollection(FeatureType):
         geojson = {"type": "FeatureCollection", "features": []}
 
         for f in self.features:
-            geojson["features"].append(f.to_geojson())
+            geojson["features"].append(f.to_geojson() if not isinstance(f, dict) else f)
 
         return geojson
 
@@ -250,7 +250,7 @@ def feature_collection(features, options):
     if not options:
         options = {}
 
-    feat_collection = FeatureCollection(features)
+    feat_collection = FeatureCollection(features).to_geojson()
 
     if "id" in options:
         feat_collection.id = options["id"]
