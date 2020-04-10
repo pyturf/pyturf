@@ -1,6 +1,6 @@
 # How To Contribute
 
-As the library follows a modular structure, it is fairly easy to contribute by working on a subpackage 
+As the library follows a modular structure, it is fairly easy to contribute by working on a subpackage and 
 submit a pull request of those atomic changes. 
 
 For this, first you should check this repo's issues and check which modules are being worked on by filtering by the 
@@ -13,14 +13,15 @@ so that subsequent contributors can follow the same logic outlined here.
 
 Please attend to the following guidelines:
 
-- Open an issue in `diogomatoschaves/pyturf`.
+- Open an issue in `diogomatoschaves/pyturf` outlining your plan.
 - Always include tests. [pytest](https://docs.pytest.org/en/latest/) is used in this project.
 - `pyturf` modules are small, containing a single exported function. See below for a typical module structure.
 - Export your module function by including it in `turf/<your-module>/__init__.py` and `turf/__init__.py`. See below for details.
-- GeoJSON is the _lingua franca_ of Turf. It should be used as the data structure for anything that can be represented as geography.
+- GeoJSON is the _lingua franca_ of `pyturf`. It should be used as the data structure for anything that can be represented as geography.
+- Add your new module under the `Available Modules` section.
 - Avoid extra dependencies if you can.
-- Run the linter (see below for more details).
-- Finally run `python -m pytest --verbose --cov=turf` from the project root folder to run all the tests and make 
+- Run the linter before submitting changes (see below for more details).
+- Run `python -m pytest --verbose --cov=./` from the project root folder to run all the tests and make 
 sure they pass with a sufficiently high coverage.
 
 When you're ready to submit your changes, make sure to pull and rebase from the upstream (this main repo) 
@@ -29,10 +30,9 @@ before you open the pull request. You should then check if your changes pass the
 
 ## Code Style
 
-To ensure consistent code style, [black](https://black.readthedocs.io/en/stable/) is used in this project. 
-At the root level run:
+To ensure consistent code style, [black](https://black.readthedocs.io/en/stable/) is used in this project. At the root level run:
 
-```sh
+```shell script
 $ black .
 ```
 
@@ -52,7 +52,7 @@ turf
     ├── _new_module.py
     |
     ├── tests
-        ├── test_module_name.py
+        ├── test_new_module.py
         ├── in
         │   ├── points.geojson
         |   ├── ...
@@ -145,6 +145,6 @@ def test_new_module(self, fixture):
 
 In order to run the tests, from the root directory run:
 
-```sh
-$ python -m pytest --verbose --cov=turf
+```shell script
+$ python -m pytest --verbose --cov=./
 ```
