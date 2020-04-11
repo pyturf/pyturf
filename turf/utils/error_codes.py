@@ -15,6 +15,7 @@ error_code_corpus = {
     "InvalidGreatCircle": lambda start, end: f"GreatCircle can't be calculated between {start} and {end}",
     "InvalidGreatCirclePoints": lambda start, end: f"Input {start} and {end} are diametrically opposite, thus there is no single route but rather infinite",
     "InvalidFeature": "Input must be a FeatureCollection or Feature",
+    "InvalidFeatureCollection": "Input must be a an array of Features",
     "InvalidPoint": "Input must be a Point geoJSON feature or an array of numbers.",
     "InvalidMultiInput": "Input coordinates must be an array ",
     "InvalidPointInput": "Input coordinates must be an array of 2 valid numbers.",
