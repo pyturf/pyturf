@@ -13,7 +13,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestGreatCircle:
-
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -23,7 +22,7 @@ class TestGreatCircle:
     )
     def test_great_circle(self, fixture):
 
-        start = fixture["in"]['features'][0]
-        end = fixture["in"]['features'][1]
+        start = fixture["in"]["features"][0]
+        end = fixture["in"]["features"][1]
         properties = fixture["in"].get("properties", {})
         assert great_circle(start, end, properties) == fixture["out"]

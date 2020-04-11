@@ -27,6 +27,36 @@ def distance(start, end, options=None):
     lat1 = degrees_to_radians(coordinates1[1])
     lat2 = degrees_to_radians(coordinates2[1])
 
-    a = np.sin(d_lat / 2) ** 2 + np.sin(d_lon / 2) ** 2 * np.cos(lat1) * np.cos(lat2)
+    distance_rad = calculate_radians_distance(d_lon, d_lat, lat1, lat2)
 
-    return radians_to_length(2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a)), **kwargs)
+    return radians_to_length(distance_rad, **kwargs)
+
+
+def calculate_radians_distance(dif_lon, dif_lat, lat1, lat2):
+    """
+    Calculates the distance between start and end
+
+    basic haversine formula
+    http://www.edwilliams.org/avform.htm#Dist
+    https://en.wikipedia.org/wiki/Great-circle_distance
+
+    :param dif_lon: longitudinal difference (radians) between start and ending points
+    :param dif_lat: latitudinal difference (radians) between start and ending points
+    :param lat1: radians latitude for starting point
+    :param lat2: radians latitude for ending point
+
+    :return: distance_radians
+    """
+    d = np.sin(dif_lat / 2) ** 2 + np.sin(dif_lon / 2) ** 2 * np.cos(lat1) * np.cos(
+        lat2
+    )
+    d = 2 * np.arctan2(np.sqrt(d), np.sqrt(1 - d))
+
+    # z = math.pow(math.sin(h / 2), 2) + \
+    #     math.cos(self.start.y) * \
+    #     math.cos(self.end.y) * \
+    #     math.pow(math.sin(w / 2), 2)
+
+    # distance = 2 * math.asin(math.sqrt(z))
+
+    return d
