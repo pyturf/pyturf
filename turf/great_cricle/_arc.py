@@ -13,19 +13,20 @@ from turf.utils.error_codes import error_code_messages
 
 class Coordinate:
 
-    def __init__(self, lon: float, lat: float):
+    def __init__(self, lon: float, lat: float, decimals=6):
         self.lon = lon
         self.lat = lat
         self.x = degrees_to_radians(lon)
         self.y = degrees_to_radians(lat)
+        self.decimals = decimals
 
     @property
-    def coords(self) -> Tuple[float, float]:
-        return (self.lon, self.lat)
+    def coords(self) -> List[Union[float, float]]:
+        return self._rnd([self.lon, self.lat])
 
     @property
     def point(self) -> Point:
-        return point([self.lon, self.lat]).to_geojson()
+        return point(self._rnd([self.lon, self.lat])).to_geojson()
 
     def to_dict(self):
         d = {
@@ -35,11 +36,13 @@ class Coordinate:
         return d
 
     def __repr__(self):
-        return f"Position({self.lon}, {self.lat})"
+        return f"Position({self.lon},{self.lat})"
 
     def __str__(self):
         return json.dumps(self.to_dict())
 
+    def _rnd(self, x):
+        return [round(i,self.decimals) for i in x]
 
 class GreatCircle():
 
@@ -102,7 +105,7 @@ class GreatCircle():
             math.atan2(z, math.sqrt(math.pow(x, 2) + math.pow(y, 2))))
         lon = radians_to_degrees(math.atan2(y, x))
 
-        return [round(lon,6), round(lat,6)]
+        return Coordinate(lon,lat).coords
 
     def _calculate_arc_coordinates(self) -> LineString:
         """
@@ -114,17 +117,15 @@ class GreatCircle():
         coordinates = []
         n_points = self.properties.get('npoints',0)
 
-        coordinates.append([round(self.start.lon, 6),
-                            round(self.start.lat, 6)])
+        coordinates.append(self.start.coords)
 
-        if n_points > 0:
+        if n_points > 2:
 
-            for i in range(n_points):
-                coord = self._get_intermediate_coord((i+1)/(n_points+1))
+            for i in range(n_points-2):
+                coord = self._get_intermediate_coord((i+1)/(n_points-2+1))
                 coordinates.append(coord)
 
-        coordinates.append([round(self.end.lon, 6),
-                            round(self.end.lat, 6)])
+        coordinates.append(self.end.coords)
 
         return coordinates
 

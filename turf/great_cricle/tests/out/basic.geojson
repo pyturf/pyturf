@@ -408,7 +408,7 @@
 				]
 			},
 			"type": "Feature",
-			"properties": {}
+			"properties": {"npoints": 100}
 		},
 		{
 			"type": "Feature",
@@ -428,7 +428,7 @@
 				"type": "Point",
 				"coordinates": [
 					28.125,
-					43.32517767999296
+					43.325178
 				]
 			}
 		}
