@@ -23,7 +23,7 @@ def great_circle(start, end, options=None):
 
     properties = options.get("properties", {})
     npoints = options.get("npoints", 100)
-    properties['npoints'] = npoints
+    properties["npoints"] = npoints
 
     great_circle = GreatCircle(start, end, properties)
 
