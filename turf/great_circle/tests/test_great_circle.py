@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from turf.great_cricle import great_circle
+from turf.great_circle import great_circle
 
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput

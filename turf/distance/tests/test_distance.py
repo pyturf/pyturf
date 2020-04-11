@@ -1,10 +1,13 @@
 import pytest
 
 from turf import point
+
+from turf.distance import distance
+from turf.distance.tests.fixture import fixture, expected_results
+
 from turf.utils.exceptions import InvalidInput
 from turf.utils.error_codes import error_code_messages
-from turf.distance.tests.fixture import fixture, expected_results
-from turf.distance import distance
+
 
 
 class TestDistance:

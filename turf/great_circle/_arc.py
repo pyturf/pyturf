@@ -4,7 +4,7 @@ import json
 
 from turf.distance._distance import calculate_radians_distance
 from turf.helpers import degrees_to_radians, radians_to_degrees
-from turf.helpers import feature_collection, point, line_string
+from turf.helpers import feature_collection, line_string, point
 from turf.helpers import units_factors
 from turf.helpers import LineString, Point
 from turf.invariant import get_coord
