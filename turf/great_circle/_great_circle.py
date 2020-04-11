@@ -1,5 +1,5 @@
 from turf.invariant import get_coord
-from turf.great_circle import GreatCircle
+from turf.great_circle._arc import GreatCircle
 
 
 def great_circle(start, end, options=None):
