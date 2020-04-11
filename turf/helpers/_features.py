@@ -1,7 +1,6 @@
-from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Generic, Iterable, Union, Sequence
+from abc import ABC
+from typing import List, Dict, Any, Iterable, Union, Sequence
 
-from turf.helpers._units import geometry_types
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
 from turf.utils.helpers import get_input_dimensions
@@ -30,11 +29,6 @@ class Geometry(ABC):
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.coordinates})"
-
-    @staticmethod
-    @abstractmethod
-    def _check_input(coordinates):
-        pass
 
     def get(self, attribute: str, default=None) -> Any:
         try:
@@ -466,7 +460,7 @@ def geometry(
     elif geom_type == "MultiPolygon":
         geom = MultiPolygon(coordinates)
     else:
-        raise Exception(f"{geom_type} is invalid")
+        raise InvalidInput(error_code_messages["InvalidGeometry"](all_geometry_types))
 
     return geom.to_geojson() if as_geojson else geom
 
