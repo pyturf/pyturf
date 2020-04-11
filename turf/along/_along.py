@@ -34,7 +34,7 @@ def along(line, dist, options=None):
         elif travelled >= dist:
             overshot = dist - travelled
             if not overshot:
-                return point([truncate(coord, 6) for coord in coords[i]]).to_geojson()
+                return point([truncate(coord, 6) for coord in coords[i]])
             else:
                 direction = bearing(coords[i], coords[i - 1]) - 180
                 interpolated = destination(coords[i], overshot, direction, options)
@@ -42,4 +42,4 @@ def along(line, dist, options=None):
         else:
             travelled += distance(coords[i], coords[i + 1])
 
-    return point([truncate(coord, 6) for coord in coords[-1]]).to_geojson()
+    return point([truncate(coord, 6) for coord in coords[-1]])

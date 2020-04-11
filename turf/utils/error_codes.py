@@ -12,7 +12,10 @@ error_code_corpus = {
     "InvalidDegrees": "<degrees> must be a number",
     "InvalidRadians": "<radians> must be a number",
     "InvalidGeometry": lambda geometries: f"Input must be of type {', '.join(geometries)}",
-    "InvalidFeature": "Input must be a FeatureCollection or Feature",
+    "InvalidFeaturesInput": "Input must be a FeatureCollection or Feature",
+    "InvalidGeometryInput": "Input must be a valid Geometry",
+    "InvalidFeature": "Input must be a valid Feature",
+    "InvalidFeatureCollection": "Input must be a an array of Features",
     "InvalidPoint": "Input must be a Point geoJSON feature or an array of numbers.",
     "InvalidMultiInput": "Input coordinates must be an array ",
     "InvalidPointInput": "Input coordinates must be an array of 2 valid numbers.",
@@ -22,6 +25,7 @@ error_code_corpus = {
     "InvalidLinearRing": "Each Polygon ring coordinates must be a list of 4 or more Points.",
     "InvalidFirstLastPoints": "First and last Points of Polygon ring are not equivalent.",
     "InvalidBoundingBox": "The input bounding box must be an array of size 4",
+    "InvalidCoordinates": "The input geometry(s) must have a coordinates attribute",
 }
 
 error_code_messages = {
@@ -33,6 +37,7 @@ error_code_messages = {
     "InvalidRadians": error_code_corpus["InvalidRadians"],
     "InvalidGeometry": error_code_corpus["InvalidGeometry"],
     "InvalidFeature": error_code_corpus["InvalidFeature"],
+    "InvalidFeatureCollection": error_code_corpus["InvalidFeatureCollection"],
     "InvalidPoint": error_code_corpus["InvalidPoint"],
     "InvalidPointInput": error_code_corpus["InvalidPointInput"],
     "InvalidMultiInput": error_code_corpus["InvalidMultiInput"],
@@ -42,4 +47,5 @@ error_code_messages = {
     "InvalidLinearRing": error_code_corpus["InvalidLinearRing"],
     "InvalidFirstLastPoints": error_code_corpus["InvalidFirstLastPoints"],
     "InvalidBoundingBox": error_code_corpus["InvalidBoundingBox"],
+    "InvalidCoordinates": error_code_corpus["InvalidCoordinates"],
 }
