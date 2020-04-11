@@ -10,6 +10,9 @@ from turf.helpers._features import (
     multi_point,
     multi_line_string,
     multi_polygon,
+    feature,
+    Point,
+    feature_collection,
 )
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
@@ -18,7 +21,7 @@ from turf.utils.exceptions import InvalidInput
 class TestPoint:
     def test_coordinates_props(self):
 
-        p = point([5, 10], {"name": "test point"})
+        p = point([5, 10], {"name": "test point"}, as_geojson=False)
 
         assert p.geometry.coordinates[0] == 5
         assert p.geometry.coordinates[1] == 10
@@ -27,9 +30,9 @@ class TestPoint:
 
     def test_no_props(self):
 
-        p = point([0, 0])
+        p = point([0, 0], as_geojson=False)
 
-        assert p.properties == {}
+        assert p.get("properties") == {}
 
     @pytest.mark.parametrize(
         "input_value,exception_value",
@@ -54,7 +57,12 @@ class TestPoint:
 
     def test_points(self):
 
-        pts = points([[-75, 39], [-80, 45], [-78, 50]], {"foo": "bar"}, {"id": "hello"})
+        pts = points(
+            [[-75, 39], [-80, 45], [-78, 50]],
+            {"foo": "bar"},
+            {"id": "hello"},
+            as_geojson=False,
+        )
 
         assert len(pts.features) == 3
         assert pts.id == "hello"
@@ -62,7 +70,7 @@ class TestPoint:
 
     def test_multi_point(self):
 
-        mp = multi_point([[0, 0], [10, 10]], {"test": 23})
+        mp = multi_point([[0, 0], [10, 10]], {"test": 23}, as_geojson=False)
 
         assert mp.type == "Feature"
         assert mp.properties == {"test": 23}
@@ -94,7 +102,7 @@ class TestPoint:
 
     def test_to_geojson(self):
 
-        p = point([0, 0])
+        p = point([0, 0], as_geojson=False)
 
         assert p.to_geojson() == {
             "geometry": {"coordinates": [0, 0], "type": "Point"},
@@ -106,7 +114,7 @@ class TestPoint:
 class TestLineString:
     def test_coordinates_props(self):
 
-        line = line_string([[5, 10], [20, 40]], {"name": "test line"})
+        line = line_string([[5, 10], [20, 40]], {"name": "test line"}, as_geojson=False)
 
         assert line.geometry.coordinates[0][0] == 5
         assert line.geometry.coordinates[1][0] == 20
@@ -115,7 +123,7 @@ class TestLineString:
 
     def test_no_props(self):
 
-        line = line_string([[5, 10], [20, 40]])
+        line = line_string([[5, 10], [20, 40]], as_geojson=False)
 
         assert line.properties == {}
 
@@ -156,6 +164,7 @@ class TestLineString:
             ],
             {"foo": "bar"},
             {"id": "hello"},
+            as_geojson=False,
         )
 
         assert len(ls.features) == 2
@@ -164,7 +173,9 @@ class TestLineString:
 
     def test_multi_line_string(self):
 
-        mls = multi_line_string([[[0, 0], [1, 2]], [[5, 0], [15, 8]]], {"test": 23})
+        mls = multi_line_string(
+            [[[0, 0], [1, 2]], [[5, 0], [15, 8]]], {"test": 23}, as_geojson=False
+        )
 
         assert mls.type == "Feature"
         assert mls.properties == {"test": 23}
@@ -196,7 +207,7 @@ class TestLineString:
 
     def test_to_geojson(self):
 
-        line = line_string([[5, 10], [20, 40]])
+        line = line_string([[5, 10], [20, 40]], as_geojson=False)
 
         assert line.to_geojson() == {
             "geometry": {"coordinates": [[5, 10], [20, 40]], "type": "LineString"},
@@ -209,7 +220,9 @@ class TestPolygon:
     def test_coordinates_props(self):
 
         poly = polygon(
-            [[[5, 10], [20, 40], [40, 0], [5, 10]]], {"name": "test polygon"}
+            [[[5, 10], [20, 40], [40, 0], [5, 10]]],
+            {"name": "test polygon"},
+            as_geojson=False,
         )
 
         assert poly.geometry.coordinates[0][0][0] == 5
@@ -220,7 +233,7 @@ class TestPolygon:
 
     def test_no_props(self):
 
-        poly = polygon([[[5, 10], [20, 40], [40, 0], [5, 10]]])
+        poly = polygon([[[5, 10], [20, 40], [40, 0], [5, 10]]], as_geojson=False)
 
         assert poly.properties == {}
 
@@ -266,6 +279,7 @@ class TestPolygon:
             ],
             {"foo": "bar"},
             {"id": "hello"},
+            as_geojson=False,
         )
 
         assert len(poly.features) == 2
@@ -280,6 +294,7 @@ class TestPolygon:
                 [[[93, 19], [63, 7], [79, 0], [93, 19]]],
             ],
             {"test": 23},
+            as_geojson=False,
         )
 
         assert mp.type == "Feature"
@@ -333,7 +348,9 @@ class TestPolygon:
     def test_to_geojson(self):
 
         poly = polygon(
-            [[[5, 10], [20, 40], [40, 0], [5, 10]]], {"name": "test polygon"}
+            [[[5, 10], [20, 40], [40, 0], [5, 10]]],
+            {"name": "test polygon"},
+            as_geojson=False,
         )
 
         assert poly.to_geojson() == {
@@ -344,3 +361,137 @@ class TestPolygon:
             "properties": {"name": "test polygon"},
             "type": "Feature",
         }
+
+
+class TestFeature:
+
+    allowed_types = [
+        "Point",
+        "LineString",
+        "Polygon",
+        "MultiPoint",
+        "MultiLineString",
+        "MultiPolygon",
+    ]
+
+    @pytest.mark.parametrize(
+        "input_value,as_geojson",
+        [
+            pytest.param(
+                {"type": "Point", "coordinates": [4.83, 45.75]},
+                True,
+                id="point-geojson",
+            ),
+            pytest.param(Point([4.83, 45.75]), False, id="point-object",),
+        ],
+    )
+    def test_feature(self, input_value, as_geojson):
+
+        feat = feature(input_value, as_geojson=as_geojson)
+
+        assert feat.get("geometry") == input_value
+
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                {"type": "NotGeoJSON", "coordinates": [4.83, 45.75]},
+                error_code_messages["InvalidGeometry"](allowed_types),
+                id="InvalidGeometry",
+            ),
+            pytest.param(
+                {"type": "Point",},
+                error_code_messages["InvalidCoordinates"],
+                id="InvalidCoordinates",
+            ),
+        ],
+    )
+    def test_feature_exception(self, input_value, exception_value):
+
+        with pytest.raises(Exception) as excinfo:
+            feature(input_value)
+
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value
+
+
+class TestFeatureColletion:
+
+    allowed_types = [
+        "Point",
+        "LineString",
+        "Polygon",
+        "MultiPoint",
+        "MultiLineString",
+        "MultiPolygon",
+    ]
+
+    @pytest.mark.parametrize(
+        "input_value,as_geojson",
+        [
+            pytest.param(
+                lambda x: [
+                    {
+                        "type": "Feature",
+                        "properties": {},
+                        "geometry": {"type": "Point", "coordinates": [4.83, 45.75]},
+                    }
+                ],
+                True,
+                id="feature-point-geojson",
+            ),
+            pytest.param(
+                lambda as_geojson: [
+                    line_string([[4.83, 45.75], [4.94, 45.91]], as_geojson=as_geojson)
+                ],
+                False,
+                id="feature-line_string-object",
+            ),
+        ],
+    )
+    def test_feature(self, input_value, as_geojson):
+
+        feat_collection = feature_collection(input_value(True), as_geojson=as_geojson)
+
+        assert feat_collection.get("features") == input_value(False)
+
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {"type": "Point", "coordinates": [4.83, 45.75]},
+                },
+                error_code_messages["InvalidFeatureCollection"],
+                id="InvalidFeatureCollection",
+            ),
+            pytest.param(
+                [
+                    {
+                        "type": "Feature",
+                        "properties": {},
+                        "geometry": {
+                            "type": "NotGeoJSON",
+                            "coordinates": [4.83, 45.75],
+                        },
+                    }
+                ],
+                error_code_messages["InvalidGeometry"](allowed_types),
+                id="InvalidGeometryType",
+            ),
+            pytest.param(
+                [{"type": "Point",}],
+                error_code_messages["InvalidGeometry"](allowed_types),
+                id="InvalidGeometry",
+            ),
+        ],
+    )
+    def test_feature_exception(self, input_value, exception_value):
+
+        with pytest.raises(Exception) as excinfo:
+            feature_collection(input_value)
+
+        assert excinfo.type == InvalidInput
+        assert str(excinfo.value) == exception_value

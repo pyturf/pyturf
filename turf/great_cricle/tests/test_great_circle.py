@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from turf.envelope import envelope
+from turf.great_cricle import great_circle
 
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
@@ -11,7 +11,8 @@ current_path = os.path.dirname(os.path.realpath(__file__))
 
 fixtures = get_fixtures(current_path)
 
-class TestEnvelope:
+
+class TestGreatCircle:
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -19,6 +20,9 @@ class TestEnvelope:
             for fixture_name, fixture in fixtures.items()
         ],
     )
-    def test_envelope(self, fixture):
+    def test_great_circle(self, fixture):
 
-        assert envelope(fixture["in"]) == fixture["out"]
+        start = fixture["in"]["features"][0]
+        end = fixture["in"]["features"][1]
+        properties = fixture["in"].get("properties", {})
+        assert great_circle(start, end, properties) == fixture["out"]

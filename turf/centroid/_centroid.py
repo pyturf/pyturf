@@ -41,4 +41,3 @@ def reduce_coords(sum_array, coords):
         return reduce(lambda prev, coord: reduce_coords(prev, coord), coords, sum_array)
 
     return [sum_array[0] + coords[0], sum_array[1] + coords[1], sum_array[2] + 1]
-

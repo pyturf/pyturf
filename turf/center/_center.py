@@ -21,4 +21,4 @@ def center(features, options=None):
     x = (bounding_box[0] + bounding_box[2]) / 2
     y = (bounding_box[1] + bounding_box[3]) / 2
 
-    return point([x, y], options.get("properties", {}), options).to_geojson()
+    return point([x, y], options.get("properties", {}), options)

@@ -1,4 +1,3 @@
-
 from turf.bearing import bearing
 from turf.destination import destination
 from turf.distance import distance
@@ -19,4 +18,3 @@ def midpoint(point1, point2):
     mid_point = destination(point1, dist / 2, heading)
 
     return mid_point
-

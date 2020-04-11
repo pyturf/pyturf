@@ -11,11 +11,10 @@ from turf.utils.test_setup import get_fixtures
 
 current_path = os.path.dirname(os.path.realpath(__file__))
 
-fixtures = get_fixtures(current_path)
+fixtures = get_fixtures(current_path, keys=["in"])
 
 
 class TestMidpoint:
-
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -29,7 +28,9 @@ class TestMidpoint:
 
         mid_point = midpoint(points[0], points[1])
 
-        assert truncate(distance(points[0], mid_point), 2) == truncate(distance(points[1], mid_point), 2)
+        assert truncate(distance(points[0], mid_point), 2) == truncate(
+            distance(points[1], mid_point), 2
+        )
 
     @pytest.mark.parametrize(
         "input_value, exception_value",

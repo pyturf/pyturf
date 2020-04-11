@@ -57,6 +57,7 @@ def get_coords_from_geometry(geometry, allowed_types=None, raise_exception=True)
 
     if any(
         isinstance(geometry, allowed_type_class)
+        and geometry.get("type", "") in allowed_types
         for allowed_type_class in allowed_class_types
     ):
         return geometry.get("coordinates", [])
@@ -101,7 +102,7 @@ def get_geometry_from_features(features, allowed_types=None):
         if features.get("type") == "Feature":
             return [features.get("geometry", {})]
 
-    raise InvalidInput(error_code_messages["InvalidFeature"])
+    raise InvalidInput(error_code_messages["InvalidFeaturesInput"])
 
 
 def get_coords_from_features(features, allowed_types=None):

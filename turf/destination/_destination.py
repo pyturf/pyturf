@@ -53,4 +53,4 @@ def destination(origin, distance, bearing, options=None):
     lng = truncate(radians_to_degrees(longitude2), 6)
     lat = truncate(radians_to_degrees(latitude2), 6)
 
-    return point([lng, lat], options.get("properties", None)).to_geojson()
+    return point([lng, lat], options.get("properties", None))
