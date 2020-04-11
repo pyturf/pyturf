@@ -26,5 +26,4 @@ class TestGreatCircle:
         start = fixture["in"]['features'][0]
         end = fixture["in"]['features'][1]
         properties = fixture["in"].get("properties", {})
-        breakpoint()
         assert great_circle(start, end, properties) == fixture["out"]

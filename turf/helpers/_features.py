@@ -65,7 +65,6 @@ class FeatureCollection(FeatureType):
 
     def to_geojson(self):
         geojson = {"type": "FeatureCollection", "features": []}
-
         for f in self.features:
             geojson["features"].append(f.to_geojson() if not isinstance(f, dict) else f)
 
