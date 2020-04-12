@@ -13,6 +13,9 @@ fixtures = get_fixtures(current_path)
 
 
 class TestArea:
+
+    allowed_types = ["Polygon", "MultiPolygon"]
+
     @pytest.mark.parametrize(
         "fixture",
         [

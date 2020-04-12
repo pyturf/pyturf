@@ -15,6 +15,9 @@ fixtures = get_fixtures(current_path, keys=["in"])
 
 
 class TestMidpoint:
+
+    allowed_types = ["Point"]
+
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -37,12 +40,12 @@ class TestMidpoint:
         [
             pytest.param(
                 [[[1, 2], [2, 3]], [3, 4]],
-                error_code_messages["InvalidPoint"],
+                error_code_messages["InvalidGeometry"](allowed_types),
                 id="InvalidInput-LineString",
             ),
             pytest.param(
                 [[1], [2, 3]],
-                error_code_messages["InvalidPoint"],
+                error_code_messages["InvalidPointInput"],
                 id="InvalidInput-Point-with-1-coordinate",
             ),
         ],

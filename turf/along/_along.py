@@ -2,7 +2,7 @@ from turf.helpers import point
 from turf.bearing import bearing
 from turf.destination import destination
 from turf.distance import distance
-from turf.invariant import get_coords_from_geometry
+from turf.invariant import get_coords_from_geometry, get_coords_from_features
 from turf.utils.exceptions import InvalidInput
 from turf.utils.error_codes import error_code_messages
 from turf.utils.helpers import truncate
@@ -25,7 +25,7 @@ def along(line, dist, options=None):
     if not isinstance(dist, (float, int)) or dist < 0:
         raise InvalidInput(error_code_messages["InvalidDistance"])
 
-    coords = get_coords_from_geometry(line, ["LineString"])
+    coords = get_coords_from_features(line, ["LineString"])
 
     travelled = 0
     for i in range(len(coords)):

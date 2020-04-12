@@ -1,6 +1,6 @@
 import numpy as np
 
-from turf.invariant import get_coord
+from turf.invariant import get_coords_from_features
 from turf.helpers import degrees_to_radians, radians_to_degrees
 
 
@@ -22,8 +22,8 @@ def bearing(start, end, options=None):
     if isinstance(options, dict) and "final" in options:
         return calculate_final_bearing(start, end)
 
-    start = get_coord(start)
-    end = get_coord(end)
+    start = get_coords_from_features(start, ["Point"])
+    end = get_coords_from_features(end, ["Point"])
 
     lon1 = degrees_to_radians(start[0])
     lon2 = degrees_to_radians(end[0])

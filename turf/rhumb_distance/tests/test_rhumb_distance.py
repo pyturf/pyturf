@@ -14,7 +14,7 @@ current_path = os.path.dirname(os.path.realpath(__file__))
 fixtures = get_fixtures(current_path)
 
 
-class TestRhumbDestination:
+class TestRhumbDistance:
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -42,24 +42,30 @@ class TestRhumbDestination:
 
         assert distances == fixture["out"]
 
-    def test_exception(self):
-
-        wrong_units = "foo"
+    @pytest.mark.parametrize(
+        "input_value,exception_value",
+        [
+            pytest.param(
+                (point([0, 0]), point([10, 10]), {"units": "foo"}),
+                error_code_messages["InvalidUnits"]("foo"),
+                id="InvalidUnits",
+            ),
+            pytest.param(
+                (None, point([10, 10])),
+                error_code_messages["InvalidGeometry"](["Point"]),
+                id="InvalidGeometry",
+            ),
+            pytest.param(
+                (point([10, 10]), [10]),
+                error_code_messages["InvalidPointInput"],
+                id="InvalidPointInput",
+            ),
+        ],
+    )
+    def test_exception(self, input_value, exception_value):
 
         with pytest.raises(Exception) as excinfo:
-            rhumb_distance(point([0, 0]), point([10, 10]), {"units": wrong_units})
+            rhumb_distance(*input_value)
 
         assert excinfo.type == InvalidInput
-        assert str(excinfo.value) == error_code_messages["InvalidUnits"](wrong_units)
-
-        with pytest.raises(Exception) as excinfo:
-            rhumb_distance(None, point([10, 10]))
-
-        assert excinfo.type == InvalidInput
-        assert str(excinfo.value) == error_code_messages["InvalidPoint"]
-
-        with pytest.raises(Exception) as excinfo:
-            rhumb_distance(point([10, 10]), "point")
-
-        assert excinfo.type == InvalidInput
-        assert str(excinfo.value) == error_code_messages["InvalidPoint"]
+        assert str(excinfo.value) == exception_value

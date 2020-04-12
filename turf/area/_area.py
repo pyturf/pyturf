@@ -20,6 +20,9 @@ def area(features):
 
     geometries = get_geometry_from_features(features)
 
+    if not isinstance(geometries, list) or geometries == features:
+        geometries = [geometries]
+
     return reduce(lambda prev, curr: prev + calculate_area(curr), geometries, 0)
 
 

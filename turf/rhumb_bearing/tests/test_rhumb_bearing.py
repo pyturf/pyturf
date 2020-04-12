@@ -14,7 +14,7 @@ current_path = os.path.dirname(os.path.realpath(__file__))
 fixtures = get_fixtures(current_path)
 
 
-class TestRhumbDestination:
+class TestRhumbBearing:
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -22,7 +22,7 @@ class TestRhumbDestination:
             for fixture_name, fixture in fixtures.items()
         ],
     )
-    def test_rhumb_distance(self, fixture):
+    def test_rhumb_bearing(self, fixture):
 
         pt1 = fixture["in"]["features"][0]
         pt2 = fixture["in"]["features"][1]
@@ -43,4 +43,4 @@ class TestRhumbDestination:
             rhumb_bearing(point([10, 10]), "point")
 
         assert excinfo.type == InvalidInput
-        assert str(excinfo.value) == error_code_messages["InvalidPoint"]
+        assert str(excinfo.value) == error_code_messages["InvalidGeometry"](["Point"])

@@ -38,6 +38,8 @@ error_code_messages = {
     "InvalidDegrees": error_code_corpus["InvalidDegrees"],
     "InvalidRadians": error_code_corpus["InvalidRadians"],
     "InvalidGeometry": error_code_corpus["InvalidGeometry"],
+    "InvalidFeaturesInput": error_code_corpus["InvalidFeaturesInput"],
+    "InvalidGeometryInput": error_code_corpus["InvalidGeometryInput"],
     "InvalidGreatCircle": error_code_corpus["InvalidGreatCircle"],
     "InvalidGreatCirclePoints": error_code_corpus["InvalidGreatCirclePoints"],
     "InvalidFeature": error_code_corpus["InvalidFeature"],
