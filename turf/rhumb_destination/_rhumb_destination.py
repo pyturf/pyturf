@@ -34,7 +34,7 @@ def rhumb_destination(features: Dict, options: Dict = None) -> Point:
     if not options:
         options = features.get("properties", {})
 
-    coords = get_coords_from_features(features)
+    coords = get_coords_from_features(features, ["Point"])
 
     bearing = options.get("bearing", 180)
     distance = options.get("dist", 100)

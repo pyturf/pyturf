@@ -5,7 +5,7 @@ import numpy as np
 
 from turf.helpers import degrees_to_radians, radians_to_degrees
 from turf.helpers import Feature
-from turf.invariant import get_coord
+from turf.invariant import get_coords_from_features
 
 
 def rhumb_bearing(
@@ -30,8 +30,8 @@ def rhumb_bearing(
     if not isinstance(options, dict):
         options = {}
 
-    origin = get_coord(origin)
-    destination = get_coord(destination)
+    origin = get_coords_from_features(origin, ["Point"])
+    destination = get_coords_from_features(destination, ["Point"])
     final = options.get("final", False)
 
     if final:

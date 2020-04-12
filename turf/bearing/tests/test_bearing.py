@@ -11,6 +11,8 @@ class TestBearing:
     start = point([-75, 45], {"marker-color": "#F00"})
     end = point([20, 60], {"marker-color": "#00F"})
 
+    allowed_types = ["Point"]
+
     def test_calculate_bearing(self):
 
         initial_bearing = bearing(self.start, self.end)
@@ -28,7 +30,7 @@ class TestBearing:
         [
             pytest.param(
                 ([[0, 1]], [2, 3]),
-                error_code_messages["InvalidPoint"],
+                error_code_messages["InvalidGeometry"](allowed_types),
                 id="InvalidStartPoint",
             ),
             pytest.param(

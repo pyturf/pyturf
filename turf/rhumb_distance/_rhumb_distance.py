@@ -4,7 +4,7 @@ import numpy as np
 
 from turf.helpers import convert_length, degrees_to_radians
 from turf.helpers import earth_radius
-from turf.invariant import get_coord
+from turf.invariant import get_coords_from_features
 
 
 def rhumb_distance(origin, destination, options: Dict = None) -> float:
@@ -24,8 +24,8 @@ def rhumb_distance(origin, destination, options: Dict = None) -> float:
     if not isinstance(options, dict):
         options = {}
 
-    origin = get_coord(origin)
-    destination = get_coord(destination)
+    origin = get_coords_from_features(origin, ["Point"])
+    destination = get_coords_from_features(destination, ["Point"])
 
     # compensate the crossing of the 180th meridian (https://macwright.org/2016/09/26/the-180th-meridian.html)
     # solution from https://github.com/mapbox/mapbox-gl-js/issues/3250#issuecomment-294887678

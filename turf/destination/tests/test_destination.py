@@ -13,6 +13,9 @@ fixtures = get_fixtures(current_path)
 
 
 class TestDestination:
+
+    allowed_types = ["Point"]
+
     @pytest.mark.parametrize(
         "fixture",
         [
@@ -32,7 +35,7 @@ class TestDestination:
         [
             pytest.param(
                 ([[0, 1], [2, 4]], 100, 15),
-                error_code_messages["InvalidPoint"],
+                error_code_messages["InvalidGeometry"](allowed_types),
                 id="InvalidPoint",
             ),
         ],

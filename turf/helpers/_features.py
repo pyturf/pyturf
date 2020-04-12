@@ -30,6 +30,15 @@ class Geometry(ABC):
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.coordinates})"
 
+    def __eq__(self, other: Any) -> bool:
+        try:
+            equality = self.type == other.type
+            equality &= self.coordinates == other.coordinates
+        except AttributeError:
+            return False
+
+        return equality
+
     def get(self, attribute: str, default=None) -> Any:
         try:
             return getattr(self, attribute)

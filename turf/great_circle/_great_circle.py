@@ -1,4 +1,4 @@
-from turf.invariant import get_coord
+from turf.invariant import get_coords_from_features
 from turf.great_circle._arc import GreatCircle
 
 
@@ -16,8 +16,8 @@ def great_circle(start, end, options=None):
     if not options or not isinstance(options, dict):
         options = {}
 
-    start = get_coord(start)
-    end = get_coord(end)
+    start = get_coords_from_features(start, ["Point"])
+    end = get_coords_from_features(end, ["Point"])
 
     properties = options.get("properties", {})
     npoints = options.get("npoints", 100)

@@ -7,7 +7,6 @@ from turf.helpers import degrees_to_radians, radians_to_degrees
 from turf.helpers import point, line_string
 from turf.helpers import units_factors
 from turf.helpers import Feature, LineString, Point
-from turf.invariant import get_coord
 from turf.utils.exceptions import InvalidInput
 from turf.utils.error_codes import error_code_messages
 

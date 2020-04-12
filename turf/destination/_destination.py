@@ -6,7 +6,7 @@ from turf.helpers import (
     radians_to_degrees,
     point,
 )
-from turf.invariant import get_coord
+from turf.invariant import get_coords_from_features
 from turf.utils.helpers import truncate
 
 
@@ -32,7 +32,7 @@ def destination(origin, distance, bearing, options=None):
     if "units" in options:
         kwargs["units"] = options.get("units")
 
-    coords = get_coord(origin)
+    coords = get_coords_from_features(origin, ["Point"])
 
     longitude1 = degrees_to_radians(coords[0])
     latitude1 = degrees_to_radians(coords[1])

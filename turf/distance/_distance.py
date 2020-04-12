@@ -1,6 +1,6 @@
 import numpy as np
 from turf.helpers import degrees_to_radians, radians_to_length
-from turf.invariant import get_coord
+from turf.invariant import get_coords_from_features
 
 
 def distance(start, end, options=None):
@@ -18,8 +18,8 @@ def distance(start, end, options=None):
     if isinstance(options, dict) and "units" in options:
         kwargs.update(options)
 
-    coordinates1 = get_coord(start)
-    coordinates2 = get_coord(end)
+    coordinates1 = get_coords_from_features(start, ["Point"])
+    coordinates2 = get_coords_from_features(end, ["Point"])
 
     d_lat = degrees_to_radians(coordinates2[1] - coordinates1[1])
     d_lon = degrees_to_radians(coordinates2[0] - coordinates1[0])
