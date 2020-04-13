@@ -1,11 +1,12 @@
-Please make sure that you:
+Please make sure that:
 
-- [ ] Have read [Contributing.md](../CONTRIBUTING.md)
-- [ ] Include a link to the issue this pull request is associated to.
-- [ ] Have ran the linter at the root level of the project: `black .`
-- [ ] Have ran the tests and made sure they are all passing: `python -m pytest --verbose --cov=./` 
+- [ ] You have read [CONTRIBUTING.md](../CONTRIBUTING.md)
+- [ ] You Include a link to the issue this pull request is associated to.
+- [ ] The linter has been run at the root level of the project: `black .`
+- [ ] All tests are passing: `python -m pytest --verbose --cov=./` 
+- [ ] Your branch is up to date with master: `git rebase upstream/master`
 
-For new modules, also make sure that you:
+For new modules, also make sure that:
 
-- [ ] Have exported the new module function in `turf/<your-module>/__init__.py` and `turf/__init__.py`.
-- [ ] have added the new module under the `Available Modules` section.
+- [ ] The new module function is exported in `turf/<your-module>/__init__.py` and `turf/__init__.py`.
+- [ ] The new module has been added under the `Available Modules` section on the [README](../README.md).

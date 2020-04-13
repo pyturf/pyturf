@@ -8,7 +8,7 @@ For this, first you should check this repo's issues and check which modules are 
 that you'd like to implement, making sure that it hasn't been already implemented or is currently being worked by 
 someone else.
  
-When these checks have been made, open a new issue on this repo outlining the module you'll be working on, 
+When you're ready, open a new issue on this repo outlining the module you'll be working on, 
 so that subsequent contributors can follow the same logic outlined here.
 
 Please attend to the following guidelines:
@@ -18,15 +18,15 @@ Please attend to the following guidelines:
 - `pyturf` modules are small, containing a single exported function. See below for a typical module structure.
 - Export your module function by including it in `turf/<your-module>/__init__.py` and `turf/__init__.py`. See below for details.
 - GeoJSON is the _lingua franca_ of `pyturf`. It should be used as the data structure for anything that can be represented as geography.
+- Keep your commits atomic and each of them passing all checks (linter and tests).
 - Add your new module under the `Available Modules` section.
 - Avoid extra dependencies if you can.
 - Run the linter before submitting changes (see below for more details).
 - Run `python -m pytest --verbose --cov=./` from the project root folder to run all the tests and make 
 sure they pass with a sufficiently high coverage.
+- Rebase your branch with the upstream master before opening the PR: `git rebase upstream/master`
 
-When you're ready to submit your changes, make sure to pull and rebase from the upstream (this main repo) 
-before you open the pull request. You should then check if your changes pass the CI pipeline, which is run in the 
-`Actions` tab of the project.
+After you open the PR, make sure that the CI pipeline passes all checks (on the `Checks` tab of the PR).
 
 ## Code Style
 
