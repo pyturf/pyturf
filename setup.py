@@ -1,11 +1,15 @@
+import os
 from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open("version.txt") as f:
+    __version__ = f.read()
+
 setup(
     name="pyturf",
-    version="0.1",
+    version=os.environ["GITHUB_REF"].split("-")[-1] or __version__,
     description="Python geospatial library",
     long_description=long_description,
     long_description_content_type="text/markdown",
