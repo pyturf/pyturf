@@ -12,3 +12,4 @@ from turf.great_circle import great_circle
 from turf.helpers import *
 from turf.length import length
 from turf.midpoint import midpoint
+from turf.square import square
