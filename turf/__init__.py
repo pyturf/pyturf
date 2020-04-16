@@ -13,4 +13,5 @@ from turf.helpers import *
 from turf.length import length
 from turf.midpoint import midpoint
 from turf.rhumb_destination import rhumb_destination
+from turf.rhumb_distance import rhumb_distance
 from turf.square import square
