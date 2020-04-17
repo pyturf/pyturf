@@ -79,6 +79,7 @@ Currently, the following modules have been implemented:
 - [helpers](https://github.com/diogomatoschaves/pyturf/tree/master/turf/helpers)
 - [length](https://github.com/diogomatoschaves/pyturf/tree/master/turf/length)
 - [midpoint](https://github.com/diogomatoschaves/pyturf/tree/master/turf/midpoint)
+- [rhumb-bearing](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_bearing)
 - [rhumb-destination](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_destination)
 - [rhumb-distance](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_distance)
 - [square](https://github.com/diogomatoschaves/pyturf/tree/master/turf/square)
