@@ -8,8 +8,10 @@ try:
     __version__ = os.environ["GITHUB_REF"].split("/")[-1]
     print(f"Version: {__version__}")
 except KeyError:
-    with open("turf/version.txt") as f:
-        __version__ = f.read()
+    from turf.version import __version__
+
+with open("requirements.txt") as fp:
+    install_requires = fp.read()
 
 setup(
     name="pyturf",
@@ -27,4 +29,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.5",
+    install_requires=install_requires,
 )
