@@ -8,9 +8,12 @@ try:
     version = os.environ["GITHUB_REF"].split("/")[-1]
     print(f"Version: {version}")
 except KeyError:
-    with open("version.txt") as f:
-        __version__ = f.read()
-    version = __version__
+    try:
+        with open("version.txt") as f:
+            __version__ = f.read()
+        version = __version__
+    except FileNotFoundError:
+        version = 0
 
 setup(
     name="pyturf",
