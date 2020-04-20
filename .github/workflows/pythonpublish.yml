@@ -17,7 +17,6 @@ jobs:
       - name: Change Pypi version
         run: |
           python ./scripts/update_version.py
-          black .
       - name: Commit files
         env:
           CI_USER: ${{ secrets.USERNAME }}
