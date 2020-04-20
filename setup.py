@@ -10,9 +10,6 @@ try:
 except KeyError:
     from turf.version import __version__
 
-with open("requirements.txt") as fp:
-    install_requires = fp.read()
-
 setup(
     name="pyturf",
     version=__version__,
@@ -29,5 +26,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.5",
-    install_requires=install_requires,
+    install_requires=["numpy"],
+    test_requires=["pytest", "pytest-cov"],
 )
