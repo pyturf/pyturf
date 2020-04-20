@@ -8,7 +8,7 @@ try:
     __version__ = os.environ["GITHUB_REF"].split("/")[-1]
     print(f"Version: {__version__}")
 except KeyError:
-    with open("version.txt") as f:
+    with open("turf/version.txt") as f:
         __version__ = f.read()
 
 setup(
