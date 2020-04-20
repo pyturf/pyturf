@@ -14,6 +14,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Change Pypi version
+        run: python ../scripts/update_version.py
+      - name: commit changed files
+        run: git commit -a -m "Update version.txt"
+      - name: fetch from master
+        run: git fetch origin master
+      - name: push code to master
+        run: git push origin HEAD:master
       - name: Set up Python
         uses: actions/setup-python@v1
         with:

@@ -5,26 +5,22 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 try:
-    version = os.environ["GITHUB_REF"].split("/")[-1]
-    print(f"Version: {version}")
+    __version__ = os.environ["GITHUB_REF"].split("/")[-1]
+    print(f"Version: {__version__}")
 except KeyError:
-    try:
-        with open("version.txt") as f:
-            __version__ = f.read()
-        version = __version__
-    except FileNotFoundError:
-        version = 0
+    with open("version.txt") as f:
+        __version__ = f.read()
 
 setup(
     name="pyturf",
-    version=version,
+    version=__version__,
     description="Python geospatial library",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/diogomatoschaves/py-turf",
     author="Diogo Matos Chaves",
     author_email="di.matoschaves@gmail.com",
-    packages=[*find_packages(), "turf.utils"],
+    packages=[*find_packages(), "turf.utils", "version.txt"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
