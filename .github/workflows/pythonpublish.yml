@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Change Pypi version
-        run: python ../scripts/update_version.py
+        run: python ./scripts/update_version.py
       - name: commit changed files
         run: git commit -a -m "Update version.txt"
       - name: fetch from master
