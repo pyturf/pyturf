@@ -20,7 +20,7 @@ setup(
     url="https://github.com/diogomatoschaves/py-turf",
     author="Diogo Matos Chaves",
     author_email="di.matoschaves@gmail.com",
-    packages=[*find_packages(), "turf.utils", "version.txt"],
+    packages=[*find_packages(), "turf.utils"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
