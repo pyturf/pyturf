@@ -18,17 +18,17 @@ jobs:
         run: python ./scripts/update_version.py
       - name: Commit files
         env:
-          CI_USER: ${{ secrets.GITHUB_USER }}
-          CI_EMAIL: ${{ secrets.GITHUB_EMAIL }}
+          CI_USER: ${{ secrets.USERNAME }}
+          CI_EMAIL: ${{ secrets.EMAIL }}
         run: |
           git config --local user.email "$CI_EMAIL"
           git config --local user.name "$CI_USER"
           git commit -a -m "Update version.txt"
       - name: Push code to master
         env:
-          CI_USER: ${{ secrets.GITHUB_USER }}
-          CI_EMAIL: ${{ secrets.GITHUB_EMAIL }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          CI_USER: ${{ secrets.USERNAME }}
+          CI_EMAIL: ${{ secrets.EMAIL }}
+          GITHUB_REPOSITORY: ${{ secrets.REPOSITORY }}
         run: git push "https://$CI_USER:$CI_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:master
       - name: Set up Python
         uses: actions/setup-python@v1
