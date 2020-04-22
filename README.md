@@ -70,6 +70,7 @@ Currently, the following modules have been implemented:
 - [bbox](https://github.com/diogomatoschaves/pyturf/tree/master/turf/bbox)
 - [bbox-polygon](https://github.com/diogomatoschaves/pyturf/tree/master/turf/bbox_polygon)
 - [bearing](https://github.com/diogomatoschaves/pyturf/tree/master/turf/bearing)
+- [boolean-point-in-polygon](https://github.com/diogomatoschaves/pyturf/tree/master/turf/boolean_point_in_polygon)
 - [center](https://github.com/diogomatoschaves/pyturf/tree/master/turf/center)
 - [centroid](https://github.com/diogomatoschaves/pyturf/tree/master/turf/centroid)
 - [destination](https://github.com/diogomatoschaves/pyturf/tree/master/turf/destination)
