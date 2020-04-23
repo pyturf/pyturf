@@ -77,6 +77,7 @@ Currently, the following modules have been implemented:
 - [destination](https://github.com/diogomatoschaves/pyturf/tree/master/turf/destination)
 - [distance](https://github.com/diogomatoschaves/pyturf/tree/master/turf/distance)
 - [envelope](https://github.com/diogomatoschaves/pyturf/tree/master/turf/envelope)
+- [explode](https://github.com/diogomatoschaves/pyturf/tree/master/turf/explode)
 - [great circle](https://github.com/diogomatoschaves/pyturf/tree/master/turf/great_circle)
 - [helpers](https://github.com/diogomatoschaves/pyturf/tree/master/turf/helpers)
 - [length](https://github.com/diogomatoschaves/pyturf/tree/master/turf/length)

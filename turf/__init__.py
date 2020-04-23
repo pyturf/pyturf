@@ -9,6 +9,7 @@ from turf.centroid import centroid
 from turf.destination import destination
 from turf.distance import distance
 from turf.envelope import envelope
+from turf.explode import explode
 from turf.great_circle import great_circle
 from turf.helpers import *
 from turf.length import length

@@ -1,0 +1,25 @@
+{
+	"type": "GeometryCollection",
+	"geometries": [
+		{
+			"type": "Point",
+			"coordinates": [
+				100,
+				3
+			]
+		},
+		{
+			"type": "LineString",
+			"coordinates": [
+				[
+					101,
+					5
+				],
+				[
+					102,
+					8
+				]
+			]
+		}
+	]
+}
