@@ -1,0 +1,13 @@
+{
+	"type": "MultiPoint",
+	"coordinates": [
+		[
+			100,
+			1
+		],
+		[
+			101,
+			2
+		]
+	]
+}
