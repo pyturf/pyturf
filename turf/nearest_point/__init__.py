@@ -1,0 +1,1 @@
+from turf.nearest_point._nearest_point import nearest_point
