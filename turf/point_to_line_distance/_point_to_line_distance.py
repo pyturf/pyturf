@@ -18,16 +18,13 @@ def point_to_line_distance(
     being the distance from a line the minimum distance between the point and
     any segment of the `LineString`
 
-    # http://geomalgorithms.com/a02-_lines.html
+    http://geomalgorithms.com/a02-_lines.html
 
     :param point: Point GeoJSON Feature or Geometry
     :param line: LineString GeoJSON Feature or Geometry
     :param options: Optional parameters
-        options["units"]: can be anything supported by pyturf/convert_length
-                          (ex: degrees, radians, miles, or kilometers)
-        options["method"]: wether to calculate the distance based on geodesic
-                          (spheroid) or planar (flat) method.
-                          Valid options are: 'geodesic' or 'planar
+        [options["units"]]: any supported unit (e.g. degrees, radians, miles...)
+        [options["method"]]: geodesic or 'planar for distance calculation
 
     :return: distance between point and line
     """
@@ -60,11 +57,10 @@ def get_distance_to_segment(
     :param segment_start: segment start point from the line feature
     :param segment_end: adjacent segment end point from the line feature
     :param method: wether to calculate the distance based on geodesic
-                          (spheroid) or planar (flat) method.
+                    (spheroid) or planar (flat) method.
                           Valid options are: 'geodesic' or 'planar
 
-    :return: distance between point and both segments
-    """
+    :return: distance between point and both segments"""
     v = [segment_end[0] - segment_start[0], segment_end[1] - segment_start[1]]
 
     w = [point[0] - segment_start[0], point[1] - segment_start[1]]

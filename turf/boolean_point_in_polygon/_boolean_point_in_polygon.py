@@ -27,8 +27,8 @@ def boolean_point_in_polygon(
     :param point: input Point Feature
     :param polygon: input Polygon or MultiPolygon Feature
     :param options: optional parameters
-        [options["ignoreBoundary"]] - True if polygon boundary should be ignored when determining if
-                                      the point is inside the polygon otherwise False.
+        [options["ignoreBoundary"]] True if polygon boundary should be ignored when determining if
+                                    the point is inside the polygon otherwise False.
     :return: True if the Point is inside the Polygon; False otherwise
     """
 

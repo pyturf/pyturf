@@ -17,13 +17,11 @@ def rhumb_destination(features: Dict, options: Dict = None) -> Point:
     # https://en.wikipedia.org/wiki/Rhumb_line
 
     :param features: any GeoJSON feature or feature collection
-        :param properties: specification to calculate the rhumb line
-            :param distance: distance distance from the starting point
-                 Default 100
-            :param bearing: varant bearing angle ranging from -180 to 180 degrees from north
-                Default: 180
-            :param units: specifies distance (can be degrees, radians, miles, or kilometers)
-                Default "kilometers"
+    :param properties: specification to calculate the rhumb line
+        [options["distance"]=100] distance from the starting point
+        [options["bearing"]=180] varant bearing angle ranging from -180 to 180 degrees from north
+        [options["units"]=kilometers] units: specifies distance (can be degrees, radians, miles, or kilometers)
+
     :param options: optional parameters also be part of features["properties"]
         [options["units"]={}] can be degrees, radians, miles, or kilometers
         [options["properties"]={}] Translate GeoJSON Properties to Point

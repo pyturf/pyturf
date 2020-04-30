@@ -16,14 +16,14 @@ def rhumb_bearing(
     """
     Takes two {Point|points} and finds the bearing angle between them along a
     Rhumb line
-     * i.e. the angle measured in degrees start the north line (0 degrees)
+    * i.e. the angle measured in degrees start the north line (0 degrees)
 
-    # https://en.wikipedia.org/wiki/Rhumb_line
+    https://en.wikipedia.org/wiki/Rhumb_line
 
     :param start: starting point [lng, lat] or Point feature
     :param end: ending point [lng, lat] or Point feature
     :param options: Optional parameters
-        options["final"]: Calculates the final bearing if True
+        [options["final"]]: Calculates the final bearing if True
 
     :return: bearing from north in decimal degrees
     """
