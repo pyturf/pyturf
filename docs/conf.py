@@ -9,6 +9,9 @@
 import os
 import sys
 
+# import sphinx_rtd_theme
+# from sphinx.locale import _
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -46,11 +49,13 @@ release = version = turf.version.__version__
 # ones.
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.githubpages",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
+    "sphinx_rtd_theme",
 ]
 
 set_type_checking_flag = True
@@ -89,7 +94,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ["_build"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -107,7 +112,7 @@ add_module_names = True
 # show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-# pygments_style = "flask_theme_support.FlaskyStyle"
+pygments_style = "sphinx"
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
@@ -123,16 +128,38 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
+# html_theme_options = {
+#     "show_powered_by": False,
+#     "github_banner": True,
+#     "show_related": False,
+#     "note_bg": "#FFF59C",
+# }
+
 html_theme_options = {
-    "show_powered_by": False,
-    "github_banner": False,
-    "show_related": False,
-    "note_bg": "#FFF59C",
+    "canonical_url": "",
+    "logo_only": True,
+    "display_version": True,
+    "prev_next_buttons_location": "bottom",
+    "style_external_links": True,
+    "vcs_pageview_mode": "",
+    # 'style_nav_header_background': 'white',
+    # Toc options
+    "collapse_navigation": True,
+    "sticky_navigation": True,
+    "navigation_depth": 4,
+    "includehidden": True,
+    "titles_only": False,
+}
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3/", None),
+    "pyturf": ("https://github.com/diogomatoschaves/pyturf/", None),
+    "sphinx": ("http://www.sphinx-doc.org/en/stable/", None),
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -174,16 +201,24 @@ html_use_smartypants = False
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
-    "index": ["sidebarintro.html", "sourcelink.html", "searchbox.html", "hacks.html"],
+    "index": [
+        "globaltoc.html",
+        "sidebarintro.html",
+        "sourcelink.html",
+        "searchbox.html",
+        "hacks.html",
+    ],
     "**": [
+        "globaltoc.html",
         "sidebarlogo.html",
-        "localtoc.html",
+        # "localtoc.html",
         "relations.html",
         "sourcelink.html",
         "searchbox.html",
         "hacks.html",
     ],
 }
+
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -202,7 +237,7 @@ html_sidebars = {
 html_show_sourcelink = False
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
-html_show_sphinx = False
+html_show_sphinx = True
 
 # If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
 html_show_copyright = True
@@ -381,5 +416,29 @@ epub_exclude_files = ["search.html"]
 
 # If false, no index is generated.
 # epub_use_index = True
+# Extensions to theme docs
+# def setup(app):
+#     from sphinx.domains.python import PyField
+#     from sphinx.util.docfields import Field
 
-intersphinx_mapping = {"python": ("https://docs.python.org/3/", None)}
+#     app.add_object_type(
+#         'confval',
+#         'confval',
+#         objname='configuration value',
+#         indextemplate='pair: %s; configuration value',
+#         doc_field_types=[
+#             PyField(
+#                 'type',
+#                 label=_('Type'),
+#                 has_arg=False,
+#                 names=('type',),
+#                 bodyrolename='class'
+#             ),
+#             Field(
+#                 'default',
+#                 label=_('Default'),
+#                 has_arg=False,
+#                 names=('default',),
+#             ),
+#         ]
+#     )

@@ -83,7 +83,9 @@ Currently, the following modules have been implemented:
 - [length](https://github.com/diogomatoschaves/pyturf/tree/master/turf/length)
 - [midpoint](https://github.com/diogomatoschaves/pyturf/tree/master/turf/midpoint)
 - [nearest-point](https://github.com/diogomatoschaves/pyturf/tree/master/turf/nearest_point)
+- [point-on-feature](https://github.com/diogomatoschaves/pyturf/tree/master/turf/point_on_feature)
 - [point-to-line-distance](https://github.com/diogomatoschaves/pyturf/tree/master/turf/point_to_line_distance)
+- [polygon-tangents](https://github.com/diogomatoschaves/pyturf/tree/master/turf/polygon_tangents)
 - [rhumb-bearing](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_bearing)
 - [rhumb-destination](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_destination)
 - [rhumb-distance](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_distance)
@@ -94,3 +96,13 @@ Currently, the following modules have been implemented:
 This library is a work in progress, so pull requests from the community are welcome!
 
 Check out [CONTRIBUTING.md](CONTRIBUTING.md) for a detailed explanation on how to contribute.
+
+## Creating the Sphinx documentation
+
+To update the documentation, please run:
+
+```shell script
+$ sphinx-build -b html pyturf/docs/ pyturf/docs/build/
+```
+
+

@@ -2,8 +2,8 @@
 
 This part of the documentation covers functionalities in the measurement bundle
 
-Measurement modules
-===================
+Measurement
+===========
 
 Along
 -----
@@ -70,10 +70,25 @@ Midpoint
 
 .. autofunction:: turf.midpoint
 
+Nearest Point
+-------------
+
+.. autofunction:: turf.nearest_point
+
+Point On Feature
+----------------
+
+.. autofunction:: turf.point_on_feature
+
 Point to line distance
 ----------------------
 
 .. autofunction:: turf.point_to_line_distance
+
+Polygon tangents
+----------------
+
+.. autofunction:: turf.polygon_tangents
 
 Rhumb bearing
 -------------

@@ -2,8 +2,8 @@
 
 This part of the documentation covers functionalities in the unit conversion bundle
 
-Unit conversion modules
-=======================
+Unit conversion
+===============
 
 Convert area
 ------------

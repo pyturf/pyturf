@@ -2,8 +2,8 @@
 
 This part of the documentation covers functionalities in the booleans bundle
 
-Booleans modules
-================
+Booleans
+========
 
 Boolean point in polygon
 ------------------------

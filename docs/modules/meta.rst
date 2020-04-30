@@ -2,8 +2,8 @@
 
 This part of the documentation covers functionalities in the meta bundle
 
-Meta modules
-============
+Meta
+====
 
 Get coords from features
 ------------------------

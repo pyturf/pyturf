@@ -2,6 +2,5 @@
 
 This part of the documentation covers functionalities in the interpolation bundle
 
-Interpolation modules
-=====================
-
+Interpolation
+=============

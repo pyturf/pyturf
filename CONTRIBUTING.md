@@ -152,3 +152,42 @@ In order to run the tests, from the root directory run:
 ```shell script
 $ python -m pytest --verbose --cov=./
 ```
+
+## Updating the documentation
+
+In the case, you add a new module, please update also the documentation. The structure
+for the documentation follows the `turf` structure. You can check [turf.js documentation](https://turfjs.org/).
+According to the `turf.js documentation`, you can pick the same `block name` and update it with your addition.
+
+```
+turf
+|
+├── ...
+├── __init__.py
+├── docs
+    ├── ...
+    ├── conf.py
+    |
+    ├── modules
+        ├── aggregation.rst
+        ├── assertion.rst
+        ├── booleans.rst
+        ├── ...```
+
+Inside the `black`, please follow the following structure. E.g. For adding the `length module`, you had to change
+the `measurements.rst`. Following example adds the new module in the documentation.
+
+
+```
+Length
+------
+
+.. autofunction:: turf.length
+```
+
+Afterwards, you can update the html files by running following command.
+
+```shell script
+$ sphinx-build -b html pyturf/docs/ pyturf/docs/build/
+```
+

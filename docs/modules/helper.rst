@@ -2,8 +2,8 @@
 
 This part of the documentation covers functionalities in the helper bundle
 
-Helper modules
-==============
+Helper
+======
 
 Feature
 -------
