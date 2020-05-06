@@ -82,6 +82,7 @@ Currently, the following modules have been implemented:
 - [helpers](https://github.com/diogomatoschaves/pyturf/tree/master/turf/helpers)
 - [length](https://github.com/diogomatoschaves/pyturf/tree/master/turf/length)
 - [midpoint](https://github.com/diogomatoschaves/pyturf/tree/master/turf/midpoint)
+- [nearest-point](https://github.com/diogomatoschaves/pyturf/tree/master/turf/nearest_point)
 - [point-to-line-distance](https://github.com/diogomatoschaves/pyturf/tree/master/turf/point_to_line_distance)
 - [rhumb-bearing](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_bearing)
 - [rhumb-destination](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_destination)
