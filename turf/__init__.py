@@ -15,8 +15,9 @@ from turf.helpers import *
 from turf.length import length
 from turf.midpoint import midpoint
 from turf.nearest_point import nearest_point
-from turf.polygon_tangens import polygon_tangens
+from turf.point_on_feature import point_on_feature
 from turf.point_to_line_distance import point_to_line_distance
+from turf.polygon_tangents import polygon_tangents
 from turf.rhumb_bearing import rhumb_bearing
 from turf.rhumb_destination import rhumb_destination
 from turf.rhumb_distance import rhumb_distance
