@@ -22,7 +22,7 @@ PointFeature = TypeVar("PointFeature", Dict, Point, Sequence)
 PolygonFeature = TypeVar("PolygonFeature", Dict, Polygon, MultiPolygon)
 
 
-def polygon_tangens(
+def polygon_tangents(
     start_point: PointFeature, polygon: PolygonFeature
 ) -> FeatureCollection:
     """ Finds the tangents of a {Polygon or(MultiPolygon} from a {Point}.
