@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ignoreEndVertices": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+			       12,6
+          ],
+          [
+			       9,3
+          ],
+          [
+            6,0
+          ],
+          [
+			       3,-3
+          ],
+          [
+			       0,-6
+          ]
+        ]
+      }
+    }
+  ]
+}

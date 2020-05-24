@@ -12,6 +12,7 @@ from turf.helpers._features import all_geometry_types
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
 
+from turf.boolean_point_on_line import boolean_point_on_line
 
 GeoJSON = TypeVar("GeoJSON", Feature, FeatureCollection)
 
@@ -59,16 +60,10 @@ def point_on_feature(features: GeoJSON) -> Point:
             if geometry_type == "LineString":
                 geometry_coords = [geometry_coords]
 
-            for line in geometry_coords:
-
-                for seg_index in range(1, len(line)):
-
-                    if point_on_segment(
-                        center_coords, line[seg_index - 1], line[seg_index]
-                    ):
-
-                        center_on_surface = True
-                        break
+            for line_coords in geometry_coords:
+                if boolean_point_on_line(center_coords, line_coords):
+                    center_on_surface = True
+                    break
 
         elif geometry_type in ["Polygon", "MultiPolygon"]:
 
@@ -106,28 +101,3 @@ def normalize_to_feature_collection(geojson: GeoJSON) -> FeatureCollection:
         geojson = feature_collection([feature(geojson)])
 
     return geojson
-
-
-def point_on_segment(point: List, segment_start: List, segment_end: List) -> bool:
-    """
-    Checks if a given point is on a line or not
-
-    :param point: Coordinates of a point
-    :param segment_start: Coordinates of the start line
-    :param segment_end: Coordinates of the line end
-    :return: bool
-    """
-
-    len_segment = np.sqrt(
-        np.power(segment_end[0] - segment_start[0], 2)
-        + np.power(segment_end[1] - segment_start[1], 2)
-    )
-    len_point_seg_1 = np.sqrt(
-        np.power(point[0] - segment_start[0], 2)
-        + np.power(point[1] - segment_start[1], 2)
-    )
-    len_point_seg_2 = np.sqrt(
-        np.power(segment_end[0] - point[0], 2) + np.power(segment_end[1] - point[1], 2)
-    )
-
-    return len_segment == len_point_seg_1 + len_point_seg_2
