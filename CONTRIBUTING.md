@@ -1,7 +1,3 @@
-
-Contribute
-**********
-
 # How To Contribute
 
 As the library follows a modular structure, it is fairly easy to contribute by working on a subpackage and
@@ -24,6 +20,7 @@ Please attend to the following guidelines:
 - GeoJSON is the _lingua franca_ of `pyturf`. It should be used as the data structure for anything that can be represented as geography.
 - Keep your commits atomic and each of them passing all checks (linter and tests).
 - Add your new module under the `Available Modules` section.
+- Add your new module under its appropriate section in [docs/source/modules](docs/source/modules).
 - Avoid extra dependencies if you can.
 - Run the linter before submitting changes (see below for more details).
 - Run `python -m pytest --verbose --cov=./` from the project root folder to run all the tests and make
@@ -36,7 +33,7 @@ After you open the PR, make sure that the CI pipeline passes all checks (on the 
 
 To ensure consistent code style, [black](https://black.readthedocs.io/en/stable/) is used in this project. At the root level run:
 
-```shell script
+```
 $ black .
 ```
 
@@ -149,15 +146,15 @@ def test_new_module(self, fixture):
 
 In order to run the tests, from the root directory run:
 
-```shell script
+```
 $ python -m pytest --verbose --cov=./
 ```
 
-## Updating the documentation
+## Updating The Documentation
 
-In the case, you add a new module, please update also the documentation. The structure
+In case you add a new module, please update also the documentation. The structure
 for the documentation follows the `turf` structure. You can check [turf.js documentation](https://turfjs.org/).
-According to the `turf.js documentation`, you can pick the same `block name` and update it with your addition.
+According to the `turf.js documentation`, you can pick the same `block` name and update it with your addition.
 
 ```
 turf
@@ -172,11 +169,10 @@ turf
         ├── aggregation.rst
         ├── assertion.rst
         ├── booleans.rst
-        ├── ...```
+        ├── ...
+```
 
-Inside the `black`, please follow the following structure. E.g. For adding the `length module`, you had to change
-the `measurements.rst`. Following example adds the new module in the documentation.
-
+As an example, for adding the `length module` you would have to add the following lines to  `measurements.rst`. 
 
 ```
 Length
@@ -184,10 +180,3 @@ Length
 
 .. autofunction:: turf.length
 ```
-
-Afterwards, you can update the html files by running following command.
-
-```shell script
-$ sphinx-build -b html pyturf/docs/ pyturf/docs/build/
-```
-

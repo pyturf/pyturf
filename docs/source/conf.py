@@ -18,10 +18,12 @@ import sys
 #
 
 # sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath(".."))
-sys.path.insert(0, os.path.abspath("../turf"))
+sys.path.insert(0, os.path.abspath("../.."))
+sys.path.insert(0, os.path.abspath("../../turf"))
 sys.path.insert(0, os.path.abspath("_themes"))
 
+from m2r import MdInclude
+from recommonmark.transform import AutoStructify
 import turf
 
 # -- Project information -----------------------------------------------------
@@ -33,11 +35,10 @@ author = "Diogo Matos Chaves"
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
-release = "2020"
 
 version = turf.version.__version__
 
-release = version = turf.version.__version__
+release = turf.version.__version__
 
 # -- General configuration ------------------------------------------------
 
@@ -54,8 +55,8 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
-    "sphinx_autodoc_typehints",
     "sphinx_rtd_theme",
+    "recommonmark",
 ]
 
 set_type_checking_flag = True
@@ -65,7 +66,6 @@ templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-# source_suffix = ['.rst', '.md']
 source_suffix = [".rst", ".md"]
 
 # The encoding of source files.
@@ -414,31 +414,20 @@ epub_exclude_files = ["search.html"]
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 # epub_show_urls = 'inline'
 
-# If false, no index is generated.
-# epub_use_index = True
-# Extensions to theme docs
-# def setup(app):
-#     from sphinx.domains.python import PyField
-#     from sphinx.util.docfields import Field
 
-#     app.add_object_type(
-#         'confval',
-#         'confval',
-#         objname='configuration value',
-#         indextemplate='pair: %s; configuration value',
-#         doc_field_types=[
-#             PyField(
-#                 'type',
-#                 label=_('Type'),
-#                 has_arg=False,
-#                 names=('type',),
-#                 bodyrolename='class'
-#             ),
-#             Field(
-#                 'default',
-#                 label=_('Default'),
-#                 has_arg=False,
-#                 names=('default',),
-#             ),
-#         ]
-#     )
+# https://github.com/rtfd/recommonmark/blob/master/docs/conf.py
+def setup(app):
+    config = {
+        # 'url_resolver': lambda url: github_doc_root + url,
+        "auto_toc_tree_section": "Contents",
+        "enable_eval_rst": True,
+    }
+    app.add_config_value("recommonmark_config", config, True)
+    app.add_transform(AutoStructify)
+
+    # from m2r to make `mdinclude` work
+    app.add_config_value("no_underscore_emphasis", False, "env")
+    app.add_config_value("m2r_parse_relative_links", False, "env")
+    app.add_config_value("m2r_anonymous_references", False, "env")
+    app.add_config_value("m2r_disable_inline_math", False, "env")
+    app.add_directive("mdinclude", MdInclude)

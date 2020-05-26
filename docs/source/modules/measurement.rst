@@ -1,111 +1,109 @@
 .. turf:
 
-This part of the documentation covers functionalities in the measurement bundle
-
 Measurement
 ===========
 
-Along
+along
 -----
 
 .. autofunction:: turf.along
 
-Area
+area
 ----
 
 .. autofunction:: turf.area
 
-BBox
+bbox
 ----
 
 .. autofunction:: turf.bbox
 
-Bbox polygon
+bbox-polygon
 ------------
 
 .. autofunction:: turf.bbox_polygon
 
-Bearing
+bearing
 -------
 
 .. autofunction:: turf.bearing
 
-Center
+center
 ------
 
 .. autofunction:: turf.center
 
-Centroid
+centroid
 --------
 
 .. autofunction:: turf.centroid
 
-Destination
+destination
 -----------
 
 .. autofunction:: turf.destination
 
-Distance
+distance
 --------
 
 .. autofunction:: turf.distance
 
-Envelope
+envelope
 --------
 
 .. autofunction:: turf.envelope
 
-Great circle
-------------
-
-.. autofunction:: turf.great_circle
-
-Length
+length
 ------
 
 .. autofunction:: turf.length
 
-Midpoint
+midpoint
 --------
 
 .. autofunction:: turf.midpoint
 
-Nearest Point
+nearest-point
 -------------
 
 .. autofunction:: turf.nearest_point
 
-Point On Feature
+point-on-feature
 ----------------
 
 .. autofunction:: turf.point_on_feature
 
-Point to line distance
+point-to-line-distance
 ----------------------
 
 .. autofunction:: turf.point_to_line_distance
 
-Polygon tangents
+polygon-tangents
 ----------------
 
 .. autofunction:: turf.polygon_tangents
 
-Rhumb bearing
+rhumb-bearing
 -------------
 
 .. autofunction:: turf.rhumb_bearing
 
-Rhumb destination
+rhumb-destination
 -----------------
 
 .. autofunction:: turf.rhumb_destination
 
-Rhumb distance
+rhumb-distance
 --------------
 
 .. autofunction:: turf.rhumb_distance
 
-Square
+square
 ------
 
 .. autofunction:: turf.square
+
+great-circle
+------------
+
+.. autofunction:: turf.great_circle

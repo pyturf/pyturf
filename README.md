@@ -1,8 +1,11 @@
 # pyturf
 
+Read the [docs](https://pyturf.readthedocs.io/en/latest/)
+
 ![build_badge](https://github.com/diogomatoschaves/pyturf/workflows/build/badge.svg)
 [![codecov](https://codecov.io/gh/diogomatoschaves/pyturf/branch/master/graph/badge.svg)](https://codecov.io/gh/diogomatoschaves/pyturf)
 [![PyPI version](https://badge.fury.io/py/pyturf.svg)](https://badge.fury.io/py/pyturf)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://pyturf.readthedocs.io/?badge=latest)
 
 `pyturf` is a powerful geospatial library written in python, based on [turf.js](https://github.com/Turfjs/turf),
 a popular library written in javascript. It follows the same modular structure and maintains the same functionality as the original
@@ -13,7 +16,7 @@ It includes traditional geospatial operations, as well as helper functions for c
 
 ## Installation
 
-```shell script
+```
 $ pip install pyturf
 ```
 
@@ -95,14 +98,4 @@ Currently, the following modules have been implemented:
 
 This library is a work in progress, so pull requests from the community are welcome!
 
-Check out [CONTRIBUTING.md](CONTRIBUTING.md) for a detailed explanation on how to contribute.
-
-## Creating the Sphinx documentation
-
-To update the documentation, please run:
-
-```shell script
-$ sphinx-build -b html pyturf/docs/ pyturf/docs/build/
-```
-
-
+Check out [CONTRIBUTING.md](https://github.com/diogomatoschaves/pyturf/blob/master/CONTRIBUTING.md) for a detailed explanation on how to contribute.

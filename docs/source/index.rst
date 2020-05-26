@@ -6,6 +6,9 @@
 Welcome to pyturf's documentation!
 ==================================
 
+
+.. mdinclude:: introduction.md
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -29,13 +32,12 @@ Welcome to pyturf's documentation!
    modules/unit_conversion
 
 
-The Contributor Guide
----------------------
+Contributor Guide
+-----------------
 
-If you want to contribute to the project, follow this documentation:
+If you want to contribute to the project, fork this repository and check the contributing guide:
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contributing:
 
    devguide
