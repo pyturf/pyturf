@@ -1,3 +1,7 @@
+
+Contribute
+**********
+
 # How To Contribute
 
 As the library follows a modular structure, it is fairly easy to contribute by working on a subpackage and
@@ -172,7 +176,7 @@ turf
         ├── ...
 ```
 
-As an example, for adding the `length module` you would have to add the following lines to  `measurements.rst`. 
+As an example, for adding the `length module` you would have to add the following lines to  `measurements.rst`.
 
 ```
 Length
