@@ -22,3 +22,4 @@ from turf.rhumb_bearing import rhumb_bearing
 from turf.rhumb_destination import rhumb_destination
 from turf.rhumb_distance import rhumb_distance
 from turf.square import square
+from turf.version import __version__

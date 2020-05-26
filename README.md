@@ -96,3 +96,13 @@ Currently, the following modules have been implemented:
 This library is a work in progress, so pull requests from the community are welcome!
 
 Check out [CONTRIBUTING.md](CONTRIBUTING.md) for a detailed explanation on how to contribute.
+
+## Creating the Sphinx documentation
+
+To update the documentation, please run:
+
+```shell script
+$ sphinx-build -b html pyturf/docs/ pyturf/docs/build/
+```
+
+

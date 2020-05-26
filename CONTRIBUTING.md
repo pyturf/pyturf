@@ -1,14 +1,18 @@
+
+Contribute
+**********
+
 # How To Contribute
 
-As the library follows a modular structure, it is fairly easy to contribute by working on a subpackage and 
-submit a pull request of those atomic changes. 
+As the library follows a modular structure, it is fairly easy to contribute by working on a subpackage and
+submit a pull request of those atomic changes.
 
-For this, first you should check this repo's issues and check which modules are being worked on by filtering by the 
-`in-progress` label. Then, you can check [turf.js](https://github.com/Turfjs/turf) github repo, choose a module 
-that you'd like to implement, making sure that it hasn't been already implemented or is currently being worked by 
+For this, first you should check this repo's issues and check which modules are being worked on by filtering by the
+`in-progress` label. Then, you can check [turf.js](https://github.com/Turfjs/turf) github repo, choose a module
+that you'd like to implement, making sure that it hasn't been already implemented or is currently being worked by
 someone else.
- 
-When you're ready, open a new issue on this repo outlining the module you'll be working on, 
+
+When you're ready, open a new issue on this repo outlining the module you'll be working on,
 so that subsequent contributors can follow the same logic outlined here.
 
 Please attend to the following guidelines:
@@ -22,7 +26,7 @@ Please attend to the following guidelines:
 - Add your new module under the `Available Modules` section.
 - Avoid extra dependencies if you can.
 - Run the linter before submitting changes (see below for more details).
-- Run `python -m pytest --verbose --cov=./` from the project root folder to run all the tests and make 
+- Run `python -m pytest --verbose --cov=./` from the project root folder to run all the tests and make
 sure they pass with a sufficiently high coverage.
 - Rebase your branch with the upstream master before opening the PR: `git rebase upstream/master`
 
@@ -64,8 +68,8 @@ turf
 
 ## Importing modules in `__init__.py` files
 
-In order for the module function to be imported directly from `turf`, we need to import them on the `__init__.py` files 
-on both the module and at the root level. So for example, for a new module named `new_module`, 
+In order for the module function to be imported directly from `turf`, we need to import them on the `__init__.py` files
+on both the module and at the root level. So for example, for a new module named `new_module`,
 on `turf/new_module/__init__.py` we would include:
 
 ```python
@@ -82,20 +86,20 @@ from turf.new_module import new_module
 
 ## Adding Tests
 
-Tests setup in this project follows a certain pattern that, even if not being a _one size fits all_, if followed should 
+Tests setup in this project follows a certain pattern that, even if not being a _one size fits all_, if followed should
 ensure a good test flow in most cases.
 
-The pattern consists of importing the tests input and output through files in `turf/new_module/tests/in`  
-and `turf/new_module/tests/out` respectively, and then parameterizing these fixtures to be used in individual tests as required. 
+The pattern consists of importing the tests input and output through files in `turf/new_module/tests/in`
+and `turf/new_module/tests/out` respectively, and then parameterizing these fixtures to be used in individual tests as required.
 
 These guidelines should be followed:
 
 - The file where tests are executed should be under the directory `tests`.
 - The directory `tests` should have sub directories `in` and `out`, where input and output files should be kept respectively.
-- Files in both `in` and `out` for a specific test must have the same name, although they can have 
-different file extensions (eg: `.json` or `.geojson`). 
+- Files in both `in` and `out` for a specific test must have the same name, although they can have
+different file extensions (eg: `.json` or `.geojson`).
 
-Fixtures and expected outputs can then be imported by means of the function `get_fixtures` defined in 
+Fixtures and expected outputs can then be imported by means of the function `get_fixtures` defined in
 `turf/utils/test_setup.py`, by providing the test file path as input:
 
 ```python
@@ -107,11 +111,11 @@ current_path = os.path.dirname(os.path.realpath(__file__))
 fixtures = get_fixtures(current_path)
 ```
 
-The returned value `fixtures` becomes a dictionary of fixtures, with the file names in `in` and `out` as keys, 
-and in turn each fixture is a dictionary containing keys `"in"` and `"out"`, representing the input and 
-output of the tests respectively. 
+The returned value `fixtures` becomes a dictionary of fixtures, with the file names in `in` and `out` as keys,
+and in turn each fixture is a dictionary containing keys `"in"` and `"out"`, representing the input and
+output of the tests respectively.
 
-If for some reason you only have either `in` or `out` fixtures, then in order to avoid errors running the tests 
+If for some reason you only have either `in` or `out` fixtures, then in order to avoid errors running the tests
 you should pass the argument `keys` to `get_fixtures` as shown below:
 
 ```python
@@ -123,7 +127,7 @@ current_path = os.path.dirname(os.path.realpath(__file__))
 fixtures = get_fixtures(current_path, keys=["in"]) # Only retrieve input fixtures
 ```
 
-These fixtures can then be parameterized as individual tests, allowing for only one test definition to be used 
+These fixtures can then be parameterized as individual tests, allowing for only one test definition to be used
 in multiple test cases. This would follow a structure of the kind:
 
 ```python
@@ -138,8 +142,8 @@ from turf.new_module import new_module # Don't import your function directly fro
     ],
 )
 def test_new_module(self, fixture):
-    
-    # This is an example function call 
+
+    # This is an example function call
     assert new_module(fixture["in"]) == fixture["out"]
 ```
 
@@ -148,3 +152,42 @@ In order to run the tests, from the root directory run:
 ```shell script
 $ python -m pytest --verbose --cov=./
 ```
+
+## Updating the documentation
+
+In the case, you add a new module, please update also the documentation. The structure
+for the documentation follows the `turf` structure. You can check [turf.js documentation](https://turfjs.org/).
+According to the `turf.js documentation`, you can pick the same `block name` and update it with your addition.
+
+```
+turf
+|
+├── ...
+├── __init__.py
+├── docs
+    ├── ...
+    ├── conf.py
+    |
+    ├── modules
+        ├── aggregation.rst
+        ├── assertion.rst
+        ├── booleans.rst
+        ├── ...```
+
+Inside the `black`, please follow the following structure. E.g. For adding the `length module`, you had to change
+the `measurements.rst`. Following example adds the new module in the documentation.
+
+
+```
+Length
+------
+
+.. autofunction:: turf.length
+```
+
+Afterwards, you can update the html files by running following command.
+
+```shell script
+$ sphinx-build -b html pyturf/docs/ pyturf/docs/build/
+```
+
