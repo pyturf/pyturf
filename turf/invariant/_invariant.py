@@ -105,7 +105,7 @@ def get_coords_from_geometry(
     if not allowed_types:
         allowed_types = allowed_types_default
 
-    if isinstance(geometry, list):
+    if isinstance(geometry, (list, tuple)):
         return _process_list_input(
             allowed_types, geometry, get_coords_from_geometry, raise_exception
         )
@@ -145,7 +145,7 @@ def get_geometry_from_features(features: Any, allowed_types: Sequence = None) ->
     if not allowed_types:
         allowed_types = allowed_types_default
 
-    if isinstance(features, list):
+    if isinstance(features, (list, tuple)):
         return _process_list_input(
             [*allowed_types, "Feature"], features, get_geometry_from_features
         )
