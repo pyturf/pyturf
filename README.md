@@ -89,6 +89,7 @@ Currently, the following modules have been implemented:
 - [point-on-feature](https://github.com/diogomatoschaves/pyturf/tree/master/turf/point_on_feature)
 - [point-to-line-distance](https://github.com/diogomatoschaves/pyturf/tree/master/turf/point_to_line_distance)
 - [polygon-tangents](https://github.com/diogomatoschaves/pyturf/tree/master/turf/polygon_tangents)
+- [polygon-to-line](https://github.com/diogomatoschaves/pyturf/tree/master/turf/polygon_to_line)
 - [rhumb-bearing](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_bearing)
 - [rhumb-destination](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_destination)
 - [rhumb-distance](https://github.com/diogomatoschaves/pyturf/tree/master/turf/rhumb_distance)
