@@ -44,6 +44,7 @@ regex==2020.2.20
 reprit==0.2.2
 requests==2.23.0
 requests-toolbelt==0.9.1
+rtree>=0.8,<0.9
 setupcfg==2019.4.13
 six==1.14.0
 snowballstemmer==2.0.0
