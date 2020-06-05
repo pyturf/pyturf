@@ -16,8 +16,8 @@ setup(
     description="Python geospatial library",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/diogomatoschaves/py-turf",
-    author="Diogo Matos Chaves",
+    url="https://github.com/pyturf/pyturf",
+    author="Diogo Matos Chaves, Steffen Häußler",
     author_email="di.matoschaves@gmail.com",
     packages=[*find_packages(), "turf.utils"],
     classifiers=[
