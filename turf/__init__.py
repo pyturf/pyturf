@@ -14,6 +14,7 @@ from turf.explode import explode
 from turf.great_circle import great_circle
 from turf.helpers import *
 from turf.length import length
+from turf.line_intersect import line_intersect
 from turf.midpoint import midpoint
 from turf.nearest_point import nearest_point
 from turf.point_on_feature import point_on_feature
