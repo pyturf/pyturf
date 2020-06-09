@@ -1,7 +1,11 @@
 from typing import Sequence, Union, Dict
 
 from turf.helpers import Feature
-from turf.invariant import get_coords_from_features, get_geometry_from_features
+from turf.invariant import (
+    get_coords_from_features,
+    get_geometry_from_features,
+    get_geometry_type,
+)
 from turf.bbox import bbox as bounding_box
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
@@ -31,7 +35,6 @@ def boolean_point_in_polygon(
                                     the point is inside the polygon otherwise False.
     :return: True if the Point is inside the Polygon; False otherwise
     """
-
     if not isinstance(options, dict):
         options = {}
 
@@ -40,39 +43,38 @@ def boolean_point_in_polygon(
     point_coords = get_coords_from_features(point, ["Point"])
     polygon_coords = get_coords_from_features(polygon, valid_polygons)
 
-    try:
-        polygon_geom_type = get_geometry_from_features(polygon, valid_polygons).get(
-            "type"
-        )
-        if not polygon_geom_type:
-            raise AttributeError
-    except AttributeError:
-        raise InvalidInput(error_code_messages["InvalidGeometry"](valid_polygons))
+    geometry_type = get_geometry_type(polygon, valid_polygons)
 
     bbox = bounding_box(polygon)
 
     if not in_bbox(point_coords, bbox):
         return False
 
-    if polygon_geom_type == "Polygon":
+    if isinstance(geometry_type, str):
+        geometry_type = [geometry_type]
         polygon_coords = [polygon_coords]
 
     inside_polygon = False
 
-    for polygon in polygon_coords:
-        # check if it is in the outer ring first
-        if in_ring(point_coords, polygon[0], ignore_boundary):
-            in_hole = False
+    for geo_type, poly_coords in zip(geometry_type, polygon_coords):
 
-            for ring in polygon[1:]:
-                if in_ring(point_coords, ring, not ignore_boundary):
-                    in_hole = True
+        if geo_type == "Polygon":
+            poly_coords = [poly_coords]
 
-            if not in_hole:
-                inside_polygon = True
+        for polygon in poly_coords:
+            # check if it is in the outer ring first
+            if in_ring(point_coords, polygon[0], ignore_boundary):
+                in_hole = False
 
-        if inside_polygon:
-            break
+                for ring in polygon[1:]:
+                    if in_ring(point_coords, ring, not ignore_boundary):
+                        in_hole = True
+
+                if not in_hole:
+                    inside_polygon = True
+
+            if inside_polygon:
+                break
 
     return inside_polygon
 

@@ -11,18 +11,16 @@ from turf.helpers import (
     MultiPolygon,
     Point,
     Polygon,
+    get_input_dimensions,
 )
 
 from turf.envelope._envelope import envelope
 from turf.polygon_to_line import polygon_to_line
 from turf.helpers import feature, feature_collection, line_string, point
-from turf.invariant import get_coords_from_features
-
+from turf.invariant import get_coords_from_features, get_geometry_type
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
 
-
-GeoJSON = TypeVar("GeoJSON", Feature, FeatureCollection)
 
 LinePolyFeature = TypeVar(
     "LineFeature",
@@ -144,28 +142,21 @@ def get_line_segments(line: LinePolyFeature) -> Sequence:
     """
     segments = []
 
-    try:
-        line_geometry = line.get("geometry").get("type")
-    except AttributeError:
-        try:
-            line_geometry = line["type"]
-        except KeyError:
-            raise InvalidInput(
-                error_code_messages["InvalidGeometry"](
-                    ["LineString", "MultiLineString", "Polygon", "MultiPolygon"]
-                )
-            )
+    geometry_type = get_geometry_type(line)
 
-    if line_geometry in ["MultiPolygon", "Polygon"]:
-        line = polygon_to_line(line)
-        line_geometry = line["geometry"]["type"]
+    if isinstance(geometry_type, str):
+        geometry_type = [geometry_type]
 
-    line_coords = get_coords_from_features(line, ("LineString", "MultiLineString"))
+    for line_geo in geometry_type:
+        if line_geo in ["MultiPolygon", "Polygon"]:
+            line = polygon_to_line(line)
+            line_geo = line["geometry"]["type"]
 
-    if line_geometry in ["LineString"]:
-        line_coords = [line_coords]
+        line_coords = get_coords_from_features(line, ("LineString", "MultiLineString"))
 
-    for line_coord in line_coords:
-        segments.extend(list(zip(line_coord, line_coord[1:])))
+        if line_geo in ["LineString"] and get_input_dimensions(line_coords) == 2:
+            line_coords = [line_coords]
 
+        for line_coord in line_coords:
+            segments.extend(list(zip(line_coord, line_coord[1:])))
     return segments

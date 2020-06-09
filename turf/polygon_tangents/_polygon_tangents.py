@@ -13,7 +13,7 @@ from turf.helpers import (
 )
 from turf.helpers import feature, feature_collection, geometry, point, polygon
 from turf.helpers import Feature, FeatureCollection, Geometry
-from turf.invariant import get_coords_from_features
+from turf.invariant import get_coords_from_features, get_geometry_type
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
 
@@ -36,18 +36,16 @@ def polygon_tangents(
     :return:
         Feature Collection containing the two tangent points
     """
+    point_features = []
+
     point_coord = get_coords_from_features(start_point, ("Point",))
     polygon_coords = get_coords_from_features(polygon, ("Polygon", "MultiPolygon"))
 
-    try:
-        geometry_type = polygon.get("geometry").get("type")
-    except AttributeError:
-        try:
-            geometry_type = polygon.get("type")
-        except AttributeError:
-            raise InvalidInput(
-                error_code_messages["InvalidGeometry"](["Polygon", "MultiPolygon"])
-            )
+    geometry_type = get_geometry_type(polygon)
+
+    if isinstance(geometry_type, str):
+        geometry_type = [geometry_type]
+        polygon_coords = [polygon_coords]
 
     box = bbox(polygon)
 
@@ -66,34 +64,38 @@ def polygon_tangents(
         near_point = nearest_point(start_point, explode(polygon))
         near_point_index = near_point["properties"]["featureIndex"]
 
-    if geometry_type == "Polygon":
+    for geo_type, poly_coords in zip(geometry_type, polygon_coords):
 
-        tangents = process_polygon(
-            polygon_coords, point_coord, near_point, near_point_index
-        )
-
-    # bruteforce approach
-    # calculate both tangents for each polygon
-    # define all tangents as a new polygon and calculate tangetns out of those coordinates
-    elif geometry_type == "MultiPolygon":
-
-        multi_tangents = []
-
-        for polygon_coord in polygon_coords:
+        if geo_type == "Polygon":
 
             tangents = process_polygon(
-                polygon_coord, point_coord, near_point, near_point_index
+                poly_coords, point_coord, near_point, near_point_index
             )
-            multi_tangents.extend(tangents)
 
-        tangents = process_polygon(
-            [multi_tangents], point_coord, near_point, near_point_index
-        )
+        # bruteforce approach
+        # calculate both tangents for each polygon
+        # define all tangents as a new polygon and calculate tangetns out of those coordinates
+        elif geo_type == "MultiPolygon":
 
-    r_tangents = tangents[0]
-    l_tangents = tangents[1]
+            multi_tangents = []
 
-    return feature_collection([point(r_tangents), point(l_tangents)])
+            for poly_coord in poly_coords:
+
+                tangents = process_polygon(
+                    poly_coord, point_coord, near_point, near_point_index
+                )
+                multi_tangents.extend(tangents)
+
+            tangents = process_polygon(
+                [multi_tangents], point_coord, near_point, near_point_index
+            )
+
+        r_tangents = tangents[0]
+        l_tangents = tangents[1]
+
+        point_features.extend([point(r_tangents), point(l_tangents)])
+
+    return feature_collection(point_features)
 
 
 def process_polygon(
