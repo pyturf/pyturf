@@ -10,7 +10,7 @@ from turf.helpers import (
 )
 
 from turf.helpers import feature_collection, line_string, multi_line_string
-from turf.invariant import get_coords_from_features
+from turf.invariant import get_coords_from_features, get_geometry_type
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
 
@@ -36,31 +36,29 @@ def polygon_to_line(polygon: PolygonFeature, options: Dict = {}) -> LineFeature:
     else:
         properties = options.get("properties", {})
 
-    try:
-        geometry_type = polygon.get("geometry").get("type")
-    except AttributeError:
-        try:
-            geometry_type = polygon["type"]
-        except KeyError:
-            raise InvalidInput(
-                error_code_messages["InvalidGeometry"](["Polygon", "MultiPolygon"])
-            )
+    geometry_type = get_geometry_type(polygon, ("Polygon", "MultiPolygon"))
 
     polygon_coords = get_coords_from_features(polygon, ("Polygon", "MultiPolygon"))
 
-    if geometry_type == "MultiPolygon":
+    if isinstance(geometry_type, str):
+        geometry_type = [geometry_type]
+        polygon_coords = [polygon_coords]
 
-        line_coords = []
+    for geo_type, poly_coords in zip(geometry_type, polygon_coords):
 
-        for polygon_coord in polygon_coords:
+        if geo_type == "MultiPolygon":
 
-            line_coords.append(coords_to_line(polygon_coord, properties))
+            line_coords = []
 
-        line_feature = feature_collection(line_coords)
+            for poly_coord in poly_coords:
 
-    else:
+                line_coords.append(coords_to_line(poly_coord, properties))
 
-        line_feature = coords_to_line(polygon_coords, properties)
+            line_feature = feature_collection(line_coords)
+
+        else:
+
+            line_feature = coords_to_line(poly_coords, properties)
 
     return line_feature
 

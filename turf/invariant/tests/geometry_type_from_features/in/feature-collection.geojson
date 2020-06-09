@@ -1,6 +1,8 @@
-[
-  ["Point","LineString", "Polygon"],
-  [
+{
+  "type": "FeatureCollection",
+  "properties": {
+  },
+  "features": [
     {
       "type": "Feature",
       "properties": {},
@@ -47,7 +49,7 @@
     },
     {
       "type": "Feature",
-      "properties": {"allowed_types": ["LineString"]},
+      "properties": {},
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -63,4 +65,4 @@
       }
     }
   ]
-]
+}

@@ -1,9 +1,10 @@
 [
-  ["Point"],
-  [{
+  {
     "type": "Feature",
     "properties": {
-      "allowed_types": ["Point"]
+      "allowed_types": [
+        "Point"
+      ]
     },
     "geometry": {
       "type": "Point",
@@ -12,5 +13,5 @@
         45.75764678012361
       ]
     }
-  }]
+  }
 ]

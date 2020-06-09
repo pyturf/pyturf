@@ -1,9 +1,10 @@
 [
-  ["Polygon"],
-  [{
+  {
     "type": "Feature",
     "properties": {
-      "allowed_types": ["Polygon"]
+      "allowed_types": [
+        "Polygon"
+      ]
     },
     "geometry": {
       "type": "Polygon",
@@ -44,5 +45,5 @@
         ]
       ]
     }
-  }]
+  }
 ]
