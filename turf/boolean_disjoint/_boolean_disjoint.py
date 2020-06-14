@@ -55,7 +55,6 @@ def disjoint(
     :param feature_2: {List} a List with geometry type and coordinates
     :return: boolean True/False if features are disjoint
     """
-
     is_disjoint = True
 
     if feature_1[0] in ["Point"]:
