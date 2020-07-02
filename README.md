@@ -75,6 +75,7 @@ Currently, the following modules have been implemented:
 - [bbox-polygon](https://github.com/pyturf/pyturf/tree/master/turf/bbox_polygon)
 - [bearing](https://github.com/pyturf/pyturf/tree/master/turf/bearing)
 - [boolean-disjoint](https://github.com/pyturf/pyturf/tree/master/turf/boolean_disjoint)
+- [boolean-intersects](https://github.com/pyturf/pyturf/tree/master/turf/boolean_intersects)
 - [boolean-point-in-polygon](https://github.com/pyturf/pyturf/tree/master/turf/boolean_point_in_polygon)
 - [boolean-point-on-line](https://github.com/pyturf/pyturf/tree/master/turf/boolean_point_on_line)
 - [center](https://github.com/pyturf/pyturf/tree/master/turf/center)

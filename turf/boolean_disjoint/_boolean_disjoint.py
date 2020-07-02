@@ -40,7 +40,7 @@ def boolean_disjoint(feature_1: Any, feature_2: Any) -> bool:
             is_disjoint = disjoint(flat_1, flat_2)
 
             if not is_disjoint:
-                break
+                return is_disjoint
 
     return is_disjoint
 

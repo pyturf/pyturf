@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from turf.boolean_disjoint import boolean_disjoint
+from turf.boolean_intersects import boolean_intersects
 from turf.utils.test_setup import get_fixtures
 
 
@@ -30,6 +30,6 @@ class TestBooleanPointOnLine:
             feature_1, feature_2 = features["features"]
             expected_result = False
 
-        test_result = boolean_disjoint(feature_1, feature_2)
+        test_result = boolean_intersects(feature_1, feature_2)
 
         assert test_result == expected_result
