@@ -78,6 +78,7 @@ Currently, the following modules have been implemented:
 - [boolean-intersects](https://github.com/pyturf/pyturf/tree/master/turf/boolean_intersects)
 - [boolean-point-in-polygon](https://github.com/pyturf/pyturf/tree/master/turf/boolean_point_in_polygon)
 - [boolean-point-on-line](https://github.com/pyturf/pyturf/tree/master/turf/boolean_point_on_line)
+- [boolean-within](https://github.com/pyturf/pyturf/tree/master/turf/boolean_within)
 - [center](https://github.com/pyturf/pyturf/tree/master/turf/center)
 - [centroid](https://github.com/pyturf/pyturf/tree/master/turf/centroid)
 - [destination](https://github.com/pyturf/pyturf/tree/master/turf/destination)
