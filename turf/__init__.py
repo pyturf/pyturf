@@ -20,6 +20,7 @@ from turf.length import length
 from turf.line_intersect import line_intersect
 from turf.midpoint import midpoint
 from turf.nearest_point import nearest_point
+from turf.point_grid import point_grid
 from turf.point_on_feature import point_on_feature
 from turf.point_to_line_distance import point_to_line_distance
 from turf.polygon_tangents import polygon_tangents

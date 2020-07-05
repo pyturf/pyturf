@@ -91,6 +91,7 @@ Currently, the following modules have been implemented:
 - [line-intersect](https://github.com/pyturf/pyturf/tree/master/turf/line_intersect)
 - [midpoint](https://github.com/pyturf/pyturf/tree/master/turf/midpoint)
 - [nearest-point](https://github.com/pyturf/pyturf/tree/master/turf/nearest_point)
+- [point-grid](https://github.com/pyturf/pyturf/tree/master/turf/point_grid)
 - [point-on-feature](https://github.com/pyturf/pyturf/tree/master/turf/point_on_feature)
 - [point-to-line-distance](https://github.com/pyturf/pyturf/tree/master/turf/point_to_line_distance)
 - [polygon-tangents](https://github.com/pyturf/pyturf/tree/master/turf/polygon_tangents)

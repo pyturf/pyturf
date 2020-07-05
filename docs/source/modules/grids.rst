@@ -3,6 +3,12 @@
 Grids
 =====
 
+Point Grid
+--------------
+
+.. autofunction:: turf.point_grid
+
+
 Rectangle Grid
 --------------
 
