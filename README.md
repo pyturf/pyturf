@@ -95,10 +95,12 @@ Currently, the following modules have been implemented:
 - [point-to-line-distance](https://github.com/pyturf/pyturf/tree/master/turf/point_to_line_distance)
 - [polygon-tangents](https://github.com/pyturf/pyturf/tree/master/turf/polygon_tangents)
 - [polygon-to-line](https://github.com/pyturf/pyturf/tree/master/turf/polygon_to_line)
+- [rectangle-grid](https://github.com/pyturf/pyturf/tree/master/turf/rectangle_grid)
 - [rhumb-bearing](https://github.com/pyturf/pyturf/tree/master/turf/rhumb_bearing)
 - [rhumb-destination](https://github.com/pyturf/pyturf/tree/master/turf/rhumb_destination)
 - [rhumb-distance](https://github.com/pyturf/pyturf/tree/master/turf/rhumb_distance)
 - [square](https://github.com/pyturf/pyturf/tree/master/turf/square)
+- [square-grid](https://github.com/pyturf/pyturf/tree/master/turf/square_grid)
 
 ## Contributing
 
