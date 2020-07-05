@@ -31,4 +31,5 @@ from turf.rhumb_destination import rhumb_destination
 from turf.rhumb_distance import rhumb_distance
 from turf.square import square
 from turf.square_grid import square_grid
+from turf.triangle_grid import triangle_grid
 from turf.version import __version__

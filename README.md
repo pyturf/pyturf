@@ -102,6 +102,7 @@ Currently, the following modules have been implemented:
 - [rhumb-distance](https://github.com/pyturf/pyturf/tree/master/turf/rhumb_distance)
 - [square](https://github.com/pyturf/pyturf/tree/master/turf/square)
 - [square-grid](https://github.com/pyturf/pyturf/tree/master/turf/square_grid)
+- [triangle-grid](https://github.com/pyturf/pyturf/tree/master/turf/triangle_grid)
 
 ## Contributing
 
