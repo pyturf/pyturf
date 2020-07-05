@@ -7,13 +7,13 @@ from turf.helpers import feature_collection, polygon, FeatureCollection
 
 
 def triangle_grid(
-    bbox: List[float], n_cells: Union[int, float], options: Dict = {},
+    bbox: List[float], cell_side: Union[int, float], options: Dict = {},
 ) -> FeatureCollection:
     """
     Creates a square of rectangles from a bounding box, Feature or FeatureCollection.
 
     :param bbox: Array extent in [minX, minY, maxX, maxY] order
-    :param n_cells: dimension of each cell
+    :param cell_side: dimension of each cell
     :param options: Optional parameters
         [options["units"]]: units ("degrees", "radians", "miles", "kilometers")
                             of the given cell_width and cell_height
@@ -32,9 +32,9 @@ def triangle_grid(
     east = bbox[2]
     north = bbox[3]
 
-    x_fraction = n_cells / (distance([west, south], [east, south], options))
+    x_fraction = cell_side / (distance([west, south], [east, south], options))
     cell_width_deg = x_fraction * (east - west)
-    y_fraction = n_cells / (distance([west, south], [west, north], options))
+    y_fraction = cell_side / (distance([west, south], [west, north], options))
     cell_height_deg = y_fraction * (north - south)
 
     # if the grid does not fill the bbox perfectly, center it.

@@ -16,6 +16,7 @@ from turf.envelope import envelope
 from turf.explode import explode
 from turf.great_circle import great_circle
 from turf.helpers import *
+from turf.hex_grid import hex_grid
 from turf.length import length
 from turf.line_intersect import line_intersect
 from turf.midpoint import midpoint

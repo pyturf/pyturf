@@ -87,6 +87,7 @@ Currently, the following modules have been implemented:
 - [explode](https://github.com/pyturf/pyturf/tree/master/turf/explode)
 - [great circle](https://github.com/pyturf/pyturf/tree/master/turf/great_circle)
 - [helpers](https://github.com/pyturf/pyturf/tree/master/turf/helpers)
+- [hex_grid](https://github.com/pyturf/pyturf/tree/master/turf/hex_grid)
 - [length](https://github.com/pyturf/pyturf/tree/master/turf/length)
 - [line-intersect](https://github.com/pyturf/pyturf/tree/master/turf/line_intersect)
 - [midpoint](https://github.com/pyturf/pyturf/tree/master/turf/midpoint)

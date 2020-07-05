@@ -23,7 +23,7 @@ class TestPointGrid:
     def test_point_grid(self, fixture):
 
         bbox = fixture["in"]["bbox"]
-        n_cells = fixture["in"]["cellSide"]
+        cell_side = fixture["in"]["cellSide"]
 
         options = dict(
             (key, fixture["in"][key])
@@ -31,7 +31,7 @@ class TestPointGrid:
             if key in fixture["in"]
         )
 
-        result = point_grid(bbox, n_cells, options)
+        result = point_grid(bbox, cell_side, options)
 
         result = prepare_output(result, bbox, options)
 
