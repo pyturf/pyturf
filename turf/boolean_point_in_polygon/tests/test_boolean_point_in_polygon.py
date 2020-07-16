@@ -197,7 +197,7 @@ class TestBooleanPointInPolygon:
             ),
             pytest.param(
                 point([0, 1]),
-                [[[0, 1], [1, 2], [2, 3], [0, 1]]],
+                [[0, 1], [1, 2], [2, 3], [0, 1]],
                 error_code_messages["InvalidGeometry"](allowed_types_polygon),
                 id="InvalidGeometry-input_must_have_a_geometry",
             ),

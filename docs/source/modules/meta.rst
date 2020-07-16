@@ -17,3 +17,9 @@ Get geometry from features
 --------------------------
 
 .. autofunction:: turf.invariant.get_geometry_from_features
+
+
+Get geometry type from features
+-------------------------------
+
+.. autofunction:: turf.invariant.get_geometry_type
