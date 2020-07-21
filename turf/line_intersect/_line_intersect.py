@@ -159,4 +159,5 @@ def get_line_segments(line: LinePolyFeature) -> Sequence:
 
         for line_coord in line_coords:
             segments.extend(list(zip(line_coord, line_coord[1:])))
+
     return segments
