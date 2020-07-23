@@ -3,6 +3,7 @@ from turf.area import area
 from turf.bbox import bbox
 from turf.bbox_polygon import bbox_polygon
 from turf.bearing import bearing
+from turf.boolean_disjoint import boolean_disjoint
 from turf.boolean_point_in_polygon import boolean_point_in_polygon
 from turf.boolean_point_on_line import boolean_point_on_line
 from turf.center import center

@@ -18,7 +18,6 @@ from turf.envelope._envelope import envelope
 from turf.polygon_to_line import polygon_to_line
 from turf.helpers import feature, feature_collection, line_string, point
 from turf.invariant import get_coords_from_features, get_geometry_type
-
 from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
 
