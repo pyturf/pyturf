@@ -40,7 +40,7 @@ def boolean_disjoint(feature_1: Any, feature_2: Any) -> bool:
             is_disjoint = disjoint(flat_1, flat_2)
 
             if not is_disjoint:
-                break
+                return is_disjoint
 
     return is_disjoint
 
@@ -55,7 +55,6 @@ def disjoint(
     :param feature_2: {List} a List with geometry type and coordinates
     :return: boolean True/False if features are disjoint
     """
-
     is_disjoint = True
 
     if feature_1[0] in ["Point"]:

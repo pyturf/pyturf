@@ -3,6 +3,18 @@
 Booleans
 ========
 
+boolean-disjoint
+----------------
+
+.. autofunction:: turf.boolean_disjoint
+
+
+boolean-intersects
+------------------
+
+.. autofunction:: turf.boolean_intersects
+
+
 boolean-point-in-polygon
 ------------------------
 
