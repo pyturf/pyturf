@@ -7,6 +7,7 @@ from turf.boolean_disjoint import boolean_disjoint
 from turf.boolean_intersects import boolean_intersects
 from turf.boolean_point_in_polygon import boolean_point_in_polygon
 from turf.boolean_point_on_line import boolean_point_on_line
+from turf.boolean_within import boolean_within
 from turf.center import center
 from turf.centroid import centroid
 from turf.destination import destination

@@ -25,3 +25,9 @@ boolean-point-on-line
 ---------------------
 
 .. autofunction:: turf.boolean_point_on_line
+
+
+boolean-within
+----------------
+
+.. autofunction:: turf.boolean_within
