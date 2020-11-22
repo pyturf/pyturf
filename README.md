@@ -87,18 +87,23 @@ Currently, the following modules have been implemented:
 - [explode](https://github.com/pyturf/pyturf/tree/master/turf/explode)
 - [great circle](https://github.com/pyturf/pyturf/tree/master/turf/great_circle)
 - [helpers](https://github.com/pyturf/pyturf/tree/master/turf/helpers)
+- [hex_grid](https://github.com/pyturf/pyturf/tree/master/turf/hex_grid)
 - [length](https://github.com/pyturf/pyturf/tree/master/turf/length)
 - [line-intersect](https://github.com/pyturf/pyturf/tree/master/turf/line_intersect)
 - [midpoint](https://github.com/pyturf/pyturf/tree/master/turf/midpoint)
 - [nearest-point](https://github.com/pyturf/pyturf/tree/master/turf/nearest_point)
+- [point-grid](https://github.com/pyturf/pyturf/tree/master/turf/point_grid)
 - [point-on-feature](https://github.com/pyturf/pyturf/tree/master/turf/point_on_feature)
 - [point-to-line-distance](https://github.com/pyturf/pyturf/tree/master/turf/point_to_line_distance)
 - [polygon-tangents](https://github.com/pyturf/pyturf/tree/master/turf/polygon_tangents)
 - [polygon-to-line](https://github.com/pyturf/pyturf/tree/master/turf/polygon_to_line)
+- [rectangle-grid](https://github.com/pyturf/pyturf/tree/master/turf/rectangle_grid)
 - [rhumb-bearing](https://github.com/pyturf/pyturf/tree/master/turf/rhumb_bearing)
 - [rhumb-destination](https://github.com/pyturf/pyturf/tree/master/turf/rhumb_destination)
 - [rhumb-distance](https://github.com/pyturf/pyturf/tree/master/turf/rhumb_distance)
 - [square](https://github.com/pyturf/pyturf/tree/master/turf/square)
+- [square-grid](https://github.com/pyturf/pyturf/tree/master/turf/square_grid)
+- [triangle-grid](https://github.com/pyturf/pyturf/tree/master/turf/triangle_grid)
 
 ## Contributing
 

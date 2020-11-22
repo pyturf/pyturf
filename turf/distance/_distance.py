@@ -16,7 +16,7 @@ def distance(start, end, options=None):
 
     kwargs = {}
     if isinstance(options, dict) and "units" in options:
-        kwargs.update(options)
+        kwargs.update({"units": options.get("units")})
 
     coordinates1 = get_coords_from_features(start, ["Point"])
     coordinates2 = get_coords_from_features(end, ["Point"])
