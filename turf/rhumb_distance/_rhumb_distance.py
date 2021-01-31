@@ -1,6 +1,5 @@
 from typing import Dict, List
-
-import numpy as np
+from math import cos, log, pi, sqrt, tan
 
 from turf.helpers import convert_length, degrees_to_radians
 from turf.helpers import earth_radius
@@ -67,21 +66,21 @@ def calculate_rhumb_distance(
     delta_lambda = degrees_to_radians(abs(destination[0] - origin[0]))
 
     # if dLon over 180° take shorter rhumb line across the anti-meridian:
-    if delta_lambda > np.pi:
-        delta_lambda -= 2 * np.pi
+    if delta_lambda > pi:
+        delta_lambda -= 2 * pi
 
     # on Mercator projection, longitude distances shrink by latitude; q is the 'stretch factor'
     # q becomes ill-conditioned along E-W line (0/0); use empirical tolerance to avoid it
 
-    delta_psi = np.log(np.tan(phi_2 / 2 + np.pi / 4) / np.tan(phi_1 / 2 + np.pi / 4))
+    delta_psi = log(tan(phi_2 / 2 + pi / 4) / tan(phi_1 / 2 + pi / 4))
 
     if abs(delta_psi) > 10e-12:
         q_1 = delta_phi / delta_psi
     else:
-        q_1 = np.cos(phi_1)
+        q_1 = cos(phi_1)
 
     # distance is pythagoras on 'stretched' Mercator projection
-    delta = np.sqrt(delta_phi * delta_phi + q_1 * q_1 * delta_lambda * delta_lambda)
+    delta = sqrt(delta_phi * delta_phi + q_1 * q_1 * delta_lambda * delta_lambda)
     # angular distance in radians
     distance = delta * radius
 

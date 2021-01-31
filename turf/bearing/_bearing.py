@@ -1,4 +1,4 @@
-import numpy as np
+from math import sin, cos, atan2
 
 from turf.invariant import get_coords_from_features
 from turf.helpers import degrees_to_radians, radians_to_degrees
@@ -30,11 +30,11 @@ def bearing(start, end, options=None):
     lat1 = degrees_to_radians(start[1])
     lat2 = degrees_to_radians(end[1])
 
-    a = np.sin(lon2 - lon1) * np.cos(lat2)
+    a = sin(lon2 - lon1) * cos(lat2)
 
-    b = np.cos(lat1) * np.sin(lat2) - np.sin(lat1) * np.cos(lat2) * np.cos(lon2 - lon1)
+    b = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(lon2 - lon1)
 
-    return radians_to_degrees(np.arctan2(a, b))
+    return radians_to_degrees(atan2(a, b))
 
 
 def calculate_final_bearing(start, end):

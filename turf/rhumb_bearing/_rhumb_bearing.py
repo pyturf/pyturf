@@ -1,7 +1,5 @@
-from math import fmod
+from math import atan2, fmod, log, pi, tan
 from typing import Dict, Sequence, Union
-
-import numpy as np
 
 from turf.helpers import degrees_to_radians, radians_to_degrees
 from turf.helpers import Feature
@@ -52,13 +50,13 @@ def calculate_rhumb_bearing(origin: Sequence, destination: Sequence) -> float:
     delta_lambda = degrees_to_radians(destination[0] - origin[0])
 
     # if delta_lambda over 180° take shorter rhumb line across the anti-meridian:
-    if abs(delta_lambda) > np.pi:
+    if abs(delta_lambda) > pi:
         if delta_lambda > 0:
-            delta_lambda = -(2 * np.pi - delta_lambda)
+            delta_lambda = -(2 * pi - delta_lambda)
         if delta_lambda < 0:
-            delta_lambda = 2 * np.pi + delta_lambda
+            delta_lambda = 2 * pi + delta_lambda
 
-    delta_psi = np.log(np.tan(phi_2 / 2 + np.pi / 4) / np.tan(phi_1 / 2 + np.pi / 4))
-    theta = np.arctan2(delta_lambda, delta_psi)
+    delta_psi = log(tan(phi_2 / 2 + pi / 4) / tan(phi_1 / 2 + pi / 4))
+    theta = atan2(delta_lambda, delta_psi)
 
     return fmod(radians_to_degrees(theta) + 360, 360)

@@ -21,8 +21,6 @@ dependencies:
   - more-itertools=8.2.0=py_0
   - mypy_extensions=0.4.3=py38_0
   - ncurses=6.2=h0a44026_0
-  - numpy=1.18.1=py38h7241aed_0
-  - numpy-base=1.18.1=py38h6575580_1
   - openssl=1.1.1g=h1de35cc_0
   - packaging=20.3=py_0
   - pathspec=0.7.0=py_0

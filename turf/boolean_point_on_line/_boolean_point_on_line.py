@@ -2,12 +2,10 @@ from typing import Dict, List, Sequence, TypeVar, Union
 from decimal import Decimal, getcontext
 from math import sqrt
 
-import numpy as np
-
 from turf.helpers import Feature, LineString, Point
-
 from turf.helpers import feature_collection, line_string, multi_line_string
 from turf.invariant import get_coords_from_features
+
 
 ctx = getcontext()
 ctx.prec = 28

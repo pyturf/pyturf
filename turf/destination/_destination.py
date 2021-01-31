@@ -1,4 +1,4 @@
-import numpy as np
+from math import asin, atan2, cos, sin
 
 from turf.helpers import (
     degrees_to_radians,
@@ -40,14 +40,14 @@ def destination(origin, distance, bearing, options=None):
 
     radians = length_to_radians(distance, **kwargs)
 
-    latitude2 = np.arcsin(
-        np.sin(latitude1) * np.cos(radians)
-        + np.cos(latitude1) * np.sin(radians) * np.cos(bearing_rads)
+    latitude2 = asin(
+        sin(latitude1) * cos(radians)
+        + cos(latitude1) * sin(radians) * cos(bearing_rads)
     )
 
-    longitude2 = longitude1 + np.arctan2(
-        np.sin(bearing_rads) * np.sin(radians) * np.cos(latitude1),
-        np.cos(radians) - np.sin(latitude1) * np.sin(latitude2),
+    longitude2 = longitude1 + atan2(
+        sin(bearing_rads) * sin(radians) * cos(latitude1),
+        cos(radians) - sin(latitude1) * sin(latitude2),
     )
 
     lng = truncate(radians_to_degrees(longitude2), 6)

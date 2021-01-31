@@ -1,7 +1,5 @@
 from functools import reduce
 
-import numpy as np
-
 from turf.invariant import get_coords_from_features
 from turf.utils.helpers import get_input_dimensions
 
@@ -14,7 +12,7 @@ def bbox(features):
     :return: bounding box extent in [minX, minY, maxX, maxY] order
     """
 
-    bounding_box = [np.inf, np.inf, -np.inf, -np.inf]
+    bounding_box = [float("inf"), float("inf"), float("-inf"), float("-inf")]
 
     coords = get_coords_from_features(features)
 
