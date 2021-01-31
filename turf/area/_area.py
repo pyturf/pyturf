@@ -1,5 +1,5 @@
-import numpy as np
 from functools import reduce
+from math import sin
 
 from turf.invariant import get_geometry_from_features, get_coords_from_geometry
 from turf.helpers import (
@@ -109,7 +109,7 @@ def ring_area(coords):
             p2 = coords[middle_index]
             p3 = coords[upper_index]
 
-            total += (rad(p3[0]) - rad(p1[0])) * np.sin(rad(p2[1]))
+            total += (rad(p3[0]) - rad(p1[0])) * sin(rad(p2[1]))
 
         total = total * earth_radius ** 2 / 2
 

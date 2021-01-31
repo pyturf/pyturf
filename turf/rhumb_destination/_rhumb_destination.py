@@ -1,7 +1,5 @@
-from math import fmod
+from math import cos, fmod, log, pi, sin, tan
 from typing import Dict, List, Sequence, Union
-
-import numpy as np
 
 from turf.helpers import convert_length, degrees_to_radians
 from turf.helpers import earth_radius
@@ -82,35 +80,35 @@ def calculate_rhumb_destination(
     # angular distance in radians
     delta = distance_in_meters / radius
     # to radians, but without normalize to pi
-    lambda_1 = origin[0] * np.pi / 180
+    lambda_1 = origin[0] * pi / 180
 
     phi_1 = degrees_to_radians(origin[1])
     theta = degrees_to_radians(bearing)
 
-    delta_phi = delta * np.cos(theta)
+    delta_phi = delta * cos(theta)
     phi_2 = phi_1 + delta_phi
 
     # check for some points going past the pole, normalise latitude if so
-    if abs(phi_2) > (np.pi / 2) and (phi_2 > 0):
-        phi_2 = np.pi - phi_2
-    if abs(phi_2) > (np.pi / 2) and (phi_2 < 0):
-        phi_2 = np.pi - phi_2
+    if abs(phi_2) > (pi / 2) and (phi_2 > 0):
+        phi_2 = pi - phi_2
+    if abs(phi_2) > (pi / 2) and (phi_2 < 0):
+        phi_2 = pi - phi_2
 
-    delta_psi = np.log(np.tan(phi_2 / 2 + np.pi / 4) / np.tan(phi_1 / 2 + np.pi / 4))
+    delta_psi = log(tan(phi_2 / 2 + pi / 4) / tan(phi_1 / 2 + pi / 4))
 
     # E-W course becomes ill-conditioned with 0/0
     if abs(delta_psi) > 10e-12:
         q_1 = delta_phi / delta_psi
     else:
-        q_1 = np.cos(phi_1)
+        q_1 = cos(phi_1)
 
-    delta_lambda = delta * np.sin(theta) / q_1
+    delta_lambda = delta * sin(theta) / q_1
     lambda_2 = lambda_1 + delta_lambda
 
     # normalise to −180..+180°
     destination = [
-        fmod(((lambda_2 * 180 / np.pi) + 540), 360) - 180,
-        (phi_2 * 180 / np.pi),
+        fmod(((lambda_2 * 180 / pi) + 540), 360) - 180,
+        (phi_2 * 180 / pi),
     ]
 
     return destination

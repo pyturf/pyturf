@@ -1,5 +1,5 @@
 import pytest
-import numpy as np
+from math import pi
 
 from turf.helpers._units import earth_radius
 from turf.helpers import (
@@ -55,9 +55,9 @@ def test_length_to_degrees(value, units, result):
 @pytest.mark.parametrize(
     "value,result",
     [
-        pytest.param(np.pi / 3, 60, id="radiance conversion PI/3"),
-        pytest.param(3.5 * np.pi, 270, id="radiance conversion 3.5 PI"),
-        pytest.param(-1 * np.pi, -180, id="radiance conversion -PI"),
+        pytest.param(pi / 3, 60, id="radiance conversion PI/3"),
+        pytest.param(3.5 * pi, 270, id="radiance conversion 3.5 PI"),
+        pytest.param(-1 * pi, -180, id="radiance conversion -PI"),
     ],
 )
 def test_radians_to_degrees(value, result):
@@ -68,9 +68,9 @@ def test_radians_to_degrees(value, result):
 @pytest.mark.parametrize(
     "value,result",
     [
-        pytest.param(60, np.pi / 3, id="degrees conversion 60"),
-        pytest.param(270, 1.5 * np.pi, id="degrees conversion 270"),
-        pytest.param(-180, -np.pi, id="degrees conversion -180"),
+        pytest.param(60, pi / 3, id="degrees conversion 60"),
+        pytest.param(270, 1.5 * pi, id="degrees conversion 270"),
+        pytest.param(-180, -pi, id="degrees conversion -180"),
     ],
 )
 def test_degrees_to_radians(value, result):

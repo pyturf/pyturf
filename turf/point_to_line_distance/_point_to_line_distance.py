@@ -1,10 +1,8 @@
 from typing import Dict, List, Sequence, Union
 
-import numpy as np
-
 from turf.distance import distance
 from turf.rhumb_distance import rhumb_distance
-from turf.helpers import convert_length, Feature
+from turf.helpers import convert_length, dot, Feature
 from turf.invariant import get_coords_from_features
 
 
@@ -65,8 +63,8 @@ def get_distance_to_segment(
 
     w = [point[0] - segment_start[0], point[1] - segment_start[1]]
 
-    c1 = np.dot(w, v)
-    c2 = np.dot(v, v)
+    c1 = dot(w, v)
+    c2 = dot(v, v)
 
     b2 = c1 / c2
     point_2 = [segment_start[0] + (b2 * v[0]), segment_start[1] + (b2 * v[1])]

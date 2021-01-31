@@ -1,4 +1,5 @@
-import numpy as np
+from math import pi
+from typing import List
 
 from turf.helpers._units import factors, area_factors
 from turf.utils.exceptions import InvalidInput
@@ -8,6 +9,21 @@ from turf.utils.error_codes import error_code_messages
 def c_like_modulo(number, base):
 
     return number - int(number / base) * base
+
+
+def dot(vector_1: List, vector_2: List) -> float:
+    """
+    Dot product of two lists
+
+    :param vector_1: list of values
+    :param vector_2: list of values
+
+    :return: dot product
+    """
+    if len(vector_1) != len(vector_2):
+        raise InvalidInput(error_code_messages["InvalidLength"])
+
+    return sum(x * y for x, y in zip(vector_1, vector_2))
 
 
 def degrees_to_radians(degrees):
@@ -20,7 +36,7 @@ def degrees_to_radians(degrees):
         raise InvalidInput(error_code_messages["InvalidDegrees"])
 
     radians = c_like_modulo(degrees, 360)
-    return radians * np.pi / 180
+    return radians * pi / 180
 
 
 def radians_to_degrees(radians):
@@ -32,8 +48,8 @@ def radians_to_degrees(radians):
     if not isinstance(radians, (float, int)):
         raise InvalidInput(error_code_messages["InvalidRadians"])
 
-    degrees = c_like_modulo(radians, 2 * np.pi)
-    return degrees * 180 / np.pi
+    degrees = c_like_modulo(radians, 2 * pi)
+    return degrees * 180 / pi
 
 
 def length_to_radians(distance, units="kilometers"):

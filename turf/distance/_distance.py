@@ -1,4 +1,5 @@
-import numpy as np
+from math import atan2, cos, sin, sqrt
+
 from turf.helpers import degrees_to_radians, radians_to_length
 from turf.invariant import get_coords_from_features
 
@@ -47,9 +48,7 @@ def calculate_radians_distance(dif_lon, dif_lat, lat1, lat2):
 
     :return: distance_radians
     """
-    d = np.sin(dif_lat / 2) ** 2 + np.sin(dif_lon / 2) ** 2 * np.cos(lat1) * np.cos(
-        lat2
-    )
-    d = 2 * np.arctan2(np.sqrt(d), np.sqrt(1 - d))
+    d = sin(dif_lat / 2) ** 2 + sin(dif_lon / 2) ** 2 * cos(lat1) * cos(lat2)
+    d = 2 * atan2(sqrt(d), sqrt(1 - d))
 
     return d

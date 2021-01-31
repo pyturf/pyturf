@@ -1,7 +1,5 @@
 from typing import List, TypeVar, Union
 
-import numpy as np
-
 from turf.boolean_point_in_polygon import boolean_point_in_polygon
 from turf.center import center
 from turf.explode import explode
