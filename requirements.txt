@@ -30,7 +30,7 @@ pkginfo==1.5.0.1
 pluggy==0.13.1
 prioq==0.1.1
 public==2019.4.13
-py==1.8.1
+py==1.10.0
 pybind11==2.5.0
 Pygments==2.6.1
 pyparsing==2.4.6
