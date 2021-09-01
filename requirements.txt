@@ -41,7 +41,7 @@ readme-renderer==25.0
 recommonmark==0.6.0
 regex==2020.2.20
 reprit==0.2.2
-requests==2.23.0
+requests==2.26.0
 requests-toolbelt==0.9.1
 rtree>=0.8,<0.9
 setupcfg==2019.4.13
