@@ -22,7 +22,7 @@ LineFeature = TypeVar(
 
 
 def polygon_to_line(polygon: PolygonFeature, options: Dict = {}) -> LineFeature:
-    """ Converts a {Polygon} to a {LineString} or a {MultiPolygon} to a {FeatureCollection}
+    """Converts a {Polygon} to a {LineString} or a {MultiPolygon} to a {FeatureCollection}
     or {MultiLineString}.
 
     :param polygon: Feature to convert
@@ -64,7 +64,7 @@ def polygon_to_line(polygon: PolygonFeature, options: Dict = {}) -> LineFeature:
 
 
 def coords_to_line(coords: Sequence, properties: Dict) -> LineFeature:
-    """ Converts coordinates to a {LineString}} or {MultiLineString}.
+    """Converts coordinates to a {LineString}} or {MultiLineString}.
 
     :param polygon: Feature to convert
     :param properties: Optional parameters

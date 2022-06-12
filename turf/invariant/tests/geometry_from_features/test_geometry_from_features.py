@@ -147,7 +147,10 @@ class TestGeometryFromFeatures:
                 id="Point_object",
             ),
             pytest.param(
-                (LineString([[4.86, 45.76], [4.85, 45.74]]), ["LineString"],),
+                (
+                    LineString([[4.86, 45.76], [4.85, 45.74]]),
+                    ["LineString"],
+                ),
                 LineString([[4.86, 45.76], [4.85, 45.74]]),
                 id="LineString_object",
             ),

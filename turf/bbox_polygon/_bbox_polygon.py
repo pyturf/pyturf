@@ -31,7 +31,15 @@ def bbox_polygon(bbox, options=None):
     low_right = [east, south]
 
     return polygon(
-        [[low_left, low_right, top_right, top_left, low_left,]],
+        [
+            [
+                low_left,
+                low_right,
+                top_right,
+                top_left,
+                low_left,
+            ]
+        ],
         options.get("properties", None),
         {"bbox": bbox, "id": options.get("id", None)},
     )

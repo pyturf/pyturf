@@ -45,7 +45,9 @@ class TestCentroid:
                 id="InvalidGeometry",
             ),
             pytest.param(
-                [1], error_code_messages["InvalidPointInput"], id="InvalidPointInput",
+                [1],
+                error_code_messages["InvalidPointInput"],
+                id="InvalidPointInput",
             ),
         ],
     )

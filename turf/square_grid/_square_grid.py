@@ -5,7 +5,9 @@ from turf.rectangle_grid import rectangle_grid
 
 
 def square_grid(
-    bbox: List[float], n_cells: Union[int, float], options: Dict = {},
+    bbox: List[float],
+    n_cells: Union[int, float],
+    options: Dict = {},
 ) -> FeatureCollection:
     """
     Creates a square of rectangles from a bounding box, Feature or FeatureCollection.

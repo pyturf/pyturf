@@ -6,7 +6,7 @@ def get_input_dimensions(lst, n_dim=0):
 
 
 def truncate(n, decimals=0):
-    multiplier = 10 ** decimals
+    multiplier = 10**decimals
     return int(n * multiplier) / multiplier
 
 

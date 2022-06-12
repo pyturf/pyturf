@@ -7,7 +7,9 @@ from turf.helpers import feature_collection, point, FeatureCollection
 
 
 def point_grid(
-    bbox: List[float], n_cells: Union[int, float], options: Dict = {},
+    bbox: List[float],
+    n_cells: Union[int, float],
+    options: Dict = {},
 ) -> FeatureCollection:
     """
     Creates a square of rectangles from a bounding box, Feature or FeatureCollection.

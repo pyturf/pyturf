@@ -111,6 +111,6 @@ def ring_area(coords):
 
             total += (rad(p3[0]) - rad(p1[0])) * sin(rad(p2[1]))
 
-        total = total * earth_radius ** 2 / 2
+        total = total * earth_radius**2 / 2
 
     return total

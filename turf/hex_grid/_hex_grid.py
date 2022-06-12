@@ -8,7 +8,9 @@ from turf.helpers import feature_collection, polygon, FeatureCollection
 
 
 def hex_grid(
-    bbox: List[float], cell_side: Union[int, float], options: Dict = {},
+    bbox: List[float],
+    cell_side: Union[int, float],
+    options: Dict = {},
 ) -> FeatureCollection:
     """
     Takes a bounding box and the diameter of the cell and returns a FeatureCollection of flat-topped
