@@ -15,7 +15,13 @@ def length(features, options=None):
     """
 
     coords = get_coords_from_features(
-        features, ["LineString", "MultiLineString", "Polygon", "MultiPolygon",]
+        features,
+        [
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+        ],
     )
 
     if any(isinstance(inner_item, list) for item in coords for inner_item in item):

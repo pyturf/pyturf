@@ -25,7 +25,7 @@ PolygonFeature = TypeVar("PolygonFeature", Dict, Polygon, MultiPolygon)
 def polygon_tangents(
     start_point: PointFeature, polygon: PolygonFeature
 ) -> FeatureCollection:
-    """ Finds the tangents of a {Polygon or(MultiPolygon} from a {Point}.
+    """Finds the tangents of a {Polygon or(MultiPolygon} from a {Point}.
 
     more:
     http://geomalgorithms.com/a15-_tangents.html
@@ -104,7 +104,7 @@ def process_polygon(
     near_point: Union[Point, None],
     near_point_index: int,
 ) -> Sequence:
-    """ Prepares a polygon to calculate the tangents
+    """Prepares a polygon to calculate the tangents
 
     :param polygon_coords: point [lng, lat] or Point feature to calculate the tangent points from
     :param point_coord: point [lng, lat]
@@ -124,7 +124,10 @@ def process_polygon(
             l_tangents = polygon_coords[0][near_point_index]
 
     tangents = calculate_tangents(
-        polygon_coords[0], point_coord, r_tangents, l_tangents,
+        polygon_coords[0],
+        point_coord,
+        r_tangents,
+        l_tangents,
     )
 
     return tangents
@@ -136,7 +139,7 @@ def calculate_tangents(
     r_tangents: Sequence,
     l_tangents: Sequence,
 ) -> Sequence:
-    """ Calculate the upper and lower tangents from the polygon by
+    """Calculate the upper and lower tangents from the polygon by
     comparison with each neighbor coordinate in the polygon
 
     :param polygon_coords: point [lng, lat] or Point feature to calculate the tangent points from
@@ -148,7 +151,11 @@ def calculate_tangents(
         List of tangents coordinates [upper and lower]
     """
     edge_next = None
-    edge_prev = is_left(poly_coords[0], poly_coords[len(poly_coords) - 1], point_coord,)
+    edge_prev = is_left(
+        poly_coords[0],
+        poly_coords[len(poly_coords) - 1],
+        point_coord,
+    )
 
     for i in range(1, len(poly_coords) + 1):
 
@@ -176,7 +183,7 @@ def calculate_tangents(
 
 
 def is_above(point1: Sequence, point2: Sequence, point3: Sequence) -> bool:
-    """ Checks if point 1 is above point2 and point 3
+    """Checks if point 1 is above point2 and point 3
 
     :param geojson: geojson or Feature
     :param geojson_types: string of the supposed feature tpye
@@ -188,7 +195,7 @@ def is_above(point1: Sequence, point2: Sequence, point3: Sequence) -> bool:
 
 
 def is_below(point1: Sequence, point2: Sequence, point3: Sequence) -> bool:
-    """ Checks if point 1 is below point2 and point 3
+    """Checks if point 1 is below point2 and point 3
 
     :param geojson: geojson or Feature
     :param geojson_types: string of the supposed feature tpye
@@ -200,7 +207,7 @@ def is_below(point1: Sequence, point2: Sequence, point3: Sequence) -> bool:
 
 
 def is_left(point1: Sequence, point2: Sequence, point3: Sequence) -> float:
-    """ Calculates if point 1 is left of point2 and point 3
+    """Calculates if point 1 is left of point2 and point 3
 
     :param geojson: geojson or Feature
     :param geojson_types: string of the supposed feature tpye

@@ -105,7 +105,11 @@ class TestGeometryTypeFromFeatures:
                 ("Polygon", "LineString", "Point"),
                 id="feature_collection_object",
             ),
-            pytest.param(Point([4.83, 45.75]), "Point", id="Point_object",),
+            pytest.param(
+                Point([4.83, 45.75]),
+                "Point",
+                id="Point_object",
+            ),
             pytest.param(
                 LineString([[4.86, 45.76], [4.85, 45.74]]),
                 "LineString",
@@ -120,7 +124,9 @@ class TestGeometryTypeFromFeatures:
         "input_value,output_value",
         [
             pytest.param(
-                ([4.83, 45.75], ["Point"]), "Point", id="point_feature_object",
+                ([4.83, 45.75], ["Point"]),
+                "Point",
+                id="point_feature_object",
             ),
             pytest.param(
                 ([[4.86, 45.76], [4.85, 45.74]], ["LineString"]),

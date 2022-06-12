@@ -284,7 +284,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "pyturf.tex", u"pyturf Documentation", u"pyturf", "manual")
+    (master_doc, "pyturf.tex", "pyturf Documentation", "pyturf", "manual")
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -312,7 +312,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "pyturf", u"pyturf Documentation", [author], 1)]
+man_pages = [(master_doc, "pyturf", "pyturf Documentation", [author], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False
@@ -327,7 +327,7 @@ texinfo_documents = [
     (
         master_doc,
         "pyturf",
-        u"pyturf Documentation",
+        "pyturf Documentation",
         author,
         "pyturf",
         "One line description of project.",

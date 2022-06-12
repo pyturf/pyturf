@@ -39,7 +39,9 @@ class TestPoint:
         "input_value,exception_value",
         [
             pytest.param(
-                [1], error_code_messages["InvalidPointInput"], id="InvalidPointInput",
+                [1],
+                error_code_messages["InvalidPointInput"],
+                id="InvalidPointInput",
             ),
             pytest.param(
                 [1, "xyz"],
@@ -383,7 +385,11 @@ class TestFeature:
                 True,
                 id="point-geojson",
             ),
-            pytest.param(Point([4.83, 45.75]), False, id="point-object",),
+            pytest.param(
+                Point([4.83, 45.75]),
+                False,
+                id="point-object",
+            ),
         ],
     )
     def test_feature(self, input_value, as_geojson):
@@ -401,7 +407,9 @@ class TestFeature:
                 id="InvalidGeometry",
             ),
             pytest.param(
-                {"type": "Point",},
+                {
+                    "type": "Point",
+                },
                 error_code_messages["InvalidCoordinates"],
                 id="InvalidCoordinates",
             ),
@@ -483,7 +491,11 @@ class TestFeatureCollection:
                 id="InvalidGeometryType",
             ),
             pytest.param(
-                [{"type": "Point",}],
+                [
+                    {
+                        "type": "Point",
+                    }
+                ],
                 error_code_messages["InvalidGeometry"](allowed_types),
                 id="InvalidGeometry",
             ),
@@ -512,7 +524,11 @@ class TestFeatureGeometry:
     @pytest.mark.parametrize(
         "args,kwargs",
         [
-            pytest.param(("Point", [0, 1]), {"as_geojson": True}, id="point-geojson",),
+            pytest.param(
+                ("Point", [0, 1]),
+                {"as_geojson": True},
+                id="point-geojson",
+            ),
             pytest.param(
                 ("LineString", [[0, 1], [2, 3]]),
                 {"as_geojson": False},

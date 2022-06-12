@@ -12,9 +12,17 @@ class TestArc:
     @pytest.mark.parametrize(
         "arc,npoints,distance",
         [
-            pytest.param([[0, 0], [1, 1]], 2, 0.025, id="2-points-arc",),
             pytest.param(
-                [[0, 0], [0.499962, 0.500019], [1, 1]], 3, 0.025, id="3-points-arc",
+                [[0, 0], [1, 1]],
+                2,
+                0.025,
+                id="2-points-arc",
+            ),
+            pytest.param(
+                [[0, 0], [0.499962, 0.500019], [1, 1]],
+                3,
+                0.025,
+                id="3-points-arc",
             ),
             # """https://rdrr.io/cran/geosphere/man/intermediate.html"""
             pytest.param(

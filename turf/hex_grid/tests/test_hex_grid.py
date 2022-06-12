@@ -111,7 +111,11 @@ class TestHexGrid:
         "input_value,expected_value",
         [
             pytest.param(
-                ([-179, -90, 179, 90], 250, {"units": "kilometers"},),
+                (
+                    [-179, -90, 179, 90],
+                    250,
+                    {"units": "kilometers"},
+                ),
                 (1000, -1000),
                 id="longitude (13141439571036224) - issue #758",
             )

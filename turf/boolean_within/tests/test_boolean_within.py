@@ -7,7 +7,10 @@ from turf.utils.test_setup import get_fixtures
 
 current_path = os.path.dirname(os.path.realpath(__file__))
 
-fixtures = get_fixtures(current_path, keys=["true", "false"],)
+fixtures = get_fixtures(
+    current_path,
+    keys=["true", "false"],
+)
 
 
 class TestBooleanPointOnLine:

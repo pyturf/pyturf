@@ -7,7 +7,9 @@ from turf.helpers import feature_collection, polygon, FeatureCollection
 
 
 def triangle_grid(
-    bbox: List[float], cell_side: Union[int, float], options: Dict = {},
+    bbox: List[float],
+    cell_side: Union[int, float],
+    options: Dict = {},
 ) -> FeatureCollection:
     """
     Creates a square of rectangles from a bounding box, Feature or FeatureCollection.

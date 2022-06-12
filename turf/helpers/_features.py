@@ -231,7 +231,13 @@ class Feature(FeatureType):
     def __init__(
         self,
         geom: Union[
-            Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon,
+            Dict,
+            Point,
+            LineString,
+            Polygon,
+            MultiPoint,
+            MultiLineString,
+            MultiPolygon,
         ],
         properties: Union[Dict, None] = None,
     ) -> None:
@@ -258,11 +264,15 @@ class Feature(FeatureType):
     @staticmethod
     def _check_input(
         geom: Union[
-            Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon,
+            Dict,
+            Point,
+            LineString,
+            Polygon,
+            MultiPoint,
+            MultiLineString,
+            MultiPolygon,
         ]
-    ) -> Union[
-        Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon,
-    ]:
+    ) -> Union[Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon,]:
         """
         Checks input given to Feature class, and converts to object if input is in dict form.
 
@@ -323,7 +333,9 @@ class FeatureCollection(FeatureType):
         return f"{self.__class__.__name__}({[feat.get('geometry').get('type') for feat in self.features]})"
 
     @staticmethod
-    def _check_input(features: Sequence,) -> List[Union[Dict, Feature]]:
+    def _check_input(
+        features: Sequence,
+    ) -> List[Union[Dict, Feature]]:
         """
         Checks input given to FeatureCollection class, and converts to list of
         Feature objects if input is in dict form.
@@ -444,7 +456,13 @@ def feature_collection(
 def geometry(
     geom_type: str, coordinates: Sequence, as_geojson: bool = True
 ) -> Union[
-    Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon,
+    Dict,
+    Point,
+    LineString,
+    Polygon,
+    MultiPoint,
+    MultiLineString,
+    MultiPolygon,
 ]:
     """
     Creates a GeoJSON {@link Geometry} from a Geometry string type & coordinates.
