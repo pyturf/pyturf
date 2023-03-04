@@ -13,7 +13,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestBBox:
-
     allowed_types = [
         "Point",
         "MultiPoint",
@@ -31,7 +30,6 @@ class TestBBox:
         ],
     )
     def test_bbox(self, fixture):
-
         assert bbox(fixture["in"]) == fixture["out"]
 
     @pytest.mark.parametrize(
@@ -50,7 +48,6 @@ class TestBBox:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             bbox(input_value)
 

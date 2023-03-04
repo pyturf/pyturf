@@ -57,7 +57,6 @@ def boolean_point_in_polygon(
     inside_polygon = False
 
     for geo_type, poly_coords in zip(geometry_type, polygon_coords):
-
         if geo_type == "Polygon":
             poly_coords = [poly_coords]
 

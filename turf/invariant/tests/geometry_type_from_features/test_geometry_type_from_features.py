@@ -39,7 +39,6 @@ class TestGeometryTypeFromFeatures:
         ],
     )
     def test_get_geometry_type_from_features_geojson(self, fixture):
-
         result = get_geometry_type(fixture["in"])
 
         if isinstance(result, tuple):
@@ -155,7 +154,6 @@ class TestGeometryTypeFromFeatures:
         ],
     )
     def test_get_geometry_from_lists(self, input_value, output_value):
-
         assert get_geometry_type(*input_value) == output_value
 
     @pytest.mark.parametrize(
@@ -189,7 +187,6 @@ class TestGeometryTypeFromFeatures:
         ],
     )
     def test_general_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             get_geometry_type(input_value)
 
@@ -278,7 +275,6 @@ class TestGeometryTypeFromFeatures:
         ],
     )
     def test_specifid_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             get_geometry_type(*input_value)
 

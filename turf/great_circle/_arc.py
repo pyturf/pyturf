@@ -13,7 +13,6 @@ from turf.utils.error_codes import error_code_messages
 
 class Coordinate:
     def __init__(self, lon: float, lat: float, decimals=6):
-
         self.lon = lon
         self.lat = lat
         self.x = degrees_to_radians(lon)
@@ -44,7 +43,6 @@ class Coordinate:
 
 class GreatCircle:
     def __init__(self, start, end, properties):
-
         self.start = Coordinate(start[0], start[1])
         self.end = Coordinate(end[0], end[1])
 
@@ -130,7 +128,6 @@ class GreatCircle:
         coordinates.append(self.start.coords)
 
         if n_points > 2:
-
             for i in range(n_points - 2):
                 coord = self._get_intermediate_coord((i + 1) / (n_points - 2 + 1))
                 coordinates.append(coord)

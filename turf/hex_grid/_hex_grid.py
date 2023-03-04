@@ -93,7 +93,6 @@ def hex_grid(
 
     for x in range(x_count + 1):
         for y in range(y_count + 1):
-
             is_odd = x % 2 == 1
 
             if (y == 0) and is_odd:
@@ -109,7 +108,6 @@ def hex_grid(
                 center_y -= hex_height / 2
 
             if has_triangles:
-
                 triangles = hex_triangles(
                     [center_x, center_y],
                     cell_width_deg / 2,
@@ -127,7 +125,6 @@ def hex_grid(
                         results.append(triangle)
 
             else:
-
                 hex = hexagon(
                     [center_x, center_y],
                     cell_width_deg / 2,

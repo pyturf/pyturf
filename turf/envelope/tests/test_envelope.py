@@ -21,5 +21,4 @@ class TestEnvelope:
         ],
     )
     def test_envelope(self, fixture):
-
         assert envelope(fixture["in"]) == fixture["out"]

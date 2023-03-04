@@ -7,7 +7,6 @@ from turf.utils.error_codes import error_code_messages
 
 
 def c_like_modulo(number, base):
-
     return number - int(number / base) * base
 
 

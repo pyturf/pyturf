@@ -21,7 +21,6 @@ from turf.utils.exceptions import InvalidInput
 
 class TestPoint:
     def test_coordinates_props(self):
-
         p = point([5, 10], {"name": "test point"}, as_geojson=False)
 
         assert p.geometry.coordinates[0] == 5
@@ -30,7 +29,6 @@ class TestPoint:
         assert p.properties["name"] == "test point"
 
     def test_no_props(self):
-
         p = point([0, 0], as_geojson=False)
 
         assert p.get("properties") == {}
@@ -51,7 +49,6 @@ class TestPoint:
         ],
     )
     def test_exceptions(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             point(input_value)
 
@@ -59,7 +56,6 @@ class TestPoint:
         assert str(excinfo.value) == exception_value
 
     def test_points(self):
-
         pts = points(
             [[-75, 39], [-80, 45], [-78, 50]],
             {"foo": "bar"},
@@ -72,7 +68,6 @@ class TestPoint:
         assert pts.features[0].properties["foo"] == "bar"
 
     def test_multi_point(self):
-
         mp = multi_point([[0, 0], [10, 10]], {"test": 23}, as_geojson=False)
 
         assert mp.type == "Feature"
@@ -96,7 +91,6 @@ class TestPoint:
         ],
     )
     def test_multi_point_exceptions(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             multi_point(*input_value)
 
@@ -104,7 +98,6 @@ class TestPoint:
         assert str(excinfo.value) == exception_value
 
     def test_to_geojson(self):
-
         p = point([0, 0], as_geojson=False)
 
         assert p.to_geojson() == {
@@ -116,7 +109,6 @@ class TestPoint:
 
 class TestLineString:
     def test_coordinates_props(self):
-
         line = line_string([[5, 10], [20, 40]], {"name": "test line"}, as_geojson=False)
 
         assert line.geometry.coordinates[0][0] == 5
@@ -125,7 +117,6 @@ class TestLineString:
         assert line.properties["name"] == "test line"
 
     def test_no_props(self):
-
         line = line_string([[5, 10], [20, 40]], as_geojson=False)
 
         assert line.properties == {}
@@ -151,7 +142,6 @@ class TestLineString:
         ],
     )
     def test_exceptions(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             line_string(input_value)
 
@@ -159,7 +149,6 @@ class TestLineString:
         assert str(excinfo.value) == exception_value
 
     def test_line_strings(self):
-
         ls = line_strings(
             [
                 [[-24, 63], [-23, 60], [-25, 65], [-20, 69]],
@@ -175,7 +164,6 @@ class TestLineString:
         assert ls.features[0].properties["foo"] == "bar"
 
     def test_multi_line_string(self):
-
         mls = multi_line_string(
             [[[0, 0], [1, 2]], [[5, 0], [15, 8]]], {"test": 23}, as_geojson=False
         )
@@ -201,7 +189,6 @@ class TestLineString:
         ],
     )
     def test_multi_line_string_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             multi_line_string(*input_value)
 
@@ -209,7 +196,6 @@ class TestLineString:
         assert str(excinfo.value) == exception_value
 
     def test_to_geojson(self):
-
         line = line_string([[5, 10], [20, 40]], as_geojson=False)
 
         assert line.to_geojson() == {
@@ -221,7 +207,6 @@ class TestLineString:
 
 class TestPolygon:
     def test_coordinates_props(self):
-
         poly = polygon(
             [[[5, 10], [20, 40], [40, 0], [5, 10]]],
             {"name": "test polygon"},
@@ -235,7 +220,6 @@ class TestPolygon:
         assert poly.geometry.type == "Polygon"
 
     def test_no_props(self):
-
         poly = polygon([[[5, 10], [20, 40], [40, 0], [5, 10]]], as_geojson=False)
 
         assert poly.properties == {}
@@ -266,7 +250,6 @@ class TestPolygon:
         ],
     )
     def test_exceptions(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             polygon(input_value)
 
@@ -274,7 +257,6 @@ class TestPolygon:
         assert str(excinfo.value) == exception_value
 
     def test_polygons(self):
-
         poly = polygons(
             [
                 [[[-5, 52], [-4, 56], [-2, 51], [-7, 54], [-5, 52]]],
@@ -290,7 +272,6 @@ class TestPolygon:
         assert poly.features[0].properties["foo"] == "bar"
 
     def test_multi_polygon(self):
-
         mp = multi_polygon(
             [
                 [[[94, 57], [78, 49], [94, 43], [94, 57]]],
@@ -341,7 +322,6 @@ class TestPolygon:
         ],
     )
     def test_multi_polygon_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             multi_polygon(*input_value)
 
@@ -349,7 +329,6 @@ class TestPolygon:
         assert str(excinfo.value) == exception_value
 
     def test_to_geojson(self):
-
         poly = polygon(
             [[[5, 10], [20, 40], [40, 0], [5, 10]]],
             {"name": "test polygon"},
@@ -367,7 +346,6 @@ class TestPolygon:
 
 
 class TestFeature:
-
     allowed_types = [
         "Point",
         "LineString",
@@ -393,7 +371,6 @@ class TestFeature:
         ],
     )
     def test_feature(self, input_value, as_geojson):
-
         feat = feature(input_value, as_geojson=as_geojson)
 
         assert feat.get("geometry") == input_value
@@ -416,7 +393,6 @@ class TestFeature:
         ],
     )
     def test_feature_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             feature(input_value)
 
@@ -425,7 +401,6 @@ class TestFeature:
 
 
 class TestFeatureCollection:
-
     allowed_types = [
         "Point",
         "LineString",
@@ -459,7 +434,6 @@ class TestFeatureCollection:
         ],
     )
     def test_feature(self, input_value, as_geojson):
-
         feat_collection = feature_collection(input_value(True), as_geojson=as_geojson)
 
         assert feat_collection.get("features") == input_value(False)
@@ -502,7 +476,6 @@ class TestFeatureCollection:
         ],
     )
     def test_feature_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             feature_collection(input_value)
 
@@ -511,7 +484,6 @@ class TestFeatureCollection:
 
 
 class TestFeatureGeometry:
-
     allowed_types = [
         "Point",
         "LineString",
@@ -563,7 +535,6 @@ class TestFeatureGeometry:
         ],
     )
     def test_geometry(self, args, kwargs):
-
         geom = geometry(*args, **kwargs)
 
         assert geom.get("type") == args[0]
@@ -593,7 +564,6 @@ class TestFeatureGeometry:
         ],
     )
     def test_geometry_exception(self, args, kwargs, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             geometry(*args, **kwargs)
 

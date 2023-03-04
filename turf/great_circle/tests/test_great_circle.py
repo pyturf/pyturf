@@ -21,7 +21,6 @@ class TestGreatCircle:
         ],
     )
     def test_great_circle(self, fixture):
-
         start = fixture["in"]["features"][0]
         end = fixture["in"]["features"][1]
         properties = fixture["in"].get("properties", {})

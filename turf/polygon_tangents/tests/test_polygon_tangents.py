@@ -22,7 +22,6 @@ class TestPolygonTangents:
         ],
     )
     def test_polygon_tangens(self, fixture):
-
         poly = fixture["in"]["features"][0]
         pnt = fixture["in"]["features"][1]
 
@@ -33,7 +32,6 @@ class TestPolygonTangents:
         assert result == fixture["out"]
 
     def test_input_mutation_prevention(self):
-
         pnt = point([61, 5])
         poly = polygon(
             [[[11, 0], [22, 4], [31, 0], [31, 11], [21, 15], [11, 11], [11, 0]]]
@@ -53,7 +51,6 @@ class TestPolygonTangents:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             polygon_tangents(*input_value)
 

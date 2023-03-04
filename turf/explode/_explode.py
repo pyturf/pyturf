@@ -28,17 +28,14 @@ def explode(features: GeoJson) -> FeatureCollection:
         raise InvalidInput(error_code_messages["InvalidGeometry"](all_geometry_types))
 
     if geojson_type in ["FeatureCollection", "GeometryCollection"]:
-
         key = "features" if geojson_type == "FeatureCollection" else "geometries"
 
         for feature in features[key]:
-
             properties = feature.get("properties", {})
             coords = get_coords_from_features(feature)
             points.extend(reduce_coordinates_to_points(coords, properties))
 
     else:
-
         properties = features.get("properties", {})
         coords = get_coords_from_geometry(features)
         points.extend(reduce_coordinates_to_points(coords, properties))

@@ -43,23 +43,18 @@ def point_on_feature(features: GeoJSON) -> Point:
         geometry_type = [geometry_type]
 
     for geo_type, geo_coords in zip(geometry_type, geometry_coords):
-
         if geo_type in ["Point", "MultiPoint"]:
-
             if geo_type == "Point":
                 geo_coords = [geo_coords]
 
             for point_coords in geo_coords:
-
                 if (center_coords[0] == point_coords[0]) and (
                     center_coords[1] == point_coords[1]
                 ):
-
                     center_on_surface = True
                     break
 
         elif geo_type in ["LineString", "MultiLineString"]:
-
             if geo_type == "LineString":
                 geo_coords = [geo_coords]
 
@@ -69,7 +64,6 @@ def point_on_feature(features: GeoJSON) -> Point:
                     break
 
         elif geo_type in ["Polygon", "MultiPolygon"]:
-
             if geo_type == "Polygon":
                 geo_coords = polygon(geo_coords)
             else:
@@ -82,7 +76,6 @@ def point_on_feature(features: GeoJSON) -> Point:
         point_on_surface = center_point
 
     else:
-
         point_on_surface = nearest_point(center_point, feature_collection)
 
     return point_on_surface
@@ -101,7 +94,6 @@ def normalize_to_feature_collection(geojson: GeoJSON) -> FeatureCollection:
         pass
 
     elif geojson_type == "Feature":
-
         geojson = feature_collection([geojson])
 
     else:

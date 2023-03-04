@@ -22,7 +22,6 @@ class TestPointLineDistance:
         ],
     )
     def test_point_to_line_distance(self, fixture):
-
         point = point_on_feature(fixture["in"])
         test_result = prepare_response(point, fixture["in"])
 
@@ -30,7 +29,6 @@ class TestPointLineDistance:
 
 
 def prepare_response(point, fixture_in):
-
     point["properties"]["marker-color"] = "#F00"
     point["properties"]["marker-style"] = "star"
     point["properties"].pop("featureIndex", None)

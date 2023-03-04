@@ -13,7 +13,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestDestination:
-
     allowed_types = ["Point"]
 
     @pytest.mark.parametrize(
@@ -24,7 +23,6 @@ class TestDestination:
         ],
     )
     def test_destination(self, fixture):
-
         bearing = fixture["in"]["properties"].get("bearing", 180)
         dist = fixture["in"]["properties"].get("dist", 100)
 
@@ -41,7 +39,6 @@ class TestDestination:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             destination(*input_value)
 

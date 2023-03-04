@@ -18,7 +18,6 @@ class TestSquare:
         ],
     )
     def test_square(self, bbox, result):
-
         squared_bbox = square(bbox)
 
         assert squared_bbox == result

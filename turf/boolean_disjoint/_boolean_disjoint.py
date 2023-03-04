@@ -36,7 +36,6 @@ def boolean_disjoint(feature_1: Any, feature_2: Any) -> bool:
 
     for flat_1 in flat_feature_1:
         for flat_2 in flat_feature_2:
-
             is_disjoint = disjoint(flat_1, flat_2)
 
             if not is_disjoint:
@@ -58,7 +57,6 @@ def disjoint(
     is_disjoint = True
 
     if feature_1[0] in ["Point"]:
-
         if feature_2[0] in ["Point"]:
             is_disjoint = feature_1[1] != feature_2[1]
 
@@ -69,7 +67,6 @@ def disjoint(
             is_disjoint = not boolean_point_in_polygon(feature_1[1], feature_2[1])
 
     elif feature_1[0] in ["LineString"]:
-
         if feature_2[0] in ["Point"]:
             is_disjoint = not boolean_point_on_line(feature_2[1], feature_1[1])
 
@@ -80,7 +77,6 @@ def disjoint(
             is_disjoint = not is_line_in_poly(feature_2[1], feature_1[1])
 
     elif feature_1[0] in ["Polygon"]:
-
         if feature_2[0] in ["Point"]:
             is_disjoint = not boolean_point_in_polygon(feature_2[1], feature_1[1])
 
@@ -177,23 +173,18 @@ def flatten_feature(feature: Any) -> List[Union[str, Sequence]]:
         feature_geometry = feature_geometry[0]
 
     if feature_geometry in ["MultiPoint", "MultiLineString", "MultiPolygon"]:
-
         if feature_geometry == "MultiPoint":
-
             feature_geometry = "Point"
 
         elif feature_geometry == "MultiLineString":
-
             feature_geometry = "LineString"
 
         elif feature_geometry == "MultiPolygon":
-
             feature_geometry = "Polygon"
 
         flat_feature = [[feature_geometry, coords] for coords in feature_coords]
 
     else:
-
         flat_feature = [[feature_geometry, feature_coords]]
 
     return flat_feature

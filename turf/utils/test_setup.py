@@ -4,7 +4,6 @@ from collections import defaultdict
 
 
 def get_fixtures(current_path, fixtures=None, keys=None):
-
     if not fixtures:
         fixtures = defaultdict(lambda: {"in": None, "out": None})
 
@@ -12,7 +11,6 @@ def get_fixtures(current_path, fixtures=None, keys=None):
         keys = ["in", "out"]
 
     for key in keys:
-
         files_path = os.path.join(current_path, key)
 
         for filename in os.listdir(files_path):

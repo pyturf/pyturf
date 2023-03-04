@@ -43,7 +43,6 @@ class TestArc:
         ],
     )
     def test_intermediate_points(self, arc, npoints, distance):
-
         gc = GreatCircle(arc[0], arc[-1], {"npoints": npoints})
 
         assert gc.properties == {"npoints": npoints}
@@ -51,6 +50,5 @@ class TestArc:
         assert round(gc.distance, 3) == distance
 
     def test_antipodal(self):
-
         with pytest.raises(InvalidInput):
             GreatCircle([0, 0], [180, 0], {})

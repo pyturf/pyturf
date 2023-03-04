@@ -27,7 +27,6 @@ def area(features):
 
 
 def calculate_area(geometry):
-
     """
     Calculate geometry area
 
@@ -88,7 +87,6 @@ def ring_area(coords):
     coords_length = len(coords)
 
     if coords_length > 2:
-
         for i in range(coords_length):
             if i == coords_length - 2:
                 lower_index = coords_length - 2

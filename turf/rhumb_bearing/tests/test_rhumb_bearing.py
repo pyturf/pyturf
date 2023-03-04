@@ -23,7 +23,6 @@ class TestRhumbBearing:
         ],
     )
     def test_rhumb_bearing(self, fixture):
-
         pt1 = fixture["in"]["features"][0]
         pt2 = fixture["in"]["features"][1]
 
@@ -38,7 +37,6 @@ class TestRhumbBearing:
         assert result == fixture["out"]
 
     def test_exception(self):
-
         with pytest.raises(Exception) as excinfo:
             rhumb_bearing(point([10, 10]), "point")
 

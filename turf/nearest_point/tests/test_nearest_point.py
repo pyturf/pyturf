@@ -20,7 +20,6 @@ class TestNearestPoint:
         ],
     )
     def test_nearest_point(self, fixture):
-
         target_point = point(fixture["in"]["properties"]["targetPoint"])
         result = nearest_point(target_point, fixture["in"])
 
@@ -29,7 +28,6 @@ class TestNearestPoint:
         assert result == fixture["out"]
 
     def test_input_mutation(self):
-
         point_1 = point([40, 50], {"featureIndex": "foo"})
         point_2 = point([20, -10], {"distanceToPoint": "bar"})
         points = feature_collection([point_1, point_2])
@@ -45,7 +43,6 @@ class TestNearestPoint:
 
 
 def prepare_response(nearest_point, target_point, fixture_in):
-
     nearest_point["properties"].update(
         {"marker-color": "#F00", "marker-symbol": "star"}
     )

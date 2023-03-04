@@ -21,7 +21,6 @@ class TestHexGrid:
         ],
     )
     def test_hex_grid(self, fixture):
-
         bbox = fixture["in"]["bbox"]
         n_cells = fixture["in"]["cellSide"]
 
@@ -71,7 +70,6 @@ class TestHexGrid:
         ],
     )
     def test_grid_tiles_count(self, input_value, expected_value):
-
         result = hex_grid(*input_value)
 
         assert len(result["features"]) == expected_value
@@ -96,7 +94,6 @@ class TestHexGrid:
         ],
     )
     def test_property_mutation(self, input_value, expected_value):
-
         result = hex_grid(*input_value)
 
         assert result["features"][0]["properties"]["foo"] == expected_value[0]
@@ -122,7 +119,6 @@ class TestHexGrid:
         ],
     )
     def test_longitude_issue_758(self, input_value, expected_value):
-
         result = hex_grid(*input_value)
 
         coords = []
@@ -132,15 +128,12 @@ class TestHexGrid:
                     coords.append(coord)
 
         for coord in coords:
-
             assert coord[0] <= expected_value[0]
             assert coord[1] >= expected_value[1]
 
 
 def prepare_output(result, bbox, options):
-
     for i in range(len(result["features"])):
-
         coords = round_coordinates(result["features"][i])
         result["features"][i] = coords
 

@@ -195,7 +195,6 @@ def get_geometry_type(
         allowed_features = [allowed_features_default, allowed_types_default]
 
     else:
-
         allowed_features = [
             tuple(
                 [
@@ -210,11 +209,9 @@ def get_geometry_type(
     features = get_geometry_from_features(features, allowed_features[1])
 
     if isinstance(features, (dict, *allowed_features[0])):
-
         geometry_type = _get_geometry_type_from_feature(features, allowed_features)
 
     elif isinstance(features, (list, tuple)):
-
         geometry_type = _get_geometry_type_from_list(features, allowed_features)
 
     else:
@@ -268,12 +265,10 @@ def _get_geometry_type_from_list(
         )
 
     elif all(isinstance(el, (list, tuple, int, float)) for el in features):
-
         feature_type = [
             k for k, v in dimensions.items() if v == n_dim and k in allowed_features[1]
         ]
         if len(feature_type) == 1:
-
             geometry_type += (feature_type[0],)
 
         else:

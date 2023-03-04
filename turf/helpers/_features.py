@@ -22,7 +22,6 @@ class Geometry(ABC):
     """
 
     def __init__(self, coordinates: Iterable, geometry_type) -> None:
-
         self._check_input(coordinates)
         self.coordinates = coordinates
         self.type = geometry_type
@@ -241,7 +240,6 @@ class Feature(FeatureType):
         ],
         properties: Union[Dict, None] = None,
     ) -> None:
-
         geom = self._check_input(geom)
 
         FeatureType.__init__(self, feature_type="Feature")
@@ -322,7 +320,6 @@ class FeatureCollection(FeatureType):
     """
 
     def __init__(self, features: Sequence = None) -> None:
-
         features = self._check_input(features)
 
         FeatureType.__init__(self, feature_type="FeatureCollection")
@@ -350,7 +347,6 @@ class FeatureCollection(FeatureType):
         eval_feats = []
         for feat in features:
             if not isinstance(feat, Feature):
-
                 if isinstance(feat, dict):
                     feat_type = feat.get("geometry", {}).get("type", "nonexistent")
                     try:

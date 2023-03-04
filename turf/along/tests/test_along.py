@@ -21,7 +21,6 @@ fixtures = get_fixtures(current_path, fixtures, ["out"])
 
 
 class TestAlong:
-
     allowed_types = ["LineString"]
 
     @pytest.mark.parametrize(
@@ -32,7 +31,6 @@ class TestAlong:
         ],
     )
     def test_along(self, fixture, fixture_name):
-
         distance = float(fixture_name.split("-")[1])
 
         print(fixture)
@@ -56,7 +54,6 @@ class TestAlong:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             along(*input_value)
 

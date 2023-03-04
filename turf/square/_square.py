@@ -34,7 +34,6 @@ def square(bbox):
             vertical_midpoint + ((east - west) / 2),
         ]
     else:
-
         horizontal_midpoint = (west + east) / 2
         bounding_box = [
             horizontal_midpoint - ((north - south) / 2),

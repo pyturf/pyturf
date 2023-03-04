@@ -19,7 +19,6 @@ class TestDistance:
         ],
     )
     def test_distance(self, units):
-
         pt1 = fixture["features"][0]
         pt2 = fixture["features"][1]
 
@@ -28,11 +27,9 @@ class TestDistance:
         assert distance(pt1, pt2, options) == expected_results[units]
 
     def test_distance_particular_case(self):
-
         assert distance(point([-180, -90]), point([180, -90])) == 0
 
     def test_exception(self):
-
         wrong_units = "foo"
 
         with pytest.raises(Exception) as excinfo:
