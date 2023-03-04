@@ -14,7 +14,6 @@ fixtures = get_fixtures(current_path, keys=["in"])
 
 
 class TestBooleanPointInPolygon:
-
     allowed_types_polygon = [
         "Polygon",
         "MultiPolygon",
@@ -45,7 +44,6 @@ class TestBooleanPointInPolygon:
         ],
     )
     def test_boolean_point_in_polygon(self, fixture, points):
-
         poly = fixture["in"]
 
         for pt, result in points:
@@ -69,7 +67,6 @@ class TestBooleanPointInPolygon:
         ],
     )
     def test_boolean_point_in_polygon_simple(self, poly, point_in, point_out):
-
         assert boolean_point_in_polygon(point_in, poly)
         assert not boolean_point_in_polygon(point_out, poly)
 
@@ -174,7 +171,6 @@ class TestBooleanPointInPolygon:
         ],
     )
     def test_boolean_point_in_polygon_boundary(self, boundary, poly, points):
-
         options = {"ignoreBoundary": boundary}
 
         for pt, result in points:
@@ -204,7 +200,6 @@ class TestBooleanPointInPolygon:
         ],
     )
     def test_exception(self, pt, poly, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             boolean_point_in_polygon(pt, poly)
 

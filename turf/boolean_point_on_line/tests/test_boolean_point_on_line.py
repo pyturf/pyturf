@@ -26,7 +26,6 @@ class TestBooleanPointOnLine:
         ],
     )
     def test_boolean_point_on_line(self, fixture):
-
         if "true" in fixture:
             features = fixture.get("true")
             point, line = features["features"]

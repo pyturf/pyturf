@@ -71,17 +71,14 @@ def spatial_filtering(line_1: Sequence, line_2: Sequence) -> Sequence:
     rtree_index = index.Index()
 
     for i, seg in enumerate(line_1):
-
         bbox = envelope(seg)
         rtree_index.insert(i, bbox["bbox"])
 
     for j, seg in enumerate(line_2):
-
         bbox = envelope(seg)
         seg_intersection_idx = deque(rtree_index.intersection(bbox["bbox"]))
 
         while seg_intersection_idx:
-
             seg_idx = seg_intersection_idx.pop()
 
             possible_intersects.append([*line_1[seg_idx], *line_2[j]])

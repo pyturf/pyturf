@@ -8,7 +8,10 @@ try:
     __version__ = os.environ["GITHUB_REF"].split("/")[-1]
     print(f"Version: {__version__}")
 except KeyError:
-    from turf.version import __version__
+    try:
+        from turf.version import __version__
+    except ModuleNotFoundError:
+        __version__ = str(open("turf/version.py").read().split(" ")[-1].splitlines()[0])
 
 setup(
     name="pyturf",

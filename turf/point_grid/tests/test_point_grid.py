@@ -21,7 +21,6 @@ class TestPointGrid:
         ],
     )
     def test_point_grid(self, fixture):
-
         bbox = fixture["in"]["bbox"]
         cell_side = fixture["in"]["cellSide"]
 
@@ -39,9 +38,7 @@ class TestPointGrid:
 
 
 def prepare_output(result, bbox, options):
-
     for i in range(len(result["features"])):
-
         coords = round_coordinates(result["features"][i])
         result["features"][i] = coords
 

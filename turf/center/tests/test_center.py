@@ -13,7 +13,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestCenter:
-
     allowed_types = [
         "Point",
         "MultiPoint",
@@ -31,7 +30,6 @@ class TestCenter:
         ],
     )
     def test_center(self, fixture):
-
         assert center(fixture["in"]) == fixture["out"]
 
     @pytest.mark.parametrize(
@@ -50,7 +48,6 @@ class TestCenter:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             center(input_value)
 

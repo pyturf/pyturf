@@ -21,7 +21,6 @@ class TestRectangleGrid:
         ],
     )
     def test_rectangle_grid(self, fixture):
-
         bbox = fixture["in"]["bbox"]
         cell_width = fixture["in"]["cellWidth"]
         cell_height = fixture["in"]["cellHeight"]
@@ -40,9 +39,7 @@ class TestRectangleGrid:
 
 
 def prepare_output(result, bbox, options):
-
     for i in range(len(result["features"])):
-
         coords = round_coordinates(result["features"][i])
         result["features"][i] = coords
 

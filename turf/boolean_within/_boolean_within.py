@@ -46,13 +46,10 @@ def check_within(
     is_within = False
 
     if feature_1[0] in ["Point"]:
-
         if feature_2[0] in ["Point", "MultiPoint"]:
-
             is_within = boolean_point_on_point(feature_1[1], feature_2[1])
 
         elif feature_2[0] in ["LineString", "MultiLineString"]:
-
             is_within = boolean_point_on_line(
                 feature_1[1], feature_2[1], {"ignoreEndVertices": True}
             )
@@ -63,23 +60,19 @@ def check_within(
             )
 
     if feature_1[0] in ["MultiPoint"]:
-
         if feature_2[0] in ["MultiPoint"]:
-
             is_within = all(
                 boolean_point_on_point(coords_1, feature_2[1])
                 for coords_1 in feature_1[1]
             )
 
         elif feature_2[0] in ["LineString", "MultiLineString"]:
-
             is_within = is_multipoint_on_linestring(feature_1, feature_2)
 
         elif feature_2[0] in ["Polygon", "MultiPolygon"]:
             is_within = is_multipoint_on_polygon(feature_1, feature_2)
 
     elif feature_1[0] in ["LineString"]:
-
         if feature_2[0] in ["LineString"]:
             is_within = is_line_on_line(feature_1[1], feature_2[1])
 
@@ -93,7 +86,6 @@ def check_within(
             is_within = is_line_in_multipoly(feature_1[1], feature_2[1])
 
     elif feature_1[0] in ["MultiLineString"]:
-
         if feature_2[0] in ["MultiLineString"]:
             is_within = all(
                 is_line_on_multiline(coords_1, feature_2[1])
@@ -106,7 +98,6 @@ def check_within(
             )
 
     elif feature_1[0] in ["Polygon"]:
-
         if feature_2[0] in ["Polygon"]:
             is_within = is_poly_in_poly(feature_1[1], feature_2[1])
 
@@ -114,7 +105,6 @@ def check_within(
             is_within = is_poly_in_multipoly(feature_1[1], feature_2[1])
 
     elif feature_1[0] in ["MultiPolygon"]:
-
         if feature_2[0] in ["MultiPolygon"]:
             is_within = all(
                 is_poly_in_multipoly(coords_1, feature_2[1])
@@ -205,7 +195,6 @@ def is_line_on_line(feature_1: Sequence, feature_2: Sequence) -> bool:
     line_on_line = False
 
     for coords in feature_1:
-
         line_on_line = boolean_point_on_line(coords, feature_2)
         if not line_on_line:
             break
@@ -244,7 +233,6 @@ def is_line_in_poly(feature_1: Sequence, feature_2: Sequence) -> bool:
         return False
 
     for i in range(len(feature_1) - 1):
-
         if not boolean_point_in_polygon(feature_1[i], feature_2):
             return False
 
@@ -294,7 +282,6 @@ def is_poly_in_poly(feature_1: Sequence, feature_2: Sequence) -> bool:
     line_coords = get_coords_from_features(feature_1)
 
     for coords in line_coords:
-
         if not boolean_point_in_polygon(coords, feature_2):
             return False
 

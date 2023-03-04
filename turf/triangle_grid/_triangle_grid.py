@@ -50,7 +50,6 @@ def triangle_grid(
             cell_triangle2 = None
 
             if (xi % 2 == 0) and (yi % 2 == 0):
-
                 cell_triangle1 = polygon(
                     [
                         [
@@ -76,7 +75,6 @@ def triangle_grid(
                 )
 
             elif (xi % 2 == 0) and (yi % 2 == 1):
-
                 cell_triangle1 = polygon(
                     [
                         [
@@ -102,7 +100,6 @@ def triangle_grid(
                 )
 
             elif (yi % 2 == 0) and (xi % 2 == 1):
-
                 cell_triangle1 = polygon(
                     [
                         [
@@ -128,7 +125,6 @@ def triangle_grid(
                 )
 
             elif (yi % 2 == 1) and (xi % 2 == 1):
-
                 cell_triangle1 = polygon(
                     [
                         [

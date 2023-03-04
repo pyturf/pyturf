@@ -26,11 +26,9 @@ class TestCoordsFromFeatures:
         ],
     )
     def test_get_coords_from_features_geojson(self, fixture):
-
         try:
             allowed_types = fixture["in"]["properties"]["allowed_types"]
         except TypeError:
-
             allowed_types = fixture["in"][0]
             fixture["in"] = fixture["in"][1]
 
@@ -134,7 +132,6 @@ class TestCoordsFromFeatures:
         ],
     )
     def test_get_coords_from_features_objects(self, input_value, output_value):
-
         assert get_coords_from_features(*input_value) == output_value
 
     @pytest.mark.parametrize(
@@ -158,7 +155,6 @@ class TestCoordsFromFeatures:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             get_coords_from_features(*input_value)
 

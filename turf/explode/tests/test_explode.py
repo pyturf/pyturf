@@ -40,7 +40,6 @@ class TestExplode:
         assert result == fixture["out"]
 
     def test_exception(self):
-
         with pytest.raises(Exception) as excinfo:
             explode([[1, 2]])
 

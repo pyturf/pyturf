@@ -39,9 +39,7 @@ def boolean_point_on_line(
     line_coords = get_coords_from_features(line, ("LineString",))
 
     for i in range(len(line_coords) - 1):
-
         if ignore_end_vertices:
-
             # ignore if point_coord are the line start
             if (i == 0) and (point_coord == line_coords[i]):
                 continue

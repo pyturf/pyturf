@@ -14,7 +14,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestBBoxPolygon:
-
     allowed_types = [
         "Point",
         "MultiPoint",
@@ -32,7 +31,6 @@ class TestBBoxPolygon:
         ],
     )
     def test_bbox_polygon(self, fixture):
-
         polygon = bbox_polygon(fixture["in"])
 
         assert polygon == fixture["out"]
@@ -59,7 +57,6 @@ class TestBBoxPolygon:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             bbox_polygon(input_value)
 

@@ -22,7 +22,6 @@ from turf.helpers import (
     ],
 )
 def test_radians_to_length(value, units, result):
-
     assert radians_to_length(value, units) == result
 
 
@@ -35,7 +34,6 @@ def test_radians_to_length(value, units, result):
     ],
 )
 def test_length_to_radians(value, units, result):
-
     assert length_to_radians(value, units) == result
 
 
@@ -48,7 +46,6 @@ def test_length_to_radians(value, units, result):
     ],
 )
 def test_length_to_degrees(value, units, result):
-
     assert length_to_degrees(value, units) == result
 
 
@@ -61,7 +58,6 @@ def test_length_to_degrees(value, units, result):
     ],
 )
 def test_radians_to_degrees(value, result):
-
     assert round(radians_to_degrees(value), 6) == result
 
 
@@ -74,7 +70,6 @@ def test_radians_to_degrees(value, result):
     ],
 )
 def test_degrees_to_radians(value, result):
-
     assert degrees_to_radians(value) == result
 
 
@@ -89,7 +84,6 @@ def test_degrees_to_radians(value, result):
     ],
 )
 def test_convert_length(value, original_unit, final_unit, result):
-
     assert convert_length(value, original_unit, final_unit) == result
 
 
@@ -107,5 +101,4 @@ def test_convert_length(value, original_unit, final_unit, result):
     ],
 )
 def test_convert_area(value, original_unit, final_unit, result):
-
     assert convert_area(value, original_unit, final_unit) == result

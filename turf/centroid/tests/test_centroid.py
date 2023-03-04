@@ -13,7 +13,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestCentroid:
-
     allowed_types = [
         "Point",
         "MultiPoint",
@@ -31,7 +30,6 @@ class TestCentroid:
         ],
     )
     def test_centroid(self, fixture):
-
         options = {"properties": {"marker-symbol": "circle"}}
 
         assert centroid(fixture["in"], options) == fixture["out"]
@@ -52,7 +50,6 @@ class TestCentroid:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             centroid(input_value)
 

@@ -23,7 +23,6 @@ class TestLineIntersectss:
         ],
     )
     def test_line_intersect(self, fixture):
-
         line_1 = fixture["in"]["features"][0]
         line_2 = fixture["in"]["features"][1]
 
@@ -39,7 +38,6 @@ class TestLineIntersectss:
         )
 
     def test_input_mutation_prevention(self):
-
         line_1 = line_string([[7, 50], [8, 50], [9, 50]])
         line_2 = line_string([[8, 49], [8, 50], [8, 51]])
 
@@ -85,7 +83,6 @@ class TestLineIntersectss:
         ],
     )
     def test_geometric_objects(self, input_value, expected_value):
-
         result = line_intersect(*input_value)
 
         assert result["features"][0]["geometry"]["coordinates"] == expected_value

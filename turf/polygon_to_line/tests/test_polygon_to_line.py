@@ -22,7 +22,6 @@ class TestPolygonToLine:
         ],
     )
     def test_polygon_to_line(self, fixture):
-
         result = polygon_to_line(fixture["in"])
 
         assert result == fixture["out"]
@@ -48,7 +47,6 @@ class TestPolygonToLine:
         ],
     )
     def test_properties_handling(self, input_value, expected_value):
-
         result = polygon_to_line(*input_value)
 
         assert result == expected_value

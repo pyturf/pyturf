@@ -34,7 +34,6 @@ def centroid(features, options=None):
 
 
 def reduce_coords(sum_array, coords):
-
     input_dimension = get_input_dimensions(coords)
 
     if input_dimension >= 2:

@@ -23,7 +23,6 @@ class TestPointLineDistance:
         ],
     )
     def test_point_to_line_distance(self, fixture):
-
         point = fixture["in"]["features"][0]
         line = fixture["in"]["features"][1]
 
@@ -33,7 +32,6 @@ class TestPointLineDistance:
         result = {}
 
         for method in ["geodesic", "planar"]:
-
             options["method"] = method
             result[method] = round(point_to_line_distance(point, line, options), 8)
 

@@ -60,14 +60,11 @@ def polygon_tangents(
         and (point_coord[1] > box[1])
         and (point_coord[1] < box[3])
     ):
-
         near_point = nearest_point(start_point, explode(polygon))
         near_point_index = near_point["properties"]["featureIndex"]
 
     for geo_type, poly_coords in zip(geometry_type, polygon_coords):
-
         if geo_type == "Polygon":
-
             tangents = process_polygon(
                 poly_coords, point_coord, near_point, near_point_index
             )
@@ -76,11 +73,9 @@ def polygon_tangents(
         # calculate both tangents for each polygon
         # define all tangents as a new polygon and calculate tangetns out of those coordinates
         elif geo_type == "MultiPolygon":
-
             multi_tangents = []
 
             for poly_coord in poly_coords:
-
                 tangents = process_polygon(
                     poly_coord, point_coord, near_point, near_point_index
                 )
@@ -158,7 +153,6 @@ def calculate_tangents(
     )
 
     for i in range(1, len(poly_coords) + 1):
-
         current_poly_coord = poly_coords[i - 1]
 
         if i == len(poly_coords):
@@ -169,7 +163,6 @@ def calculate_tangents(
         edge_next = is_left(current_poly_coord, next_poly_coord, point_coord)
 
         if (edge_prev <= 0) and (edge_next > 0):
-
             if not is_below(point_coord, current_poly_coord, r_tangents):
                 r_tangents = current_poly_coord
 

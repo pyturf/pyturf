@@ -15,7 +15,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestLength:
-
     allowed_inpuy_types = [
         "LineString",
         "MultiLineString",
@@ -31,11 +30,9 @@ class TestLength:
         ],
     )
     def test_length(self, fixture):
-
         assert round(length(fixture["in"], {"units": "feet"})) == fixture["out"]
 
     def test_length_with_feature_classes(self):
-
         feature = multi_line_string(
             [
                 [
@@ -73,7 +70,6 @@ class TestLength:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             length(input_value)
 

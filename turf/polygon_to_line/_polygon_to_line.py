@@ -45,19 +45,15 @@ def polygon_to_line(polygon: PolygonFeature, options: Dict = {}) -> LineFeature:
         polygon_coords = [polygon_coords]
 
     for geo_type, poly_coords in zip(geometry_type, polygon_coords):
-
         if geo_type == "MultiPolygon":
-
             line_coords = []
 
             for poly_coord in poly_coords:
-
                 line_coords.append(coords_to_line(poly_coord, properties))
 
             line_feature = feature_collection(line_coords)
 
         else:
-
             line_feature = coords_to_line(poly_coords, properties)
 
     return line_feature
@@ -74,11 +70,9 @@ def coords_to_line(coords: Sequence, properties: Dict) -> LineFeature:
     """
 
     if len(coords) > 1:
-
         feature = multi_line_string(coords, properties)
 
     else:
-
         feature = line_string(coords[0], properties)
 
     return feature

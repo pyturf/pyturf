@@ -23,7 +23,6 @@ class TestRhumbDestination:
         ],
     )
     def test_rhumb_destination(self, fixture):
-
         destination_point = rhumb_destination(fixture["in"])
 
         test_result = prepare_response(destination_point, fixture["in"])
@@ -32,7 +31,6 @@ class TestRhumbDestination:
 
 
 def prepare_response(destination_point, fixture_in):
-
     coords = get_coords_from_features(fixture_in)
     coords = [round(coord, 6) for coord in coords]
 

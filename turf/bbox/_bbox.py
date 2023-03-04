@@ -23,7 +23,6 @@ def bbox(features):
 
 
 def reduce_coords(bounding_box, coord):
-
     input_dimension = get_input_dimensions(coord)
 
     if input_dimension >= 2:

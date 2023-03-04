@@ -15,7 +15,6 @@ fixtures = get_fixtures(current_path, keys=["in"])
 
 
 class TestMidpoint:
-
     allowed_types = ["Point"]
 
     @pytest.mark.parametrize(
@@ -26,7 +25,6 @@ class TestMidpoint:
         ],
     )
     def test_midpoint(self, fixture):
-
         points = fixture["in"]
 
         mid_point = midpoint(points[0], points[1])
@@ -51,9 +49,7 @@ class TestMidpoint:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
-
             midpoint(input_value[0], input_value[1])
 
         assert excinfo.type == InvalidInput

@@ -23,7 +23,6 @@ class TestRhumbDistance:
         ],
     )
     def test_rhumb_distance(self, fixture):
-
         pt1 = fixture["in"]["features"][0]
         pt2 = fixture["in"]["features"][1]
 
@@ -63,7 +62,6 @@ class TestRhumbDistance:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             rhumb_distance(*input_value)
 

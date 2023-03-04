@@ -13,7 +13,6 @@ fixtures = get_fixtures(current_path)
 
 
 class TestArea:
-
     allowed_types = ["Polygon", "MultiPolygon"]
 
     @pytest.mark.parametrize(
@@ -24,7 +23,6 @@ class TestArea:
         ],
     )
     def test_area(self, fixture):
-
         assert round(area(fixture["in"])) == fixture["out"]
 
     @pytest.mark.parametrize(
@@ -48,7 +46,6 @@ class TestArea:
         ],
     )
     def test_exception(self, input_value, exception_value):
-
         with pytest.raises(Exception) as excinfo:
             area(input_value)
 

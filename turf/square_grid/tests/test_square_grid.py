@@ -21,7 +21,6 @@ class TestSquareGrid:
         ],
     )
     def test_square_grid(self, fixture):
-
         bbox = fixture["in"]["bbox"]
         n_cells = fixture["in"]["cellSide"]
 
@@ -41,9 +40,7 @@ class TestSquareGrid:
 
 
 def prepare_output(result, bbox, options):
-
     for i in range(len(result["features"])):
-
         coords = round_coordinates(result["features"][i])
         result["features"][i] = coords
 
