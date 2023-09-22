@@ -82,7 +82,7 @@ class Point(Geometry):
 
         if (
             get_input_dimensions(coordinates) == 1
-            and len(coordinates) == 2
+            and len(coordinates) >= 2
             and all(isinstance(x, (int, float)) for x in coordinates)
         ):
             return
