@@ -15,7 +15,7 @@ from turf.utils.error_codes import error_code_messages
 from turf.utils.exceptions import InvalidInput
 
 
-PolygonFeature = TypeVar(Dict, "PolygonFeature", Polygon, MultiPolygon)
+PolygonFeature = TypeVar("PolygonFeature", Dict, Polygon, MultiPolygon)
 LineFeature = TypeVar(
     "LineFeature", Dict, Feature, FeatureCollection, LineString, MultiLineString
 )
