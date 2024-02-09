@@ -6,7 +6,14 @@ from turf.utils.exceptions import InvalidInput
 from turf.utils.helpers import get_input_dimensions
 
 
-all_geometry_types = ["Point", "LineString", "Polygon", "MultiPoint", "MultiLineString", "MultiPolygon"]
+all_geometry_types = [
+    "Point",
+    "LineString",
+    "Polygon",
+    "MultiPoint",
+    "MultiLineString",
+    "MultiPolygon",
+]
 
 
 class Geometry(ABC):
@@ -81,7 +88,11 @@ class Point(Geometry):
         :param coordinates: input coordinates
         """
 
-        if get_input_dimensions(coordinates) == 1 and len(coordinates) >= 2 and all(isinstance(x, (int, float)) for x in coordinates):
+        if (
+            get_input_dimensions(coordinates) == 1
+            and len(coordinates) >= 2
+            and all(isinstance(x, (int, float)) for x in coordinates)
+        ):
             return
 
         raise InvalidInput(error_code_messages["InvalidPointInput"])
@@ -125,7 +136,9 @@ class LineString(Geometry):
         if get_input_dimensions(coordinates) != 2:
             raise InvalidInput(error_code_messages["InvalidLineStringInput"])
 
-        if len(coordinates) >= 2 and all(all(isinstance(x, (int, float)) for x in y) for y in coordinates):
+        if len(coordinates) >= 2 and all(
+            all(isinstance(x, (int, float)) for x in y) for y in coordinates
+        ):
             return
 
         raise InvalidInput(error_code_messages["InvalidLinePoints"])
@@ -144,7 +157,9 @@ class MultiLineString(LineString):
         """
 
         if get_input_dimensions(coordinates) != 3:
-            raise InvalidInput(error_code_messages["InvalidMultiInput"] + "of LineStrings")
+            raise InvalidInput(
+                error_code_messages["InvalidMultiInput"] + "of LineStrings"
+            )
 
         for coord in coordinates:
             super(MultiLineString, self)._check_input(coord)
@@ -237,7 +252,13 @@ class Feature(FeatureType):
     Equivalent to a GeoJSON feature.
     """
 
-    def __init__(self, geom: Union[Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon], properties: Union[Dict, None] = None) -> None:
+    def __init__(
+        self,
+        geom: Union[
+            Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon
+        ],
+        properties: Union[Dict, None] = None,
+    ) -> None:
         geom = self._check_input(geom)
 
         FeatureType.__init__(self, feature_type="Feature")
@@ -267,7 +288,9 @@ class Feature(FeatureType):
 
     @staticmethod
     def _check_input(
-        geom: Union[Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon]
+        geom: Union[
+            Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon
+        ]
     ) -> Union[Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon]:
         """
         Checks input given to Feature class, and converts to object if input is in dict form.
@@ -282,9 +305,13 @@ class Feature(FeatureType):
                 try:
                     return eval(feat_type).from_geojson(geom)
                 except (NameError, AttributeError):
-                    raise InvalidInput(error_code_messages["InvalidGeometry"](all_geometry_types))
+                    raise InvalidInput(
+                        error_code_messages["InvalidGeometry"](all_geometry_types)
+                    )
             else:
-                raise InvalidInput(error_code_messages["InvalidGeometry"](all_geometry_types))
+                raise InvalidInput(
+                    error_code_messages["InvalidGeometry"](all_geometry_types)
+                )
 
         return geom
 
@@ -295,7 +322,11 @@ class Feature(FeatureType):
         :return: a GeoJSON feature as a dict
         """
 
-        geojson = {"type": "Feature", "properties": self.properties, "geometry": self.geometry.to_geojson()}
+        geojson = {
+            "type": "Feature",
+            "properties": self.properties,
+            "geometry": self.geometry.to_geojson(),
+        }
 
         if self.get("bbox"):
             geojson["bbox"] = self.get("bbox")
@@ -340,13 +371,19 @@ class FeatureCollection(FeatureType):
                     try:
                         geom = eval(feat_type).from_geojson(feat.get("geometry", {}))
                         properties = feat.get("properties", None)
-                        feat_from_geojson = feature(geom, properties=properties, as_geojson=False)
+                        feat_from_geojson = feature(
+                            geom, properties=properties, as_geojson=False
+                        )
 
                         eval_feats.append(feat_from_geojson)
                     except NameError:
-                        raise InvalidInput(error_code_messages["InvalidGeometry"](all_geometry_types))
+                        raise InvalidInput(
+                            error_code_messages["InvalidGeometry"](all_geometry_types)
+                        )
                 else:
-                    raise InvalidInput(error_code_messages["InvalidGeometry"](all_geometry_types))
+                    raise InvalidInput(
+                        error_code_messages["InvalidGeometry"](all_geometry_types)
+                    )
 
             else:
                 eval_feats.append(feat)
@@ -369,7 +406,10 @@ class FeatureCollection(FeatureType):
 
 
 def feature(
-    geom: (Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon), properties: Dict = None, options: Dict = None, as_geojson: bool = True
+    geom: (Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon),
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
 ) -> Union[Feature, Dict]:
     """
     Wraps a GeoJSON Geometry in a GeoJSON Feature.
@@ -400,7 +440,9 @@ def feature(
     return feat.to_geojson() if as_geojson else feat
 
 
-def feature_collection(features: Sequence, options: Dict = None, as_geojson: bool = True) -> Union[FeatureCollection, Dict]:
+def feature_collection(
+    features: Sequence, options: Dict = None, as_geojson: bool = True
+) -> Union[FeatureCollection, Dict]:
     """
     Takes one or more Feature and creates a FeatureCollection.
 
@@ -457,7 +499,12 @@ def geometry(
     return geom.to_geojson() if as_geojson else geom
 
 
-def point(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[Point, Dict]:
+def point(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[Point, Dict]:
     """
     Creates a Point Feature from a Position.
 
@@ -475,7 +522,12 @@ def point(coordinates: Sequence, properties: Dict = None, options: Dict = None, 
     return feature(geom, properties, options, as_geojson=as_geojson)
 
 
-def points(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[FeatureCollection, Dict]:
+def points(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[FeatureCollection, Dict]:
     """
     Creates a Point FeatureCollection from an Array of Point coordinates.
 
@@ -491,10 +543,19 @@ def points(coordinates: Sequence, properties: Dict = None, options: Dict = None,
     if not isinstance(coordinates, list):
         raise Exception("Coordinates must be a list")
 
-    return feature_collection(list(map(lambda coord: point(coord, properties), coordinates)), options, as_geojson=as_geojson)
+    return feature_collection(
+        list(map(lambda coord: point(coord, properties), coordinates)),
+        options,
+        as_geojson=as_geojson,
+    )
 
 
-def multi_point(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[MultiPoint, Dict]:
+def multi_point(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[MultiPoint, Dict]:
     """
     Creates a MultiPoint Feature based on a coordinate array.
     Properties can be added optionally.
@@ -513,7 +574,12 @@ def multi_point(coordinates: Sequence, properties: Dict = None, options: Dict = 
     return feature(geom, properties, options, as_geojson=as_geojson)
 
 
-def line_string(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[LineString, Dict]:
+def line_string(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[LineString, Dict]:
     """
     Creates a LineString Feature from an Array of Positions.
 
@@ -537,7 +603,12 @@ def line_string(coordinates: Sequence, properties: Dict = None, options: Dict = 
     return feature(geom, properties, options, as_geojson=as_geojson)
 
 
-def line_strings(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[FeatureCollection, Dict]:
+def line_strings(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[FeatureCollection, Dict]:
     """
     Creates a LineString FeatureCollection from an Array of LineString coordinates.
 
@@ -553,10 +624,19 @@ def line_strings(coordinates: Sequence, properties: Dict = None, options: Dict =
     if not isinstance(coordinates, list):
         raise Exception("Coordinates_list must be a list")
 
-    return feature_collection(list(map(lambda coord: line_string(coord, properties), coordinates)), options, as_geojson=as_geojson)
+    return feature_collection(
+        list(map(lambda coord: line_string(coord, properties), coordinates)),
+        options,
+        as_geojson=as_geojson,
+    )
 
 
-def multi_line_string(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[MultiLineString, Dict]:
+def multi_line_string(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[MultiLineString, Dict]:
     """
     Creates a MultiLineString Feature based on a coordinate array.
     Properties can be added optionally.
@@ -575,7 +655,12 @@ def multi_line_string(coordinates: Sequence, properties: Dict = None, options: D
     return feature(geom, properties, options, as_geojson=as_geojson)
 
 
-def polygon(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[Polygon, Dict]:
+def polygon(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[Polygon, Dict]:
     """
     Creates a Polygon Feature from an Array of LinearRings.
 
@@ -599,7 +684,12 @@ def polygon(coordinates: Sequence, properties: Dict = None, options: Dict = None
     return feature(geom, properties, options, as_geojson=as_geojson)
 
 
-def polygons(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[FeatureCollection, Dict]:
+def polygons(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[FeatureCollection, Dict]:
     """
     Creates a Polygon FeatureCollection from an Array of Polygon coordinates.
 
@@ -615,10 +705,19 @@ def polygons(coordinates: Sequence, properties: Dict = None, options: Dict = Non
     if not isinstance(coordinates, list):
         raise Exception("Coordinates_list must be a list")
 
-    return feature_collection(list(map(lambda coords: polygon(coords, properties), coordinates)), options, as_geojson=as_geojson)
+    return feature_collection(
+        list(map(lambda coords: polygon(coords, properties), coordinates)),
+        options,
+        as_geojson=as_geojson,
+    )
 
 
-def multi_polygon(coordinates: Sequence, properties: Dict = None, options: Dict = None, as_geojson: bool = True) -> Union[MultiPolygon, Dict]:
+def multi_polygon(
+    coordinates: Sequence,
+    properties: Dict = None,
+    options: Dict = None,
+    as_geojson: bool = True,
+) -> Union[MultiPolygon, Dict]:
     """
     Creates a MultiPolygon Feature based on a coordinate array.
     Properties can be added optionally.
