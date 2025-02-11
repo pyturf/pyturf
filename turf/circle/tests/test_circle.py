@@ -35,17 +35,26 @@ class TestCircle:
         "input_value, radius, exception_value",
         [
             pytest.param(
-                "xyz", 10,
+                "xyz",
+                10,
                 error_code_messages["InvalidGeometry"](["Point"]),
                 id="InvalidGeometry",
             ),
             pytest.param(
-                {"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[0,0], [1,1]]}}, 10,
+                {
+                    "type": "Feature",
+                    "geometry": {"type": "LineString", "coordinates": [[0, 0], [1, 1]]},
+                },
+                10,
                 error_code_messages["InvalidGeometry"](["Point"]),
                 id="InvalidGeometry_LineString",
             ),
             pytest.param(
-                {"type": "Feature", "geometry": {"type": "Point", "coordinates": [0, 0]}}, "invalid_radius",
+                {
+                    "type": "Feature",
+                    "geometry": {"type": "Point", "coordinates": [0, 0]},
+                },
+                "invalid_radius",
                 error_code_messages["InvalidRadius"],
                 id="InvalidRadius",
             ),
