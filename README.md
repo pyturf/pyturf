@@ -81,6 +81,7 @@ Currently, the following modules have been implemented:
 - [boolean-within](https://github.com/pyturf/pyturf/tree/master/turf/boolean_within)
 - [center](https://github.com/pyturf/pyturf/tree/master/turf/center)
 - [centroid](https://github.com/pyturf/pyturf/tree/master/turf/centroid)
+- [circle](https://github.com/pyturf/pyturf/tree/master/turf/circle)
 - [destination](https://github.com/pyturf/pyturf/tree/master/turf/destination)
 - [distance](https://github.com/pyturf/pyturf/tree/master/turf/distance)
 - [envelope](https://github.com/pyturf/pyturf/tree/master/turf/envelope)
