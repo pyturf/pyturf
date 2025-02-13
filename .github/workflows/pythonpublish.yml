@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.x"
     - name: Install poetry
@@ -31,13 +31,13 @@ jobs:
         path: dist/
 
   publish-to-pypi:
-    name: Publish stratestic 📦 to PyPI
+    name: Publish pyturf 📦 to PyPI
     needs:
     - build
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/stratestic
+      url: https://pypi.org/p/pyturf
     permissions:
       id-token: write
 
