@@ -2,7 +2,8 @@
 name = "pyturf"
 version = "0.6.10"
 description = "A modular geospatial engine written in python"
-authors = ["Diogo Matos Chaves <diogo_chaves@hotmail.com>"]
+license = "MIT"
+authors = ["Diogo Matos Chaves <diogo_chaves@hotmail.com>", "Steffen Haeussler <steffen.haeussler@yara.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
