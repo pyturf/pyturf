@@ -5,6 +5,9 @@ description = "A modular geospatial engine written in python"
 license = "MIT"
 authors = ["Diogo Matos Chaves <diogo_chaves@hotmail.com>", "Steffen Haeussler <steffen.haeussler@yara.com>"]
 readme = "README.md"
+packages = [
+    {include = "turf"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
