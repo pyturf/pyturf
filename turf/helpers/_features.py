@@ -290,7 +290,7 @@ class Feature(FeatureType):
     def _check_input(
         geom: Union[
             Dict, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon
-        ]
+        ],
     ) -> Union[Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon]:
         """
         Checks input given to Feature class, and converts to object if input is in dict form.
